@@ -79,7 +79,7 @@ The following clauses are supported:
 +---------------+---------------------------------------------------------------------------------------+
 | Filtering     | ``WHERE``                                                                             |
 +---------------+---------------------------------------------------------------------------------------+
-| Grouping      | ``GROUP BY``, ``HAVING``                                                              |
+| Grouping      | ``GROUP BY``, ``HAVING``, ``ARBITRARY``                                               |
 +---------------+---------------------------------------------------------------------------------------+
 | Conditional   | ``CASE`` , ``WHEN``, ``DEFAULT``                                                      |
 +---------------+---------------------------------------------------------------------------------------+
@@ -456,7 +456,16 @@ Example:
     HAVING c.gender = "female"
 
 
-6.5 Double grouping
+6.5 Filter with Arbitrary Value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``ARBITRARY`` returns an arbitrary value from a set.  Each target
+datasource may implement this differently but is intended to retrieve
+a single value from a set in the cheapest way, and not necessarily
+deterministic.
+
+
+6.6 Double grouping
 ~~~~~~~~~~~~~~~~~~~
 
 Perform double-grouping operations by putting operators inside other
@@ -594,12 +603,15 @@ ascending):
 Section 9 - Joining Collections
 -------------------------------
 
-Use the ``JOIN`` operator to join two or more different collections.
+Use the ``JOIN`` operator to join two or more collections.
 
-The ``JOIN`` operator is a powerful way to implement joins in
-non-relational databases such as MongoDB. There is no enforced limit to
-how many collections or tables can be joined in a query but common sense
-should prevail based on the size of collections.
+There is no technical limitation to the number of collections or tables
+that can be joined, but users are encouraged to consider the performance
+impact based on the dataset sizes.
+
+For MongoDB ``JOIN`` s, see the database specific notes section about
+`JOINs on MongoDB <sql-squared-reference.html#joins-on-mongodb>`__.
+
 
 9.1 Examples
 ~~~~~~~~~~~~
@@ -694,7 +706,84 @@ name if the full name is null.
     SELECT COALESCE(c.fullName, c.firstName) AS name FROM `/users` AS c
 
 
-Section 11 - Variables and SQL²
+Section 11 - Data Type Conversion
+---------------------------------
+
+
+11.1 Converting to Boolean
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SQL² allows String data type fields with values of either ``"true"`` or
+``"false"`` to be converted to their corresponding Boolean value.
+
+Prefix the field name with the ``BOOLEAN`` function.
+
+Example:
+
+.. code-block:: sql
+
+    SELECT BOOLEAN(survey_complete) AS Survey FROM `/users`
+
+
+11.2 Converting to Strings
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SQL² allows most fields to be converted to String data types by prefixing
+the field name with the ``TO_STRING`` function.
+
+Example:
+
+.. code-block:: sql
+
+    SELECT TO_STRING(zip_code) AS ZipCode FROM `/users`
+
+
+11.3 Converting to Integer
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SQL² allows string representations of valid integer values to be converted
+to an actual integer number.  Prefix the field name with the
+``INTEGER`` function.
+
+If a field named ``myField`` had the value
+of ``"1234"`` as a String, it could be converted to an integer with this example:
+
+.. code-block:: sql
+
+    SELECT INTEGER(myField) AS MyField FROM `/users`
+
+If a field is not a valid string representation of an integer value then a
+null value will be returned.
+
+
+11.4 Converting to Decimal
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SQL² allows string representations of valid integer and decimal values to be converted
+to an actual decimal number.  Prefix the field name with the
+``DECIMAL`` function.
+
+If a field named ``myField`` had the value
+of ``"1.234"`` as a String, it could be converted to a decimal with this example:
+
+.. code-block:: sql
+
+    SELECT DECIMAL(myField) AS MyField FROM `/users`
+
+If the field does not a contain a valid string representation of a numeric value,
+such as ``"123"`` or ``"123.456"`` then a null value will be returned.
+
+
+11.5 Converting to Dates and Times
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SQL² allows strings in a specific format to be converted
+to date and time related data types. See
+`Section 5 <sql-squared-reference.html#section-5-dates-and-times>`__
+for examples of converting to date, time, and timestamp types.
+
+
+Section 12 - Variables and SQL²
 ------------------------------
 
 SQL² has the ability to use variables in queries in addition to statically
@@ -711,7 +800,7 @@ executed.
   no older than 3.0.8.
 
 
-11.1 Single Values
+12.1 Single Values
 ~~~~~~~~~~~~~~~~~~
 
 Single values are generated in Markdown through the following elements:
@@ -749,7 +838,7 @@ like this:
     WHERE last_visit = :year
 
 
-11.2 Multiple Values
+12.2 Multiple Values
 ~~~~~~~~~~~~~~~~~~~~
 
 Multiple values are generated in Markdown only through the Check Boxes
@@ -778,15 +867,15 @@ one of the check boxes selected.
 
 
 
-Section 12 - Database Specific Notes
+Section 13 - Database Specific Notes
 ------------------------------------
 
 
-12.1 MongoDB
+13.1 MongoDB
 ~~~~~~~~~~~~
 
 
-12.1.1 The _id Field
+13.1.1 The _id Field
 ''''''''''''''''''''
 
 By default, the ``_id`` field will not appear in a result set. However,
@@ -809,3 +898,26 @@ object ID, by using the ``OID`` function. For example:
 .. code-block:: sql
 
     SELECT * FROM `/foo` WHERE _id = OID("abc123")
+
+
+13.1.2 JOINs on MongoDB
+'''''''''''''''''''''''
+
+When executing a ``JOIN`` in SQL² against MongoDB, the analytics engine
+will decide whether to use the mapreduce API, or the aggregation API along
+with the ``$lookup`` operator.  This operator was introduced in MongoDB
+version 3.2 and allows the equivalent of a left outer equijoin.  You can
+find out more `here <https://docs.mongodb.com/manual/reference/operator/aggregation/lookup>`__.
+
+To leverage the ``$lookup`` operator, the query must satisfy the following
+conditions that are imposed by MongoDB:
+
+* Must be running MongoDB 3.2 or newer
+* One collection must use an indexed field
+* That collection must not be sharded
+* Both collections must be in the same database
+* Match must be an equijoin, based on equality only (``a.field = b.field`` is ok, ``a.field < b.field`` is not)
+
+If ``$lookup`` cannot be used, SlamData will fall back to utilizing the
+mapreduce API.  Utilizing mapreduce is slower but more flexible
+and is also backwards compatible for MongoDB 2.6 and newer.
