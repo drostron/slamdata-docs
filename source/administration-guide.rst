@@ -166,7 +166,7 @@ A message similar to the following should be displayed:
 
 
 1.3.2 Starting SlamData from the Installer Package
-''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''
 
 **Mac OS**
 
@@ -195,6 +195,35 @@ http://localhost:20223/slamdata
    and type ``slamdata`` and press return to launch it. Select
    appropriate network security settings if prompted.
 
+
+1.3.3 Starting SlamData Advanced from Command Line
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+SlamData Advanced Edition requires license key information before
+launching.  This information is passed into the JVM at startup.
+An example of how this can be done is below.  Note the use of
+escaping the quote characters with ``\"``
+
+.. code-block:: bash
+
+    _JAVA_OPTIONS="-Xms1G -Xmx4G"
+
+    export SD_OPTS="\
+    -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE \
+    -Dlicense_email=myemail@example.com \
+    -Dlicense_full_name=\"My Name\" \
+    -Dlicense_registered_to=\"Name Registered To\" \
+    -Dlicense_company=\"My Company Name\" \
+    -Dlicense_street=\"123 Anywhere Street, Suite A1\" \
+    -Dlicense_tel_number=3035551212 \
+    -Dlicense_fax_number=NA \
+    -Dlicense_city=Boulder \
+    -Dlicense_zip=80302 \
+    -Dlicense_country=US"
+
+    export _JAVA_OPTIONS="$_JAVA_OPTIONS $SD_OPTS"
+
+    java -jar quasar.jar --content-path public -L slamdata
 
 
 Section 2 - Connecting to a Database
