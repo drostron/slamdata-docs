@@ -671,7 +671,7 @@ the name of the administrator group and e-mail addresses of initial members:
 
 ::
 
-    java -jar slamdata-advanced.jar bootstrap --admin-group <name> --admin-users user1@example.com[,user2@example.com,...]
+    java -jar quasar.jar bootstrap --admin-group <name> --admin-users user1@example.com[,user2@example.com,...]
 
 
 4.3 Authentication
