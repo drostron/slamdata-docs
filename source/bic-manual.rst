@@ -381,9 +381,9 @@ The following parameters can be set on a Quasar **foreign table** object:
 +=========================+==================================+================+
 | ``table``               | Name of the Quasar table / mongo | N/A            |
 |                         | collection to query.             |                |
-+-------------------------+---------------------------------------------------+       
++-------------------------+----------------------------------+----------------+       
 | ``use_remote_estimate`` | Override the server-level option | Server value   |
-+-------------------------+---------------------------------------------------+       
++-------------------------+----------------------------------+----------------+       
 
 At this point you have successfully setup a PostgreSQL < - > MongoDB mapping.
 
@@ -417,43 +417,39 @@ Note the use of the
         previous_visits TIMESTAMP [],
         i10_code VARCHAR OPTIONS (map 'codes[*].code'),
         i10_description VARCHAR OPTIONS (map 'codes[*].desc')
-      SERVER quasar
+      SERVER mybox
         OPTIONS (table 'patients');
 
 
 The following parameters can be set on a column in a Quasar **foreign
 field**:
 
-+----------------------------+----------------------------------+---------------------------+
-| Option                     | Description                      | Default value             |
-+============================+==================================+===========================+
-| ``map``                    | Name of the column to query in   | The lowercase name of the |
-|                            | Quasar.                          | column in PostgreSQL.     |
-|                            |                                  |                           |
-+----------------------------+----------------------------------+---------------------------+
-| ``nopushdown``             | Boolean (``true`` or ``false``)  | ``false``                 |
-|                            | value telling quasar_fdw not to  |                           |
-|                            | push down any comparison clauses |                           |
-|                            | with this column in it.  Used    |                           |
-|                            | when underlying data is not      |                           |
-|                            | stored as the correct type.      |                           |
-+----------------------------+----------------------------------+---------------------------+
-| ``join_rowcount_estimate`` | Integer value representing the   | ``1``                     |
-|                            | *distinctness* of a column's     |                           |
-|                            | value in the underlying data.    |                           |
-|                            | This will be used to estimate    |                           |
-|                            | the number of rows that might be |                           |
-|                            | queried from a single value. For |                           |
-|                            | columns with unique values, this |                           |
-|                            | should be ``1``.                 |                           |
-+----------------------------+----------------------------------+---------------------------+
-
++----------------------------+--------------------------+-------------------------------------------+
+| Option                     | Default Value            | Description                               |
++============================+==========================+===========================================+
+| ``map``                    | The lower case name of   | Name of the column to query in            |
+|                            | the column in PostgreSQL | PostgreSQL                                |
++----------------------------+--------------------------+-------------------------------------------+
+| ``nopushdown``             | ``false``                | Boolean (``true`` or ``false``)           |
+|                            |                          | value telling PostgreSQL not to           |
+|                            |                          | push down any comparison clauses          |
+|                            |                          | with this column in it. Used              |
+|                            |                          | when underlying data is not               |
+|                            |                          | stored as the correct type.               |
++----------------------------+--------------------------+-------------------------------------------+
+| ``join_rowcount_esitmate`` | ``1``                    | Integer value representing the            |
+|                            |                          | *distinctness* of a column's value in the |
+|                            |                          | underlying data. This will be used to     |
+|                            |                          | estimate the number of rows that might be |
+|                            |                          | queried from a single value. For columsn  |
+|                            |                          | with unique values, this should be ``1``. |
++----------------------------+--------------------------+-------------------------------------------+
 
 Important notes regarding field mapping configuration:
 
 
 - Postgres will downcase all field names, so if a field has a capital letter in it,
-you must use the map option: ``OPTIONS (map "camelCaseSensitive")``
+  you must use the map option: ``OPTIONS (map "camelCaseSensitive")``
 
 -  The SlamData BI Connector will convert strings to other types, such as dates, times,
    timestamps, intervals, integers, and floats. However, if the
