@@ -916,16 +916,13 @@ affect other decks.
       AVG(weight) AS AvgWeight
     FROM `/devguide/devdb/patients`
     WHERE
-      state IN :state[_]
+      state IN :state
     GROUP BY
       city
     ORDER BY AVG(weight) DESC
 
-One new feature we see here is the use of **:state[_]**.  Whenever a
-variable from a Markdown form is used in a query it must be
-preceded by a colon ( ``:`` ).  Some variables may also require special
-syntax after the name as well.  In this case since we are using an array of
-states we had to add the ``[_]`` suffix to the variable name.
+Whenever a variable from a Markdown form is used in a query it must be
+preceded by a colon ( ``:`` ).
 
 Also note that we can **ORDER BY** an aggregation value such as **AVG**.
 
