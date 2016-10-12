@@ -1,8 +1,12 @@
 .. figure:: images/white-logo.png
    :alt: SlamData Logo
 
-   SlamData Logo
+.. warning:: Version 4 Documentation Updates
 
+  We are currently updating all of our documentation from Version 3
+  to Version 4.  In the meantime, the document below still represents
+  Version 3.  This notice will be removed when this document has been
+  updated.  Thank you!
 
 Reference - SQL²
 ================
