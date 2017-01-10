@@ -1,24 +1,17 @@
 .. figure:: images/white-logo.png
    :alt: SlamData Logo
 
-.. warning:: Version 4 Documentation Updates
-
-  We are currently updating all of our documentation from Version 3
-  to Version 4.  In the meantime, the document below still represents
-  Version 3.  This notice will be removed when this document has been
-  updated.  Thank you!
-  
 Reference - SlamDown
 ====================
 
-This SlamDown Reference can assist with the proper formatting of
+This SlamDown Reference can assist with the correct formatting of
 SlamDown code to produce static and interactive forms within SlamData.
 
 
 Section 1 - Introduction
 ------------------------
 
-SlamData contains its own markup language called SlamDown, which is
+SlamData contains its own markup language called SlamDown, that is
 useful for creating reports and forms. SlamDown is a subset of
 `CommonMark <http://commonmark.org/>`__, a specification for a highly
 compatible implementation of
@@ -41,6 +34,8 @@ The following SlamDown elements create blocks of content.
 Three dashes or more create a horizontal line. Put a blank line above
 and below the dashes.
 
+Example:
+
 ::
 
     Text here
@@ -49,7 +44,7 @@ and below the dashes.
 
     More text here
 
-results in:
+This results in the following output:
 
 Text here
 
@@ -63,7 +58,9 @@ More text here
 
 Use hash marks (``#``) for `ATX
 headers <http://spec.commonmark.org/0.22/#atx-header>`__, with one
-hashmark for each level.
+hash mark for each level.
+
+Example:
 
 ::
 
@@ -71,7 +68,7 @@ hashmark for each level.
     ## Second level
     ### Third level  
 
-results in a first, second, and third level heading:
+This results in a first, second, and third level heading, as follows:
 
 |Headers|
 
@@ -82,34 +79,38 @@ results in a first, second, and third level heading:
 You can create blocks of code (that is, literal content in monospace
 font) in two ways:
 
-**Indented code blocks**
+**1. Indented code blocks**
 
 Indent by four spaces.
+
+Example:
 
 .. raw:: html
 
    <pre>
-       for (int i =0; i < 10; i++)
+       for (int i = 0; i < 10; i++)
            sum += myArray[i];
    </pre>
 
-**Fenced code blocks**
+**2. Fenced code blocks**
 
 Start and end with three or more backtick (\`) characters.
 
+Example:
+
 ::
 
     ```
-    for (int i =0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
         sum += myArray[i];
     ```
 
-Both Indented Code Blocks and Fenced Code Blocks result in:
+Both **Indented Code Blocks** and **Fenced Code Blocks** result in the following output:
 
 ::
 
-    for (int i =0; i < 10; i++)
-       sum += myArray[i];
+    for (int i = 0; i < 10; i++)
+        sum += myArray[i];
 
 
 2.4 Paragraphs
@@ -117,13 +118,15 @@ Both Indented Code Blocks and Fenced Code Blocks result in:
 
 Paragraphs are separated by a blank line.
 
+Example:
+
 ::
 
     This is paragraph 1.
 
     This is paragraph 2.
 
-results in:
+This results in the following output:
 
 This is paragraph 1.
 
@@ -135,11 +138,13 @@ This is paragraph 2.
 
 Start with a greater than sign (``>``) to create a block quote.
 
+Example:
+
 ::
 
     > This is a block quote.
 
-results in:
+This results in the following output:
 
     This is a block quote.
 
@@ -147,9 +152,11 @@ results in:
 2.6 Lists
 ~~~~~~~~~
 
-Ordrered lists start with numbers followed by periods. The actual
-numbers in the SlamDown do not matter. In the end, they will be
+Ordrered lists start with numbers followed by a full stop (``.``). The actual
+numbers in the SlamDown do not matter, as the list will be
 displayed with ascending indices.
+
+Example:
 
 ::
 
@@ -157,22 +164,24 @@ displayed with ascending indices.
     2. Second item
     3. Third item
 
-results in:
+This results in the following output:
 
 1. First item
 2. Second item
 3. Third item
 
-Unordered lists start with either asterisks (``*``), dashes (``-``), or
-pluses (``+``). They are interchangeable.
+Unordered lists start with either an asterisk (``*``), dash (``-``), or
+a plus sign (``+``). All three are interchangeable.
+
+Example:
 
 ::
 
-    * First item
-    * Second item
-    * Third item
+    - First item
+    - Second item
+    - Third item
 
-results in:
+This results in the following output:
 
 -  First item
 -  Second item
@@ -183,7 +192,7 @@ Section 3 - Inline Elements
 ---------------------------
 
 The following inline elements are supported in SlamDown. In addition to
-standard Markdown elements, there is also the ability to `evaluate a SQL
+standard Markdown elements, there is also the ability to `evaluate an SQL
 query <#evaluated-sql-query>`__ and put the result into the content.
 
 
@@ -193,11 +202,13 @@ query <#evaluated-sql-query>`__ and put the result into the content.
 Surround content with asterisks (``*``) for emphasis and surround it
 with double asterisks (``**``) for strong emphasis.
 
+Example:
+
 ::
 
     This is *important*. This is **more important**.
 
-results in:
+This results in the following output:
 
 This is *important*. This is **more important**.
 
@@ -208,22 +219,26 @@ This is *important*. This is **more important**.
 Links contain the link title in square brackets (``[]``) and the link
 destination in parentheses (``()``).
 
+Example:
+
 ::
 
     [SlamData](http://slamdata.com)
 
-results in:
+This results in the following output:
 
 `SlamData <http://slamdata.com>`__
 
-If the link title and destination are the same, you can use an autolink,
-where the URI is contained in angle brackets (``<>``).
+If the link title and destination are the same, an autolink can be used,
+where the URI is contained in angled brackets (``<>``).
+
+Example:
 
 ::
 
     <http://slamdata.com>
 
-results in:
+This results in the following output:
 
 http://slamdata.com
 
@@ -235,11 +250,13 @@ Images start with an explanation mark (``!``), followed by the image
 description in square brackets (``[]``) and the image URI in parentheses
 (``()``).
 
+Example:
+
 ::
 
     ![SlamData Logo](https://media.licdn.com/media/p/6/005/088/002/039b9f8.png)
 
-results in:
+This results in the following output:
 
 |LogoLink|
 
@@ -252,11 +269,13 @@ results in:
 To add code formatting (literal content with monospace font) inline, put
 the content between backtick (\`) characters.
 
+Example:
+
 ::
 
     Start SQL statements with `SELECT * FROM`
 
-results in:
+This results in the following output:
 
 Start SQL statements with ``SELECT * FROM``
 
@@ -264,9 +283,9 @@ Start SQL statements with ``SELECT * FROM``
 Section 4 - Evaluated SQL² Queries
 ----------------------------------
 
-SlamDown extends Markdown by allowing you to evaluate a SQL² query and
+SlamDown extends Markdown by allowing you to evaluate an SQL² query and
 insert the results into the rendered content, including the form
-elements listed in Seciton 5 below. Start the query with an
+elements listed in Section 5 below. Start the query with an
 exclamation point and then contain the SQL² query between double backtick
 (``````) characters.
 
@@ -278,13 +297,13 @@ exclamation point and then contain the SQL² query between double backtick
 	This is a necessary space because three backticks in a row start a
 	Fenced Code Block as stated above.
 
-In the example below, if there are 20 documents in the ``/col`` file, :then
+In the following example, there are 20 documents in the ``/col`` file.
 
 ::
 
     There are !``SELECT COUNT(*) FROM `/col` `` documents inside the collection.
 
-results in:
+This results in the following output:
 
 There are ``20`` documents inside the collection.
 
@@ -298,21 +317,23 @@ as seen in later sections.
 Section 5 - Form Elements
 -------------------------
 
-Provide interactive forms for your users with text fields,
-date pickers, check boxes and more.
+Form elements provide interactive forms for user's with text fields,
+date pickers, check boxes, and so on.
 
 First define a variable name in Slamdown and then define the 
 element type based on the formatting in the sections below.
 
-For instance:
+Example:
 
 ::
 
 	name = ____
 
 This defines the variable ``name`` and creates a simple text
-entry field in the browser.  You can then utilize this variable
-in a Query Card like this:
+entry field in the browser.  This variable can then be used
+in a **Query Card**.
+
+Example:
 
 .. code-block:: sql
 
@@ -320,8 +341,8 @@ in a Query Card like this:
 	FROM `/mydb/mytable`
 	WHERE fullname = :name
 
-Make sure to precede the variable name with a colon (``:``) when
-referencing it as a variable inside of a Query Card.
+Note that the variable name needs to be preceded by a colon (``:``) when
+referencing it as a variable inside a **Query Card**.
 
 
 5.1 Text Field
@@ -330,17 +351,21 @@ referencing it as a variable inside of a Query Card.
 Use one or more underscores (``_``) to create a text input field where a
 user can add text.
 
-For example, this line creates an input file for a user's interests. You can then
-refer to the value as ``:interests``
+The following code creates an input file for a user's interests.
+The value can then be referred to as ``:interests``.
+
+Example:
 
 ::
 
     interests = ________
 
-Optionally, you can pre-fill the input field with a default value by
-having it after the underscores in parentheses. This line creates an
-input field ``interests`` with a default value of "SlamData". You can then
-refer to the value as ``:interests``
+Optionally, the input field can be pre-filled with a default value by
+having it after the underscores in parentheses. The following
+code creates an input field called ``interests`` with a default value of "SlamData".
+The value can then be referred to as ``:interests``.
+
+Example:
 
 ::
 
@@ -350,10 +375,11 @@ refer to the value as ``:interests``
 5.2 Numeric Field
 ~~~~~~~~~~~~~~~~~
 
-By default input fields are evaluated as String types. To enforce a
-numeric type prefix the underscores with the (``#``) symbol. You
-may also provided a default value for this field as well.  For
-example:
+By default, input fields are evaluated as string types. To enforce a
+numeric type, prefix the underscores with the (``#``) symbol.
+A default value can also be provided.
+
+Example:
 
 ::
 
@@ -364,8 +390,7 @@ example:
 ~~~~~~~~~~~~~~~~~
 
 A set of radio buttons has only one button selected at a time.  Radio buttons
-can be populated with static content or populated with a query.  See the
-follow sections.
+can be populated with static content or populated by a query.
 
 
 5.3.1 Static Radio Buttons
@@ -374,20 +399,22 @@ follow sections.
 Use parentheses followed by text to indicate radio buttons.  Indicate which
 button is selected by putting an ``x`` in the parentheses.
 
-For example, this line creates a set of radio buttons with the values
-"car", "bus", and "bike", where "car" is marked as the default. The
+This following code creates a set of radio buttons with the values
+"car", "bus", and "bike", where "bus" is marked as the default. The
 result is stored in the string variable named ``commute`` for later use.
+
+Example:
 
 ::
 
     commute = () car (x) bus () bike
 
-This results in:
+This results in the following output:
 
 |Radio-Buttons-Static|
 
-Notice how the default selection became the first selection in the
-actual rendered set.
+Note that the default selection became the first selection when the radio
+buttons are rendered.
 
 
 5.3.2 Dynamic Radio Buttons
@@ -396,8 +423,10 @@ actual rendered set.
 As with all other form elements, radio buttons may be populated by
 means of an evaluated SQL² query.
 
-For example, this Slamdown code creates a set of radio buttons that
-list the unique color values in a database:
+The following code creates a set of radio buttons that
+list the unique color values in a database.
+
+Example:
 
 .. code-block:: sql
 
@@ -405,10 +434,12 @@ list the unique color values in a database:
 	(!``SELECT DISTINCT(color) FROM `/devguide/devdb/colors` ORDER BY color ASC LIMIT 1``)
 	!``SELECT DISTINCT(color) FROM `/devguide/devdb/colors` ORDER BY color ASC``
 
-First notice how the field is defined on multiple lines.
+First, note how the field is defined on multiple lines.
 
-Next you can see two queriesnow instead of one.  The first query defines which value
-is selected by default, the second defines the remaining values.  This results in:
+Second, there are now two queries instead of one.  The first query defines which value
+is selected by default, the second query defines the remaining values.
+
+This results in the following output:
 
 |Radio-Buttons-Dynamic|
 
@@ -419,19 +450,18 @@ is selected by default, the second defines the remaining values.  This results i
 Use brackets (``[]``) followed by text to indicate checkboxes.
 In a set of checkboxes each checkbox operates independently.
 
-.. hint:: **Array Evaluation**
-
-	When referring to a variable that is an array, which is what
-	a checkbox variable is, the variable must be followed by
-	the ``[_]`` operator.  See query example below.
-
 A checkbox array variable can be used in a query whether it was
-defined statically in Slamdown or dynamically through an evaluated
-SQL² query.  An example query within a Query Card would look like this.
+defined statically in SlamDown or dynamically through an evaluated
+SQL² query.  An example query within a **Query Card** would look
+as follows.
+
+Example:
 
 ::
 
-	SELECT * FROM `/mydb/mytable` WHERE phone IN :phones[_]
+	SELECT *
+        FROM `/mydb/mytable`
+        WHERE phone IN :phones
 
 
 5.4.1 Static Check Boxes
@@ -441,23 +471,25 @@ Use an ``x`` in the square brackets to indicate that the checkbox
 should be checked by default. The string value returned will be an
 array of strings in brackets.
 
-For example, this line creates a set of checkboxes with the values
+The following code creates a set of checkboxes with the values
 "Android", "iPhone", and "Blackberry". The result is stored in the
 string variable named ``phones`` for later use.
+
+Example:
 
 ::
 
 	phones = [x] iPhone [] Blackberry [x] Android 
 
-This results in:
+This results in the following output:
 
 |Check-Boxes-Static|
 
-Similar to radio buttons, notice that the fields preselected with an ``x`` as
+Similar to the behavior of radio buttons, the fields pre-selected with an ``x``
 are rendered first.
 
-The selections above would result in the ``phones`` variable containing
-a value of the following array:  [``"iPhone"``, ``"Blackberry"``]
+The selections above would result in the ``phones`` variable array containing
+the following values:  [``"iPhone"``, ``"Android"``]
 
 
 5.4.2 Dynamic Check Boxes
@@ -466,8 +498,10 @@ a value of the following array:  [``"iPhone"``, ``"Blackberry"``]
 As with all other form elements, checkboxes may be populated by
 means of an evaluated SQL² query.
 
-For example, this Slamdown code creates a set of checkboxes that
-list the phone types within a database:
+The following code creates a set of checkboxes that
+list the phone types within a database.
+
+Example:
 
 .. code-block:: sql
 
@@ -475,7 +509,7 @@ list the phone types within a database:
 	[!``SELECT DISTINCT(phone) FROM `/mydb/mytable` ORDER BY phone ASC LIMIT 1``]
 	!``SELECT DISTINCT(phone) FROM `/mydb/mytable` ORDER BY phone ASC``
 
-This results in:
+This results in the following output:
 
 |Check-Boxes-Dynamic|
 
@@ -486,27 +520,26 @@ populates the remaining checkboxes.
 5.5 Dropdowns
 ~~~~~~~~~~~~~
 
-Dropdowns allow users to select one (and only one) value from a list
+Dropdowns allow user's to select one (and only one) value from a list
 of options, similar to radio buttons.  Unlike radio buttons, however,
 dropdown elements typically take up less space in the browser and
-are more suitable to longer lists of values.
+are more suitable for longer lists of values.
 
 Use a comma-separated list in braces (``{}``) to indicate a dropdown
 element.
 
-.. hint:: **Array Evaluation**
-
-	When referring to a variable that is an array, which is what
-	a dropdown variable is, the variable must be followed by
-	the ``[_]`` operator.  See query example below.
-
 A dropdown array variable can be used in a query whether it was
-defined statically in Slamdown or dynamically through an evaluated
-SQL² query.  An example query within a Query Card would look like this.
+defined statically in SlamDown or dynamically through an evaluated
+SQL² query.  An example query within a **Query Card** would look
+as follows.
+
+Example:
 
 ::
 
-	SELECT * FROM `/mydb/mytable` WHERE city IN :mycity[_]
+	SELECT *
+        FROM `/mydb/mytable`
+        WHERE city IN :mycity
 
 
 5.5.1 Static Dropdown
@@ -515,20 +548,24 @@ SQL² query.  An example query within a Query Card would look like this.
 Define a static dropdown element by placing the values of array
 elements within braces (``{}``).
 
-For example, this line creates a dropdown element with BOS, SFO, and NYC
+The following code creates a dropdown element with BOS, SFO, and NYC
 entries. The result is stored in an array variable named ``city`` for
 later use.
+
+Example:
 
 ::
 
     city = {BOS, SFO, NYC}
 
-This results in:
+This results in the following output:
 
 |Dropdown-Static|
 
 Optionally, include a default value by listing it in parentheses at the
-end. In this line, NYC is set as the default.
+end. In the following example, NYC is set as the default.
+
+Example:
 
 ::
 
@@ -541,8 +578,10 @@ end. In this line, NYC is set as the default.
 As with all other form elements, dropdown elements may be populated by
 means of an evaluated SQL² query.
 
-For example, this Slamdown code creates a dropdown that contains the
-names of cities within a database:
+The following code creates a dropdown that contains the
+names of cities within a database.
+
+Example:
 
 .. code-block:: sql
 
@@ -552,21 +591,23 @@ names of cities within a database:
 5.6 Dates and Times
 ~~~~~~~~~~~~~~~~~~~
 
-Provide a date, time or both date & time selector for users by
+Provide a date, time or both date and time selector by
 implementing the following syntax.
 
 
 5.6.1 Date
 ''''''''''
 
-The following example creates a date selector element and
-stores the value in a variable called ``start``:
+The following code creates a date selector element and
+stores the value in a variable called ``start``.
+
+Example:
 
 ::
 
 	start = ____-__-__ (2016-04-19)
 
-This results in:
+This results in the following output:
 
 |Date-Only|
 
@@ -574,13 +615,15 @@ This results in:
 5.6.2 Time
 ''''''''''
 
-The following lines creates a time selector element:
+The following code creates a time selector element.
+
+Example:
 
 ::
 
-	start = __:__ (12:30 PM)
+	start = __:__ (02:30 PM)
 
-This results in:
+This results in the following output:
 
 |Time-Only|
 
@@ -588,40 +631,44 @@ This results in:
 5.6.3 Date & Time (TIMESTAMP)
 '''''''''''''''''''''''''''''
 
-The following line creates both a date and time selector element:
+The following code creates both a date and time selector element.
+
+Example:
 
 ::
 
 	start = ____-__-__ __:__ (2016-04-19 14:00)
 
-This results in:
+This results in the following output:
 
 |Date-And-Time|
-
-
-.. |Headers| image:: images/SD3/screenshots/fake-levels.png
-
-.. |Radio-Buttons-Static| image:: images/SD3/screenshots/radio-buttons-static.png
-
-.. |Radio-Buttons-Dynamic| image:: images/SD3/screenshots/radio-buttons-dynamic.png
-
-.. |Check-Boxes-Static| image:: images/SD3/screenshots/check-boxes-static.png
-
-.. |Check-Boxes-Dynamic| image:: images/SD3/screenshots/check-boxes-dynamic.png
-
-.. |Dropdown-Static| image:: images/SD3/screenshots/dropdown-static.png
-
-.. |Date-Only| image:: images/SD3/screenshots/date-only.png
-
-.. |Time-Only| image:: images/SD3/screenshots/time-only.png
-
-.. |Date-And-Time| image:: images/SD3/screenshots/date-and-time.png
 
 
 Section 6 - Slamdown Variables in Queries
 -----------------------------------------
 
-SlamData has the ability to use values selected in Slamdown form elements
+SlamData has the ability to use values selected in SlamDown form elements
 to be used in a query.  For more information and examples, see
 `Section 11 <sql-squared-reference.html#section-11-variables-and-sql2>`__ of
 the SQL² Reference Guide.
+
+
+
+.. |Headers| image:: images/SD4/screenshots/fake-levels.png
+
+.. |Radio-Buttons-Static| image:: images/SD4/screenshots/radio-buttons-static.png
+
+.. |Radio-Buttons-Dynamic| image:: images/SD4/screenshots/radio-buttons-dynamic.png
+
+.. |Check-Boxes-Static| image:: images/SD4/screenshots/check-boxes-static.png
+
+.. |Check-Boxes-Dynamic| image:: images/SD4/screenshots/check-boxes-dynamic.png
+
+.. |Dropdown-Static| image:: images/SD4/screenshots/dropdown-static.png
+
+.. |Date-Only| image:: images/SD4/screenshots/date-only.png
+
+.. |Time-Only| image:: images/SD4/screenshots/time-only.png
+
+.. |Date-And-Time| image:: images/SD4/screenshots/date-and-time.png
+

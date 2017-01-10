@@ -1,12 +1,6 @@
 .. figure:: images/white-logo.png
    :alt: SlamData Logo
 
-.. warning:: Version 4 Documentation Updates
-
-  We are currently updating all of our documentation from Version 3
-  to Version 4.  In the meantime, the document below still represents
-  Version 3.  This notice will be removed when this document has been
-  updated.  Thank you!
 
 Reference - SQL²
 ================
@@ -15,12 +9,11 @@ Reference - SQL²
 Section 1 - Introduction
 ------------------------
 
-SQL² is a subset of ANSI SQL, designed for queries into NoSQL databases.
+SQL² is a subset of ANSI SQL. SQL² is designed for queries on NoSQL database systems.
 
 SQL² has support for every major SQL SELECT clause, such as ``AS``,
 ``WHERE``, ``JOIN``, ``GROUP BY``, ``HAVING``, ``LIMIT``, ``OFFSET``,
-``CROSS``, etc. It also contains many standard SQL functions and
-operators. It follows PostgreSQL where SQL dialects diverge.
+``CROSS``, and so on. It follows PostgreSQL where SQL dialects diverge.
 
 
 1.1 Data Types
@@ -28,9 +21,11 @@ operators. It follows PostgreSQL where SQL dialects diverge.
 
 The following data types are used by SQL².
 
-**Note:** > Some data types are not natively supported by all databases.
-Instead, they are emulated by SlamData, meaning that you can use them as
-if they were supported by the database.
+.. note::
+
+  Some data types are not natively supported by all database systems.
+  Instead, they are emulated by SlamData, meaning that you can use them as
+  if they were supported by the database system.
 
 **MDB** = Native MongoDB Support
 
@@ -114,16 +109,20 @@ The following operators are supported:
 | Identity     | ``OID``                                                          |
 +--------------+------------------------------------------------------------------+
 
-**Note:** ``~`` , ``~*``, ``!~``, and ``!~*`` are regular expression
-operators. ``~*``, ``!~``, and ``!~*`` are preliminary and may not
-work in the current release.
+.. note::
 
-**Also Note:**  The ``||`` operator for strings will concatenate two
-strings; for example, you can create a full name from a first and last
-name property: \ ``c.firstName || ' ' || c.lastName``. The ``||``
-operator for arrays will concatenate two arrays; for example, if ``xy``
-is an array with two values, then ``c.xy || [0]`` will create an array
-with three values, where the third value is zero.
+  ``~`` , ``~*``, ``!~``, and ``!~*`` are regular expression
+  operators. ``~*``, ``!~``, and ``!~*`` are preliminary and may not
+  work in the current release.
+
+.. note::
+
+  The ``||`` operator for strings will concatenate two
+  strings. For example, you can create a full name from a first and last
+  name property: \ ``c.firstName || ' ' || c.lastName``. The ``||``
+  operator for arrays will concatenate two arrays; for example, if ``xy``
+  is an array with two values, then ``c.xy || [0]`` will create an array
+  with three values, where the third value is zero.
 
 The following functions are supported:
 
@@ -164,7 +163,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT * FROM `/users`
+    SELECT *
+    FROM `/users`
 
 
 2.2 Select specific fields from a path
@@ -177,7 +177,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT name, age FROM `/users`
+    SELECT name, age
+    FROM `/users`
+
 
 2.3 Path Aliases
 ~~~~~~~~~~~~~~~~
@@ -190,7 +192,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT c.name, c.age FROM `/users` AS c
+    SELECT c.name, c.age
+    FROM `/users` AS c
 
 
 Section 3 - Filtering a Result Set
@@ -211,7 +214,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT c.name FROM `/users` AS c WHERE c.age > 40
+    SELECT c.name
+    FROM `/users` AS c
+    WHERE c.age > 40
 
 
 3.2 Filtering using a string value
@@ -221,7 +226,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT c.name FROM `/users` AS c WHERE c.name = "Sherlock Holmes"
+    SELECT c.name
+    FROM `/users` AS c
+    WHERE c.name = "Sherlock Holmes"
 
 
 3.3 Filtering using multiple Boolean predicates
@@ -259,32 +266,36 @@ numbers and strings. Some common string operators and functions include:
 | ``LENGTH``             | Returns length of string   |
 +------------------------+----------------------------+
 
-4.2 - Examples
+4.1 - Examples
 ~~~~~~~~~~~~~~
 
 Using mathematical operations:
 
 .. code-block:: sql
 
-    SELECT c.age + 2 * 1 / 4 % 2 FROM `/users` AS c
+    SELECT c.age + 2 * 1 / 4 % 2
+    FROM `/users` AS c
 
 Concatenating strings:
 
 .. code-block:: sql
 
-    SELECT c.firstName || ' ' || c.lastName AS name FROM `/users` AS c
+    SELECT c.firstName || ' ' || c.lastName AS name
+    FROM `/users` AS c
 
 Filtering by fuzzy string comparison using the ``LIKE`` operator:
 
 .. code-block:: sql
 
-    SELECT * FROM `/users` AS c WHERE c.firstName LIKE "%Joan%"
+    SELECT * FROM `/users` AS c
+    WHERE c.firstName LIKE "%Joan%"
 
 Filtering by regular expression:
 
 .. code-block:: sql
 
-    SELECT * FROM `/users` AS c WHERE c.firstName ~ "[sS]h+""
+    SELECT * FROM `/users` AS c
+    WHERE c.firstName ~ "[sS]h+""
 
 
 Section 5 - Dates and Times
@@ -294,12 +305,14 @@ Filter by dates and times using the ``TIMESTAMP``, ``TIME``, and
 ``DATE`` operators. The ``DATEPART`` operator can also be used
 to select part of a date, such as the day.
 
-**Note:**  Some databases will automatically convert strings into dates
-or date/times. SlamData does not perform this conversion, since the
-underlying database has no schema and no fixed type for any field. As a
-result, an expression like ``WHERE ts > "2015-02-10"`` compares
-string-valued ``ts`` fields with the string ``"2015-02-10"`` instead of
-a date comparison.
+.. note::
+
+  Some database systems will automatically convert strings into dates
+  or date/times. SlamData does not perform this conversion, since the
+  underlying database system has no schema and no fixed type for any field. As a
+  result, an expression like ``WHERE ts > "2015-02-10"`` compares
+  string-valued ``ts`` fields with the string ``"2015-02-10"`` instead of
+  a date comparison.
 
 If you want to embed literal dates, timestamps, etc. into your SQL
 queries, you should use the time conversion operators, which accept
@@ -308,12 +321,12 @@ above snippet could be converted to
 ``WHERE ts > DATE("2015-02-10")``, which looks for date-valued
 ``ts`` fields and compares them with the date ``2015-02-10``.
 
-*NOTE for MongoDB Users*:
+.. note:: **MongoDB Users**
 
-If your MongoDB data does not use MongoDB's native date/time type,
-and instead, you store your timestamps as epoch milliseconds in a
-numeric value, then you should either compare numbers or use the
-``TO_TIMESTAMP`` function.
+  If your MongoDB data does not use MongoDB's native date/time type,
+  and instead, you store your timestamps as epoch milliseconds in a
+  numeric value, then you should either compare numbers or use the
+  ``TO_TIMESTAMP`` function.
 
 
 5.1 Filter based on a timestamp
@@ -326,7 +339,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT * FROM `/log/events` AS c WHERE c.ts > TIMESTAMP("2015-04-29T15:16:55Z")
+    SELECT *
+    FROM `/log/events` AS c
+    WHERE c.ts > TIMESTAMP("2015-04-29T15:16:55Z")
 
 
 5.2 Filter based on a time
@@ -339,7 +354,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT * FROM `/log/events` AS c WHERE c.ts > TIME("15:16:55")
+    SELECT *
+    FROM `/log/events` AS c
+    WHERE c.ts > TIME("15:16:55")
 
 
 5.3 Filter based on a date
@@ -352,7 +369,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT * FROM `/log/events` AS c WHERE c.ts > DATE("2015-04-29")
+    SELECT *
+    FROM `/log/events` AS c
+    WHERE c.ts > DATE("2015-04-29")
 
 
 5.4 Filter based on part of a date
@@ -369,7 +388,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT DATE_PART("day", c.ts) FROM `/log/events` AS c
+    SELECT DATE_PART("day", c.ts)
+    FROM `/log/events` AS c
 
 
 5.5 Filter based on a Unix epoch
@@ -382,7 +402,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT * FROM `/log/events` AS c WHERE c.ts > TO_TIMESTAMP(1446335999)
+    SELECT *
+    FROM `/log/events` AS c
+    WHERE c.ts > TO_TIMESTAMP(1446335999)
 
 
 Section 6 - Grouping
@@ -464,8 +486,8 @@ Example:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``ARBITRARY`` returns an arbitrary value from a set.  Each target
-datasource may implement this differently but is intended to retrieve
-a single value from a set in the cheapest way, and not necessarily
+data source may implement this differently but is intended to retrieve
+a single value from a set in the cheapest way, and is not necessarily
 deterministic.
 
 
@@ -485,26 +507,29 @@ aggregation (``SUM``) and ``GROUP BY`` clause.
 
 .. code-block:: sql
 
-    SELECT AVG(SUM(pop)) FROM `/population` GROUP BY state
+    SELECT AVG(SUM(pop))
+    FROM `/population`
+    GROUP BY state
 
 
 Section 7 - Nested Data and Arrays
 ----------------------------------
 
-Unlike a relational database many NoSQL databases allow data to be
+Unlike a relational database system, many NoSQL database systems allow data to be
 nested (that is, data can be objects) and to contain arrays.
 
 
 7.1 Nesting
 ~~~~~~~~~~~
 
-Nesting is represented by levels separated by a period (``.``).
+Nesting is represented by levels separated by a full stop (``.``).
 
 Example:
 
 .. code-block:: sql
 
-    SELECT c.profile.address.street.number FROM `/users` AS c
+    SELECT c.profile.address.street.number
+    FROM `/users` AS c
 
 
 7.2 Arrays
@@ -517,7 +542,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT c.profile.allAddress[0].street.number FROM `/users` AS c
+    SELECT c.profile.allAddress[0].street.number
+    FROM `/users` AS c
 
 
 7.2.1 Flattening
@@ -531,7 +557,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT c.profile.allAddresses[*] FROM `/users` AS c
+    SELECT c.profile.allAddresses[*]
+    FROM `/users` AS c
 
 Use the asterisk in curly brackets (``{*}``) to extract all field
 values.
@@ -540,7 +567,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT c.profile.{*} FROM `/users` AS c
+    SELECT c.profile.{*}
+    FROM `/users` AS c
 
 
 7.2.2 Filtering using arrays
@@ -553,7 +581,9 @@ Example:
 
 .. code-block:: sql
 
-    SELECT DISTINCT * FROM `/users` AS c WHERE c.profile.allAddresses[*].street.number = "221B"
+    SELECT DISTINCT *
+    FROM `/users` AS c
+    WHERE c.profile.allAddresses[*].street.number = "221B"
 
 
 Section 8 - Pagination and Sorting
@@ -572,13 +602,18 @@ Example (Limit results to 20 entries):
 
 .. code-block:: sql
 
-    SELECT * FROM `/users` LIMIT 20
+    SELECT *
+    FROM `/users`
+    LIMIT 20
 
 Example (Return the 100th to 119th entry):
 
 .. code-block:: sql
 
-    SELECT * FROM `/users` OFFSET 100 LIMIT 20
+    SELECT *
+    FROM `/users`
+    OFFSET 100
+    LIMIT 20
 
 
 8.2 Sorting
@@ -586,21 +621,24 @@ Example (Return the 100th to 119th entry):
 
 Use the ``ORDER BY`` clause to sort the results. You can specify one or
 more fields for sorting, and you can use operators in the ``ORDER BY``
-arguments. Use ``ASC`` for ascending sorting and ``DESC`` for decending
+arguments. Use ``ASC`` for ascending sorting and ``DESC`` for descending
 sorting.
 
 Example (Sort users by ascending age):
 
 .. code-block:: sql
 
-    SELECT * FROM `/users` ORDER BY age ASC
+    SELECT *
+    FROM `/users`
+    ORDER BY age ASC
 
 Example (Sort users by last digit in age, descending, and full name,
 ascending):
 
 .. code-block:: sql
 
-    SELECT * FROM `/users`
+    SELECT *
+    FROM `/users`
     ORDER BY age % 10 DESC, firstName + lastName ASC
 
 
@@ -611,7 +649,7 @@ Use the ``JOIN`` operator to join two or more collections.
 
 There is no technical limitation to the number of collections or tables
 that can be joined, but users are encouraged to consider the performance
-impact based on the dataset sizes.
+impact based upon the dataset sizes.
 
 For MongoDB ``JOIN`` s, see the database specific notes section about
 `JOINs on MongoDB <sql-squared-reference.html#joins-on-mongodb>`__.
@@ -621,7 +659,7 @@ For MongoDB ``JOIN`` s, see the database specific notes section about
 ~~~~~~~~~~~~
 
 This example returns the names of employees and the names of the
-departments they belong to by matching up the employee deparment ID with
+departments they belong to by matching up the employee department ID with
 the department's ID, where both IDs are ObjectID types.
 
 .. code-block:: sql
@@ -707,7 +745,8 @@ name if the full name is null.
 
 .. code-block:: sql
 
-    SELECT COALESCE(c.fullName, c.firstName) AS name FROM `/users` AS c
+    SELECT COALESCE(c.fullName, c.firstName) AS name
+    FROM `/users` AS c
 
 
 Section 11 - Data Type Conversion
@@ -726,7 +765,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT BOOLEAN(survey_complete) AS Survey FROM `/users`
+    SELECT BOOLEAN(survey_complete) AS Survey
+    FROM `/users`
 
 
 11.2 Converting to Strings
@@ -739,7 +779,8 @@ Example:
 
 .. code-block:: sql
 
-    SELECT TO_STRING(zip_code) AS ZipCode FROM `/users`
+    SELECT TO_STRING(zip_code) AS ZipCode
+    FROM `/users`
 
 
 11.3 Converting to Integer
@@ -754,7 +795,8 @@ of ``"1234"`` as a String, it could be converted to an integer with this example
 
 .. code-block:: sql
 
-    SELECT INTEGER(myField) AS MyField FROM `/users`
+    SELECT INTEGER(myField) AS MyField
+    FROM `/users`
 
 If a field is not a valid string representation of an integer value then a
 null value will be returned.
@@ -772,7 +814,8 @@ of ``"1.234"`` as a String, it could be converted to a decimal with this example
 
 .. code-block:: sql
 
-    SELECT DECIMAL(myField) AS MyField FROM `/users`
+    SELECT DECIMAL(myField) AS MyField
+    FROM `/users`
 
 If the field does not a contain a valid string representation of a numeric value,
 such as ``"123"`` or ``"123.456"`` then a null value will be returned.
@@ -791,13 +834,13 @@ Section 12 - Variables and SQL²
 ------------------------------
 
 SQL² has the ability to use variables in queries in addition to statically
-typed content.  Variables can be generated through the use of a Variables Card
-or through a combination of Setup Markdown Card / Show Markdown Card.  Both
-scenarios require that the variables be defined before the Query Card is
+typed content.  Variables can be generated through the use of a **Variables Card**
+or through a combination of **Setup Markdown Card** / **Show Markdown Card**.  Both
+scenarios require that the variables be defined before the **Query Card** is
 executed.
 
 
-.. attention:: SlamData Version
+.. attention:: **SlamData Version**
 
   The syntax for using variables within SQL² was changed slightly
   in version 3.0.8.  This document assumes you are using a version
@@ -854,16 +897,16 @@ For example, if the following Markdown code was used:
 
     ### Select years to report on
 
-    years = [x] 2014 [] 2015 []2016 []2017
+    years = [x] 2014 [] 2015 [] 2016 [] 2017
 
 
 The values selected by the user from the ``years`` set of Check Boxes
-should be referenced with the ``[_]`` option as well as the ``IN`` clause:
+should be referenced using the ``IN`` clause:
 
 .. code-block:: sql
 
     SELECT * FROM `/users`
-    WHERE last_visit IN :years[_]
+    WHERE last_visit IN :years
 
 
 This example would find all users who have a ``last_visit`` that matched
@@ -887,7 +930,8 @@ you can specify it by selecting the ``_id`` field. For example:
 
 .. code-block:: sql
 
-    SELECT _id AS cust_id FROM `/users`
+    SELECT _id AS cust_id
+    FROM `/users`
 
 MongoDB has special rules about fields called ``_id``. For example, they
 must remain unique, which means that some queries (such as
@@ -896,12 +940,17 @@ won't allow. In addition, other queries change the value of ``_id``
 (such as grouping). So SlamData manages ``_id`` and treats it as a
 special field.
 
-**Note:** To filter on ``_id``, you must first convert a string to an
-object ID, by using the ``OID`` function. For example:
+.. note::
+
+  To filter on ``_id``, you must first convert a string to an
+  object ID, by using the ``OID`` function, as shown in the
+  example below.
 
 .. code-block:: sql
 
-    SELECT * FROM `/foo` WHERE _id = OID("abc123")
+    SELECT *
+    FROM `/foo`
+    WHERE _id = OID("abc123")
 
 
 13.1.2 JOINs on MongoDB
@@ -910,18 +959,18 @@ object ID, by using the ``OID`` function. For example:
 When executing a ``JOIN`` in SQL² against MongoDB, the analytics engine
 will decide whether to use the mapreduce API, or the aggregation API along
 with the ``$lookup`` operator.  This operator was introduced in MongoDB
-version 3.2 and allows the equivalent of a left outer equijoin.  You can
+version 3.2 and is the equivalent of a left outer equijoin.  You can
 find out more `here <https://docs.mongodb.com/manual/reference/operator/aggregation/lookup>`__.
 
 To leverage the ``$lookup`` operator, the query must satisfy the following
 conditions that are imposed by MongoDB:
 
-* Must be running MongoDB 3.2 or newer
-* One collection must use an indexed field
-* That collection must not be sharded
-* Both collections must be in the same database
-* Match must be an equijoin, based on equality only (``a.field = b.field`` is ok, ``a.field < b.field`` is not)
+* Must be running MongoDB 3.2 or newer.
+* One collection must use an indexed field.
+* That collection must not be sharded.
+* Both collections must be in the same database.
+* Match must be an equijoin, based on equality only (``a.field = b.field`` is ok, ``a.field < b.field`` is not).
 
 If ``$lookup`` cannot be used, SlamData will fall back to utilizing the
 mapreduce API.  Utilizing mapreduce is slower but more flexible
-and is also backwards compatible for MongoDB 2.6 and newer.
+and is also backwards compatible for MongoDB 2.6 and later.

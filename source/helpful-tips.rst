@@ -1,25 +1,12 @@
 .. figure:: images/white-logo.png
    :alt: SlamData Logo
 
-.. warning:: Version 4 Documentation Updates
-
-  We are currently updating all of our documentation from Version 3
-  to Version 4.  In the meantime, the document below still represents
-  Version 3.  This notice will be removed when this document has been
-  updated.  Thank you!
   
-
 Helpful Tips
 ============
 
 This Helpful Tips document provides SQL² snippets that
-may not otherwise be covered in the other guides.  
-
-For information on how to use SlamData from a user perspective
-see the `SlamData Administration Guide <administration-guide.html>`__
-
-For information on how to use SlamData from a user perspective
-see the `SlamData Users Guide <users-guide.html>`__  (not implemented yet)
+may not otherwise be covered in the other guides.
 
 Examples in this guide will show the SQL² query as well as the generated
 MongoDB query directly below it for reference.
@@ -38,7 +25,8 @@ Section 1 - Basic Queries
 
 .. code-block:: sql
 
-    SELECT COUNT(*) FROM `/devguide/devdb/patients`
+    SELECT COUNT(*)
+    FROM `/devguide/devdb/patients`
 
 **MongoDB query equivalent**
 
@@ -101,7 +89,7 @@ Section 1 - Basic Queries
 1.2 Concatenating Field Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the double-pipe (``||``) symbol to concatenate `char` and `string` values.
+Use the double-pipe (``||``) symbol to concatenate **char** and **string** values.
 
 **SQL Example**
 
@@ -160,12 +148,12 @@ Use the double-pipe (``||``) symbol to concatenate `char` and `string` values.
 1.3 Converting Data Types
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SlamData provides the ability to convert between many data types:
+SlamData provides the ability to convert between many data types.
 
 1.3.1 TO_STRING() Function
 ''''''''''''''''''''''''''
 
-Any data type can be turned into a string data type using the ``TO_STRING()`` function:
+Any data type can be converted into a string data type using the ``TO_STRING()`` function.
 
 **SQL Example**
 
@@ -218,7 +206,7 @@ Any data type can be turned into a string data type using the ``TO_STRING()`` fu
 
 An epoch data type can be converted into a TIMESTAMP data type using the ``TO_TIMESTAMP()`` function.
 
-Assuming a collection has documents which contain a field ``epoch`` with values such as ``1408255200000``:
+The following example assumes a collection that has documents which contain a field ``epoch`` with values such as ``1408255200000``.
 
 **SQL Example**
 
@@ -267,7 +255,7 @@ Assuming a collection has documents which contain a field ``epoch`` with values 
 1.4.1 By Calendar Quarter
 '''''''''''''''''''''''''
 
-Assume you have documents in a structure similar to the following:
+The following example assumes a document structure similar to the following:
 
 .. code-block:: json
 
@@ -288,7 +276,7 @@ visited per quarter, per year.  This requires use of the ``TO_STRING()``
 and ``DATE_PART()`` functions, as well as the modulus (``%``) operator
 to assist in rounding.
 
-First section of query:
+**First part of the query:**
 
 .. code-block:: sql
 
@@ -298,11 +286,13 @@ First section of query:
       || "-Q" ||
       TO_STRING((DATE_PART("quarter",last_visit)) - (DATE_PART("quarter",last_visit) %1)) AS QUARTER
 
-Line 3: Converts the "year" portion of the last_visit field to a string
+Line 3: Converts the "year" portion of the last_visit field to a **string**.
 
-Line 4: Concatenates "-Q" to the output of Line 3
+Line 4: Concatenates "-Q" to the output of Line 3.
 
-Line 5: Rounds the month to the quarter, then concatenates the output to Lines 3 and 4 and assigns the alias ``QUARTER``
+Line 5: Rounds the month to the quarter, then concatenates the output to Lines 3 and 4 and assigns the alias ``QUARTER``.
+
+**Second part of the query:**
 
 .. code-block:: sql
 
@@ -313,21 +303,23 @@ Line 5: Rounds the month to the quarter, then concatenates the output to Lines 3
       TO_STRING((DATE_PART("quarter",last_visit)) - (DATE_PART("quarter",last_visit) %1))
     ORDER BY QUARTER ASC
 
-The ``GROUP BY`` clause is used here to group all quarterly entries together.  The same functions are used here that are used in the ``SELECT`` clause for consistency.  Currently aliases cannot be used in ``GROUP BY`` clauses as they can in ``ORDER BY`` clauses.
+The ``GROUP BY`` clause is used here to group all quarterly entries together.
+The same functions are used here that are used in the ``SELECT`` clause for consistency.
+Currently, aliases cannot be used in ``GROUP BY`` clauses as they can in ``ORDER BY`` clauses.
 
-Line 1: fetches from the appropriate collection
+Line 1: fetches from the appropriate collection.
 
-Line 2: Starts the ``GROUP BY`` clause
+Line 2: Starts the ``GROUP BY`` clause.
 
-Line 3: Similar to Line 3 in the previous example, converts the "year" portion of the last_visit field to a string.
+Line 3: Similar to Line 3 in the first part of the query, converts the "year" portion of the last_visit field to a **string**.
 
-Line 4: Concatenates "-Q" to the output of Line 3
+Line 4: Concatenates "-Q" to the output of Line 3.
 
-Line 5: Rounds the month to the quarter, then concatenates the output to Lines 3 and 4
+Line 5: Rounds the month to the quarter, then concatenates the output to Lines 3 and 4.
 
-Line 6: Orders the results based on yearly quarters in ascending order
+Line 6: Orders the results based on yearly quarters in ascending order.
 
-**Full SQL example:**
+**Complete query:**
 
 .. code-block:: sql
 
@@ -343,11 +335,11 @@ Line 6: Orders the results based on yearly quarters in ascending order
       TO_STRING((DATE_PART("quarter",last_visit)) - (DATE_PART("quarter",last_visit) %1))
     ORDER BY QUARTER ASC
 
-Results in the following table:
+This results in the following table:
 
 |Quarter-Year-Group-By|
 
-When these results are placed into a bar chart it would look similar to this:
+When the query results are rendered as a bar chart, the output would look similar to the following:
 
 |Quarter-Year-Group-By-Chart|
 
@@ -356,12 +348,12 @@ Section 2 - Complex Queries
 ---------------------------
 
 This section goes into more advanced queries that include documents with
-nested data, documents that utilize schema as data, and multicollection
+nested data, documents that utilize schema as data, and multi-collection
 JOINs.
 
-The following examples assume a document structure similar to the following:
+The following examples assume a document structure similar to the following,
+using fictitious sample data, randomly generated:
 
-**NOTE**: this is fictitious sample data, randomly generated
 
 .. code-block:: json
 
@@ -446,8 +438,8 @@ extract values from fields.
 '''''''''''''''''''''''''
 
 Querying documents with arrays without the (``[*]``) operator results in an
-array being returned, see the following SQL² and resulting image.  Compare
-this to section 1.2.2 Return Flattened Array.
+array being returned, as shown in the example output below.
+Compare this to section **1.2.2 Return Flattened Array**.
 
 **SQL Example**
 
@@ -505,8 +497,8 @@ this to section 1.2.2 Return Flattened Array.
 1.2.2 Return Flattened Array
 ''''''''''''''''''''''''''''
 
-Compare the output of this section to section 1.2.1 Return Nested Array.  The
-difference is that in this example there is one row per patient, per diagnosis.
+Compare the output of this section to section **1.2.1 Return Nested Array**.  The
+difference is that in the following example there is one row per patient, per diagnosis.
 
 **SQL Example**
 
@@ -524,7 +516,7 @@ difference is that in this example there is one row per patient, per diagnosis.
 
 **MongoDB query equivalent**
 
-Notice the inclusion of the *$unwind* MongoDB operator in the generated code below now:
+Notice the inclusion now of the MongoDB **$unwind** operator in the code below.
 
 .. code-block:: json
 
@@ -584,12 +576,12 @@ Notice the inclusion of the *$unwind* MongoDB operator in the generated code bel
 
 
 
-.. |Return-Nested-Array| image:: images/SD3/screenshots/return-nested-array.png
+.. |Return-Nested-Array| image:: images/SD4/screenshots/return-nested-array.png
 
-.. |Return-Flattened-Array| image:: images/SD3/screenshots/return-flattened-array.png
+.. |Return-Flattened-Array| image:: images/SD4/screenshots/return-flattened-array.png
 
-.. |Year-Month| image:: images/SD3/screenshots/year-month.png
+.. |Year-Month| image:: images/SD4/screenshots/year-month.png
 
-.. |Quarter-Year-Group-By| image:: images/SD3/screenshots/quarter-year-group-by.png
+.. |Quarter-Year-Group-By| image:: images/SD4/screenshots/quarter-year-group-by.png
 
-.. |Quarter-Year-Group-By-Chart| image:: images/SD3/screenshots/quarter-year-group-by-chart.png
+.. |Quarter-Year-Group-By-Chart| image:: images/SD4/screenshots/quarter-year-group-by-chart.png

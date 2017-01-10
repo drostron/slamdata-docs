@@ -1,26 +1,18 @@
 .. figure:: images/white-logo.png
    :alt: SlamData Logo
 
-.. warning:: Version 4 Documentation Updates
-
-  We are currently updating all of our documentation from Version 3
-  to Version 4.  In the meantime, the document below still represents
-  Version 3.  This notice will be removed when this document has been
-  updated.  Thank you!
-
-
-Developers Guide
-================
+Developer's Guide
+=================
 
 This Developer's Guide will assist the developer who is unfamiliar with
 SlamData to install, configure, customize and embed a complete solution
-from start fo finish.
+from start to finish.
 
-For information on how to use SlamData from a user perspective
-see the `SlamData Administration Guide <administration-guide.html>`__
+For information on how to use SlamData from an administration perspective
+see the `SlamData Administration Guide <administration-guide.html>`__.
 
-For information on how to use SlamData from a user perspective
-see the `SlamData Users Guide <users-guide.html>`__  (not implemented yet)
+For information on how to use SlamData from a user's perspective
+see the `SlamData User's Guide <users-guide.html>`__.
 
 
 .. note:: SlamData Advanced Features
@@ -38,7 +30,7 @@ Section 1 - Installing and Running SlamData
 ~~~~~~~~~~~
 
 The purpose of this Developer's Guide is to walk a software developer
-through SlamData from installation through completed project.  The goal
+through SlamData from installation through to a completed project.  The goal
 is to provide a step-by-step process that a developer can follow,
 including sample data, that is repeatable with other data sets and
 environments.
@@ -55,10 +47,10 @@ This is achieved with some of the following features of SlamData:
 
 - Patented multidimensional relational technology, allowing SlamData to
   communicate with any data source in any data format. This includes not
-  only legacy two-dimensional data such as RDBMS in rows and columns,
-  but also deeply nested, semistructured data such as JSON and XML.
+  only historical two-dimensional data such as RDBMS in rows and columns,
+  but also deeply nested, semi-structured data such as JSON and XML.
 
-- Ability to understand schema dynamically, resulting in absolutely no
+- Ability to understand schemas dynamically, resulting in absolutely no
   need to map field types from one technology to another.  This also allows
   SlamData to use both field values **and** the schema as data.  This is
   not possible with other NoSQL -> relational solutions.
@@ -66,7 +58,7 @@ This is achieved with some of the following features of SlamData:
 - A fully generalized database backend technology, providing a reliable
   and ANSI compatible superset of SQL called SQL² that runs on top of any
   supported data source.  There is no need to learn yet another proprietary
-  database query language.
+  query language.
 
 - Fully embeddable solution that merges seamlessly with your own applications
   providing a consistent look and feel while providing significant and
@@ -89,11 +81,11 @@ This is achieved with some of the following features of SlamData:
 This guide was written with the following assumptions in mind.  The reader
 is a developer that:
 
-- Has a basic to moderate understanding of SQL
-- Has a basic to moderate understanding of JSON
-- Has a basic to moderate understanding of HTML web applications
-- Can perform basic navigation of the MongoDB database via the **mongo** shell
-- Has appropriate permissions to install relevant software
+- Has a basic to moderate understanding of SQL.
+- Has a basic to moderate understanding of JSON.
+- Has a basic to moderate understanding of HTML web applications.
+- Can perform basic navigation of a data source, such as a database system.
+- Has appropriate permissions to install relevant software.
 
 
 1.4 Requirements
@@ -114,10 +106,8 @@ section.
 1.5 Installation
 ~~~~~~~~~~~~~~~~
 
-Instructions for installing SlamData Community Edition can be found
-`here <administration-guide.html#obtaining-slamdata>`__
-
-SlamData Advanced Edition is delivered with an automated installer.
+Instructions for installing SlamData can be found
+`here <administration-guide.html#obtaining-slamdata>`__.
 
 
 1.6 Starting SlamData
@@ -126,14 +116,13 @@ SlamData Advanced Edition is delivered with an automated installer.
 Instructions for starting SlamData can be found
 `here <administration-guide.html#starting-slamdata>`__.
 
-Once SlamData Community Edition or SlamData Advanced Edition is running then
-continue to Section 2.
+Once SlamData is running then continue to Section 2.
 
 
 Section 2 - Exploring Data
 --------------------------
 
-By the end of this Developers Guide the reader will have a fully working
+By the end of this Developer's Guide the reader will have a fully working
 SlamData environment that is securely embedded with user authentication,
 interactive forms and dynamic charts.  To start, however, the basics of
 the user interface will need to be covered.  The guide will then move
@@ -158,17 +147,19 @@ Edition.  Note the numbers and their descriptions following the image.
 +--------+------------------------------------------------------------------------------+
 |     2  |  The current path you are viewing. In this example it is the Home path (/).  |
 +--------+------------------------------------------------------------------------------+
-|     3  |  The eye icon toggles visibility of the trash can icon.                      |
+|     3  |  The wrench icon configures a mount.                                         |
 +--------+------------------------------------------------------------------------------+
-|     4  |  Download all data starting from this path.                                  |
+|     4  |  The eye icon toggles visibility of the trash can icon.                      |
 +--------+------------------------------------------------------------------------------+
-|     5  |  Mount a new database server.                                                |
+|     5  |  Download all data starting from this path.                                  |
 +--------+------------------------------------------------------------------------------+
-|     6  |  Create a new folder in the datasource virtual file system.                  |
+|     6  |  Mount a new data source.                                                    |
 +--------+------------------------------------------------------------------------------+
-|     7  |  Upload a data file.                                                         |
+|     7  |  Create a new folder in the datasource virtual file system.                  |
 +--------+------------------------------------------------------------------------------+
-|     8  |  Create a new workspace.                                                     |
+|     8  |  Upload a data file.                                                         |
++--------+------------------------------------------------------------------------------+
+|     9  |  Create a new workspace.                                                     |
 +--------+------------------------------------------------------------------------------+
 
 
@@ -194,17 +185,17 @@ Workspace in turn is comprised of cards, and decks of cards.
 
 * **Card** - A unit that performs a distinct action. Examples include:
 
-    * Query Card
-    * Show Table Card
-    * Show Cart Card
-    * and more...
+    * Query Card.
+    * Search Card.
+    * Preview Table Card.
+    * and more ...
 
 +-----------------+---------------------------------------------------------------+
 | Unit Type       | May Contain:                                                  |
 +=================+===============================================================+
 | Root Deck       | Either a single **Draftboard Card** or multiple normal cards. |
 +-----------------+---------------------------------------------------------------+
-| Deck            | One or more cards, including one **Draftboard Card**          |
+| Deck            | One or more cards, including one **Draftboard Card**.         |
 +-----------------+---------------------------------------------------------------+
 | Draftboard Card | One or more decks.                                            |
 +-----------------+---------------------------------------------------------------+
@@ -216,13 +207,13 @@ A visual example of the allowable nesting follows:
 |SD-Nesting|
 
 Don't worry!  You won't need to know any of this until section 3, and by then we
-will take you through it step by step.
+will take you through it step-by-step.
 
 
 2.3 Creating a New Mount
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this guide the MongoDB database will be used in the examples; as such,
+In this guide the MongoDB database will be used in the examples. As such,
 the reader should download and run the latest stable version of MongoDB.
 
 Default MongoDB installations run on port **27017** and have no user
@@ -273,9 +264,8 @@ field empty in the interface.
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * Click on the newly created server named **devguide**.  The interface now
-  shows the databases that reside within MongoDB.
-
-  A new database will need to be created to follow along with the guide.
+  shows the databases that reside within the database system. A new database
+  will need to be created to follow along with the guide.
 
 * Click on the Create Folder icon.  |Create-Folder|
 
@@ -294,8 +284,8 @@ The interface should now look like this:
 |In-Devdb|
 
 So far in this guide you've installed SlamData, mounted a database and
-created and renamed a folder.  Good progress.  Let's get some data into
-the database now and start exploring.
+created and renamed a folder.  Good progress.  Let's now get some data into
+the database and start exploring.
 
 2.5 Importing Example Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -315,19 +305,18 @@ instructions:
   **patients** you can either rename it or you can rename it
   inside of SlamData once it has been uploaded.
 
-* Ensure the SlamData UI is in the devdb database, and click
+* Ensure that the SlamData UI is in devdb, and click
   the Upload icon.  |Upload|
 
 * In the file dialog find the patients file and submit it.
 
 * After successful upload a new collection should appear in the UI
-  like the following:
+  as follows:
 
 |After-Upload|
 
-As you can see it is easy to import JSON and CSV data into
-SlamData quickly.  The underlying database in this case is
-MongoDB.
+As you can see, it is easy to quickly import JSON data into SlamData.
+Other formats, such as CSV, can also be quickly imported.
 
 
 2.5.1 Indexing Your Database
@@ -335,11 +324,11 @@ MongoDB.
 
 .. attention:: Indexing Your Database
 
-  While this step is not exactly necessary, any database without
+  While this step is not necessary, any database without
   indexes is going to perform slowly.  In SlamData this can be
   seen as a delay in displaying results.  If you choose to skip
-  this step be prepared to wait several seconds while MongoDB
-  performs your searches.
+  this step, be prepared to wait several seconds while the database
+  system performs your searches.
 
 
 The following commands are specific to MongoDB and must be executed
@@ -382,8 +371,8 @@ file.
 
 You'll be prompted to provide a name for a new Workspace.  A
 Workspace is how users interact with the actual data within the
-database.  Let's start by calling this ``My First Test`` or something
-similar and clicking **Explore**
+database.  Let's start by calling this ``My First Test`` and
+clicking **Explore**.
 
 |Name-Workspace|
 
@@ -394,7 +383,7 @@ Once you click Explore, the following screen should appear:
 +--------+---------------------------------------------------------------------------------------+
 | Number | Description                                                                           |
 +========+=======================================================================================+
-|     1  |  Zoom icon takes user back out of the Workspace and back to the database screen.      |
+|     1  |  Zoom icon takes user out of the Workspace and back to the database screen.      |
 +--------+---------------------------------------------------------------------------------------+
 |     2  |  Flip the card over for more options.                                                 |
 +--------+---------------------------------------------------------------------------------------+
@@ -430,13 +419,13 @@ find what you're looking for.  SlamData has two very powerful ways of finding
 the data you need.  One is the **Search Card** and the other is the
 **Query Card**.   We'll start with the **Search Card**.
 
-* Click the **Flip Card** Icon (#2 in previous image)
+* Click the **Flip Card** Icon (#2 in the previous image).
 
 You'll see the following options on the back of that card:
 
 |Card-Back|
 
-* Click on **Delete Card**
+* Click on **Delete card**.
 
 The UI will now show the only remaining card in the deck which is the
 **Open Card**.  This card allows you to select which collection you wish
@@ -454,27 +443,21 @@ gray cards are those cards that cannot be used following the previous
 card.  A helpful checkmark in the upper right of each selection also
 indicates which cards can be used in the current situation.
 
-* Select the **Search Card**
+* Select the **Search Card**.
 
 A new **Search Card** will appear in the UI.  The search string appears
 simple but has some very powerful search features within.
 
-* Click and drag the right grip bar and slide it to the left, to
-  create a new card.
-
-* Select **Show Table Card**
-
-Now that we have a card that can display search results, slide back
-to the **Search Card**.
-
 * Type the word ``Austin`` and either drag the right grip bar
   to the left, or simply click on the right grip bar.
+
+* Select the **Preview Table Card**.
 
 Depending on the performance of your system and database it may take
 several seconds before the results are displayed.  Keep in mind that
 SlamData is searching the patients collection that we imported into
-MongoDB, and that indexes can significantly boost performance for
-searches.
+the database system, and that indexes can significantly boost performance
+for searches.
 
 Once the results appear, you can browse them just like you did earlier
 in the **Explore Card** with the controls in the bottom left of the
@@ -483,7 +466,7 @@ interface.
 Did you notice that in the search string earlier we did not specify
 which field we wanted to search?  That is part of the power of SlamData.
 Relatively non-technical users can use SlamData to search all of
-their datasources with little (or even no) knowledge in advance of the data
+their data sources with little (or even no) knowledge in advance of the data
 stored within.
 
 Of course when searching all available fields for the search string
@@ -493,7 +476,10 @@ to the right again, or single-click on the left grip.
 
 Let's search for any patients currently living in the city of Dallas.
 
-* Type the string ``city:Dallas`` and slide back to the **Table Card**
+* Type the string ``city:Dallas`` and either drag the right grip bar
+  to the left, or simply click on the right grip bar.
+
+* View the results in the **Preview Table Card** again.
 
 The results should have appeared much faster than the previous search
 because we told SlamData to only look at the **city** field.
@@ -501,20 +487,20 @@ because we told SlamData to only look at the **city** field.
 We can also search on non-string values such as numbers.  Let's find
 all of the patients who are between the ages of 45 and 50:
 
-* Go back to the **Search Card**
+* Go back to the **Search Card**.
 
-* Enter the string ``age:>=45 age:<=50``
+* Enter the string ``age:>=45 age:<=50``.
 
-* View the results in the **Table Card** again.
+* View the results in the **Preview Table Card** again.
 
-As one last example let's show how you can mix and match different types.
-We want to know how many males over age 50 used to live in California.
+As one last example let's see how we can mix and match different types.
+We want to know how many males over the age of 50 used to live in California.
 
-* Go back to the **Search Card**
+* Go back to the **Search Card**.
 
-* Enter the string ``previous_addresses:"[*]":state:CA age:>50 gender:=male``
+* Enter the string ``previous_addresses:"[*]":state:CA age:>50 gender:=male``.
 
-* View the results
+* View the results.
 
 See the table below for some helpful query examples:
 
@@ -522,20 +508,20 @@ See the table below for some helpful query examples:
 +---------------------------+---------------------------------------------------------------+
 | Example                   | Description                                                   |
 +===========================+===============================================================+
-| ``colorado``              | Searches for the **substring** ``colorado`` in **all fields** |
+| ``colorado``              | Searches for the **substring** ``colorado`` in **all fields**.|
 +---------------------------+---------------------------------------------------------------+
-| ``=colorado``             | Searches for the **full word** ``colorado`` in **all fields** |
+| ``=colorado``             | Searches for the **full word** ``colorado`` in **all fields**.|
 +---------------------------+---------------------------------------------------------------+
-| ``age:=50``               | Searches the field **age** for a value of 50                  |
+| ``age:=50``               | Searches the field **age** for a value of 50.                 |
 +---------------------------+---------------------------------------------------------------+
-| ``age:>=50``              | Searches the field **age** for any value over 50              |
+| ``age:>=50``              | Searches the field **age** for any value over 50.             |
 +---------------------------+---------------------------------------------------------------+
 | ``age:>=50 age:<=60``     | Searches the field **age** for values between or equal to     |
-|                           | 50 and 60                                                     |
+|                           | 50 and 60.                                                    |
 +---------------------------+---------------------------------------------------------------+
 | ``codes:"[*]":desc:flu``  | Performs a deep search through the **codes** array and        |
 |                           | examines each subdocument's **desc** field for the            |
-|                           | **substring** ``flu``                                         |
+|                           | **substring** ``flu``.                                        |
 +---------------------------+---------------------------------------------------------------+
 
 As you can see even users with no knowledge of SQL² can perform powerful
@@ -555,41 +541,31 @@ Using the same dataset we are going to perform queries, moving from basic
 queries to more advanced queries.  Let's start off by cleaning up our
 Workspace.
 
-* Go to the **Table Card**
+* Go to the **Preview Table Card**.
 
-* Flip it over
+* Flip it over.
 
-* Click on **Delete Card**
+* Click on **Delete card**.
 
-This should take you to the **Search Card**
+This should take you to the **Search Card**.
 
-* Flip it over
+* Flip it over.
 
-* Click on **Delete Card**
+* Click on **Delete card**.
 
 This should take you to the **Open Card**.  We will be using full
 path names in the queries we will write, and **Query Cards** do not
-use the **Open Card** so let's get rid of that one as well.
+use the **Open Card** so let's delete that one as well.
 
-* Flip it over
+* Flip it over.
 
-* Click on **Delete Card**
+* Click on **Delete card**.
 
-* Create a new **Query Card**
+* Create a new **Query Card**.
 
 The UI now presents the **Query Card**.  Within this card users can
 enter simple or very long and complex SQL² queries against one,
 two or more collections.
-
-Before we perform any real queries, leave the existing contents
-of the card as the default.  Let's create a **Table Card** to the right
-of this one so when the queries execute, we can see the results.
-
-* Click the right grip.
-
-* Create a new **Show Table Card**
-
-* Now click back to the **Query Card**
 
 * Type in the following query:
 
@@ -600,9 +576,13 @@ of this one so when the queries execute, we can see the results.
 Notice how the path to the dataset is surrounded by
 back-ticks (`````) not apostrophes (``'``)
 
-* Slide over to the **Show Table Card** to see the results.
+* Select **Run Query** in the bottom right.
 
-* Slide back to the **Query Card**
+* Click the right grip.
+
+* Select the **Preview Table Card** to see the results.
+
+* Slide back to the **Query Card**.
 
 * Type in or paste the following query:
 
@@ -620,11 +600,13 @@ Note that the query can span multiple lines, and that strings
 are surrounded by quotation marks (``"``) on both ends.  This
 is a requirement for all string data types.
 
-* Slide back to the **Show Table Card** to see the results.
+* Select **Run Query** in the bottom right.
 
-* Slide back to the **Query Card**
+* Slide back to the **Preview Table Card** to see the results.
 
-Let's now create a query that formats the results a little cleaner:
+* Slide back to the **Query Card**.
+
+Let's now create a query that formats the results a little better.
 
 * Type in or paste the following query:
 
@@ -639,9 +621,11 @@ Let's now create a query that formats the results a little cleaner:
         state="TX"
     ORDER BY zip_code ASC
 
-* Slide to the **Show Table Card** to see the results.
+* Select **Run Query** in the bottom right.
 
-Notice in this query we are concatenating **last_name** and
+* Slide back to the **Preview Table Card** to see the results.
+
+Notice in this query we are concatenating the **last_name** and
 **first_name** fields together, separated by a comma.  The comma
 itself is surrounded by apostrophes (``'``) because it is a single
 character.  If it was more than one character it would be a string
@@ -650,7 +634,7 @@ and would require full quotation marks around it.
 We have also given the results some aliases to display rather
 than the actual field names.
 
-Finally we are ordering (**ORDER BY**) the results in ascending (**ASC**)
+Finally, we are ordering (**ORDER BY**) the results in ascending (**ASC**)
 order based on the **zip_code** field.
 
 The results table should now look similar to the following image:
@@ -667,7 +651,7 @@ from each state that have an illness related to an ulcer. This will
 require using the flattening operator (``[*]``) so SlamData
 can examine all of the documents in the **codes** array.
 
-* Slide to the **Query Card**
+* Slide to the **Query Card**.
 
 * Type or paste the following query:
 
@@ -684,7 +668,9 @@ can examine all of the documents in the **codes** array.
     ORDER BY COUNT(*) DESC
     LIMIT 20
 
-* Slide to the **Show Table Card** to see the results.
+* Select **Run Query** in the bottom right.
+
+* Slide to the **Preview Table Card** to see the results.
 
 SQL² allows for very complex queries.  You can find out more by
 reviewing the `SQL² Reference <sql-squared-reference.html>`__.
@@ -723,38 +709,38 @@ the existing Workspace alone or you can delete it if you wish.
 To (optionally) delete the existing Workspace:
 
 * If you are still in the Workspace, click on the zoom-out
-  icon |Zoom-Out|
+  icon. |Zoom-Out|
 
 * Locate the **My First Test** Workspace and hover your mouse over it.
 
-* Click on the trash can icon that appears to the right |Trash-Can|
+* Click on the trash can icon that appears to the right. |Trash-Can|
 
-We'll create a new Workspace and call it **Average Weight by City**
+We'll create a new Workspace and call it **Average Weight by City**.
 
-* Click the Create Workspace icon in the upper right |Create-Workspace|
+* Click the Create Workspace icon in the upper right. |Create-Workspace|
 
-* Select the **Setup Markdown Card**
+* Select the **Setup Markdown Card**.
 
 This step is necessary so that the Workspace is saved and we can go
 back to rename it soon.
 
-* Create a **Show Markdown** card directly after the **Setup Markdown Card**
+* Create a **Show Markdown** card directly after the **Setup Markdown Card**.
 
-* Zoom back out to the database view
+* Zoom back out to the database view.
 
 Let's rename the Workspace now so it's obvious that we are working
 with it.
 
-* Hover over the new Workspace labeled **Untitled Workspace.slam**
+* Hover over the new Workspace labeled **Untitled Workspace.slam**.
 
-* Click the Move/Rename icon to the right |Move-Rename|
+* Click the Move/Rename icon to the right. |Move-Rename|
 
 * Replace **Untitled Workspace** with ``Average Weight by City``
-  and click **Rename**
+  and click **Rename**.
 
-* Click on the **Average Weight by City.slam** Workspace again
+* Click on the **Average Weight by City.slam** Workspace again.
 
-We are now back in the **Setup Markdown Card**.
+Ensure that you are in the **Setup Markdown Card**.
 
 SlamData uses a specific form of `Markdown <https://daringfireball.net/projects/markdown/>`__ 
 sometimes referred to
@@ -764,7 +750,7 @@ simple syntax rules.  SlamData's version also allows UI elements
 populated from the results of queries.
 
 Let's first show some examples of what the Markdown forms can do.
-Replace the text within the card with the following:
+Paste the following text into the card:
 
 ::
 
@@ -818,6 +804,7 @@ Replace the text within the card with the following:
 
     fullDateTime = ____-__-__ __:__
 
+* Select **Run Query** in the bottom right.
 
 * Click over to the **Show Markdown Card** to view the results.
 
@@ -826,7 +813,7 @@ the information.  You can also include links and images inside
 of Markdown as well.  For a full description of all fields
 and their behavior see the `SlamDown Reference <slamdown-reference.html>`__.
 
-* Click back to the **Setup Markdown Card**
+* Click back to the **Setup Markdown Card**.
 
 Replace the contents with something more useful and appropriate
 to our use case:
@@ -843,6 +830,7 @@ to our use case:
 
     The **Shortest** patient: !`` SELECT MIN(height) FROM `/devguide/devdb/patients` `` inches
 
+* Select **Run Query** in the bottom right.
 
 * Click over to the **Show Markdown Card** to see the results.
 
@@ -851,17 +839,16 @@ Keep in mind that to print the results of a query in Markdown, the query must
 begin with an exclamation point (``!``) and two back-ticks (``````) and end
 with two more back-ticks (``````).
 
-* Click back to the **Setup Markdown Card**
+* Click back to the **Setup Markdown Card**.
 
 We will use similar syntax to populate the elements of an interactive form
 in the next section.
 
 
-
 3.2 Interactive Markdown Forms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here is where things get really fun for both you and your own users.
+Here is where things get really fun for both you and your users.
 Let's actually provide the functionality that we promise with the
 title of **Average Weight by City**.
 
@@ -878,27 +865,29 @@ cities within that state.
 
     state = {!``SELECT DISTINCT(state) FROM `/devguide/devdb/patients` ORDER BY state``}
 
+* Select **Run Query** in the bottom right.
+
 * Click over to the **Show Markdown Card** to see the results.
 
 * Click on the dropdown next to **State** to see that the element
   was populated with the query we typed in.
 
-* Flip the **Show Markdown Card** over by clicking the icon in the upper right |Icon-Flip|
+* Flip the **Show Markdown Card** over by clicking the icon in the upper right. |Icon-Flip|
 
-* Select the **Wrap** option.
+* Select **Wrap**.
 
 Note that your interface should now look similar to the following:
 
 |Wrapped-Deck|
 
-You can drag the existing deck around the board now.  You can also click and
-drag the left and right hand grips just as before to see the previous cards.
+You can click and drag the left and right hand grips just as before to see
+the previous cards.
 
 * Click on the deck to make it active.
 
-* Flip the deck by clicking the icon |Icon-Flip|
+* Flip the deck by clicking the icon. |Icon-Flip|
 
-* Select the **Mirror** option.
+* Select **Mirror**.
 
 Your interface should now look similar to the following:
 
@@ -912,7 +901,7 @@ affect other decks.
 
 * Click on the new second deck to make it active.
 
-* Create a new card in this second deck, selecting the **Query Card**
+* Create a new card in this second deck, selecting the **Query Card**.
 
 * Type in or paste the following query into the **Query Card**:
 
@@ -933,10 +922,9 @@ preceded by a colon ( ``:`` ).
 
 Also note that we can **ORDER BY** an aggregation value such as **AVG**.
 
-* Click on the right grip to create a new card and select **Show Table Card**
+* Select **Run Query** in the bottom right.
 
-* Adjust the decks with their border controls until they look similar
-  to the following image:
+* Click on the right grip to create a new card and select the **Preview Table Card**.
 
 |MD-and-Show-Decks|
 
@@ -945,10 +933,9 @@ Also note that we can **ORDER BY** an aggregation value such as **AVG**.
 
 Viewing data in table form is useful but sometimes a graphical representation
 makes all the difference.  To prepare for that, let's go back and change
-query and limit the results to 20 cities so a bar chart doesn't appear as
-crowded.
+the query and limit the results to 20 cities, so a bar chart doesn't appear crowded.
 
-* Click the left grip to go back to the **Query Card**
+* Click the left grip to go back to the **Query Card**.
 
 * Add the following line to the end of the query:
 
@@ -956,7 +943,9 @@ crowded.
 
   LIMIT 20
 
-* Slide back over to the **Show Table Card**
+* Select **Run Query** in the bottom right.
+
+* Slide back over to the **Preview Table Card**.
 
 Now we are ready to add some visualizations!
 
@@ -966,28 +955,27 @@ Now we are ready to add some visualizations!
 
 Before creating an actual chart we need to set it up.  Remember earlier
 that decks can build off one another.  We need to now mirror the
-**Show Table Card**:
+**Preview Table Card**:
 
-* Click on second deck to make it active
+* Click on second deck to make it active.
 
-* Click on the flip icon to flip the deck over |Icon-Flip|
+* Click on the flip icon to flip the deck over. |Icon-Flip|
 
-* Select the Mirror option.
+* Select **Mirror**.
 
-* Drag the newly mirrored deck to the right and resize it so your interface
-  looks similar to the following image:
+* Resize so that your interface looks similar to the following image:
 
 |All-3-Decks|
 
-* Flip the new deck over and now select the **Setup Chart** option
+* Select the new deck and click on the right grip and then select the **Setup Chart Card**.
 
-* Select the Bar Chart icon on the left |Icon-Gray-Bar-Chart|
+* Select the Bar Chart icon. |Icon-Gray-Bar-Chart|
 
 The bar chart icon will change from gray to blue to show that it is active.
 
-* In the **Category** drop down select **.City** as the axis source
+* In the **Category** drop down select **.City** as the axis source.
 
-* Slide to the right to create a new card and select the **Show Chart** option
+* Slide to the right to create a new card and select **Show Chart**.
 
 Your interface should now look like the following image:
 
@@ -1019,7 +1007,7 @@ point and publish it so that others can use it as well.
   decks we've created - click the icon in the white box border
   surrounding the other decks.
 
-* Select the **Publish deck** option.
+* Select **Publish deck**.
 
 A URL will be presented to you that you can share with others.
 The URL will only be accessible while SlamData is running.
@@ -1044,7 +1032,7 @@ external web applications such as customer portals, dashboards, etc.
 '''''''''''''''''''''''''''''''
 
 For examples of how to do this go to this |Repo-Link|.  You can either download
-the zip file or clone the repository
+the zip file or clone the repository.
 
 **Option 1 - Download Zip File**
 
@@ -1052,9 +1040,9 @@ the zip file or clone the repository
 
 * Click the green **Clone or download** button.
 
-* Select **Download ZIP**
+* Select **Download ZIP**.
 
-* Unzip the contents once downloaded
+* Unzip the contents once downloaded.
 
 **Option 2 - Clone the Repository**
 
@@ -1070,25 +1058,24 @@ This section will be using the **sample1** code from that repository.
 
 * Open a web browser and open the **sample1/index.html** file.
 
-In this mock-up app we are going to simulate a reporting application that allows
-healthcare professionals to run a few reports based on patient data.  You can see
-the in this example we will have two reports.
+In this mock-up application we are going to simulate a reporting application that allows
+healthcare professionals to run a few reports based on patient data.  In this example we will have two reports.
 
 4.2.2 - Sample Report 1
 '''''''''''''''''''''''
 
 We have already done most of the work for the first report, we just need to
-embed the appropriate code from SlamData into the web application.  Again - this
+embed the appropriate code from SlamData into the web application.  Again, this
 is a mock-up application which does not actually generate dynamic web pages, so
 we will be modifying static HTML files to simulate this.  The guide will point
 out relevant areas in code that should be generated by your application.
 
-* If not already open then navigate to the **Average Weight by City** Workspace
+* If not already open then navigate to the **Average Weight by City** Workspace.
 
-* Flip the **Draftboard Card** over (again - this is the card that surrounds all
-  of the decks with a white border)
+* Flip the **Draftboard Card** over (again, this is the card that surrounds all
+  of the decks with a white border).
 
-* Select the **Embed Deck** option
+* Select **Embed Deck**.
 
 Notice that SlamData provides sample code to copy and paste into your own
 application or HTML file.
@@ -1097,12 +1084,12 @@ application or HTML file.
 4.2.2.1 Snippet 1 Code
 @@@@@@@@@@@@@@@@@@@@@@
 
-* Copy the highlighted part of the text (see image below).
+* Copy the highlighted part of the text, as shown below.
 
 |Embed-Code-1|
 
 
-* Open the **sample1/report1.html** file in a text editor
+* Open the **sample1/report1.html** file in a text editor.
 
 * Paste the **Snippet 1 code** that SlamData provided into the HTML file's ``<HEAD>`` section,
   just after the line that reads ``<!-- SLAMDATA SNIPPET 1 -->``.
@@ -1164,7 +1151,7 @@ would normally be generated by your own web application, and these two variables
 would be populated based on some logic in your application.
 
 In small examples where we are only using two reports it's easy enough to paste
-this code directly into files; however when the number of reports that are being
+this code directly into files. However, when the number of reports that are being
 embedded grows, it will quickly start to make sense when to programmatically
 generate this code.
 
@@ -1181,82 +1168,72 @@ Code:
 .. code-block:: html
 
     <head>
-      <meta charset="utf-8">
-      <title>Your Reporting App</title>
-      <link rel="stylesheet" type="text/css" href="styles.css">
-
-      <!-- SLAMDATA SNIPPET 1 -->
-
-      <script type="text/javascript">
-      var slamdata = window.SlamData = window.SlamData || {};
-      slamdata.embed = function(options) {
-        var queryParts = [];
-        if (options.permissionTokens) queryParts.push("permissionTokens=" + options.permissionTokens.join(","));
-        if (options.stylesheets) queryParts.push("stylesheets=" + options.stylesheets.map(encodeURIComponent).join(","));
-        var queryString = "?" + queryParts.join("&");
-        var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
-        var uri = "http://localhost:8080/files/workspace.html" + queryString;
-        var iframe = document.createElement("iframe");
-        iframe.width = iframe.height = "100%";
-        iframe.frameBorder = 0;
-        iframe.src = uri + "#" + options.deckPath + "/" + options.deckId + "/view" + varsParam;
-        var deckElement = document.getElementById("sd-deck-" + options.deckId);
-        if (deckElement) deckElement.appendChild(iframe);
-      };
-      </script>
-
+    <meta charset="utf-8">
+    <title>Your Reporting App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- SLAMDATA SNIPPET 1 -->
+    <script type="text/javascript">
+        var slamdata = window.SlamData = window.SlamData || {};
+        slamdata.embed = function(options) {
+          var queryParts = [];
+          if (options.permissionTokens) queryParts.push("permissionTokens=" + options.permissionTokens.join(","));
+          if (options.stylesheets && options.stylesheets.length) queryParts.push("stylesheets=" + options.stylesheets.map(encodeURIComponent).join(","));
+          var queryString = "?" + queryParts.join("&");
+          var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
+          var uri = "http://localhost:20223/slamdata/workspace.html" + queryString;
+          var iframe = document.createElement("iframe");
+          iframe.width = iframe.height = "100%";
+          iframe.frameBorder = 0;
+          iframe.src = uri + "#" + options.deckPath + options.deckId + "/view" + varsParam;
+          var deckElement = document.getElementById("sd-deck-" + options.deckId);
+          if (deckElement) deckElement.appendChild(iframe);
+        };
+    </script>
     </head>
     <body>
-      <div class="container">
+    <div class="container">
         <nav class="navbar navbar-default" role="navigation">
-              <div class="navbar-header">
+            <div class="navbar-header">
                 <div class="row">
-                  <a class="navbar-brand" href="index.html"><img width="10" src="images/spacer.png"/></a>
+                    <a class="navbar-brand" href="index.html"><img width="10" src="images/spacer.png"/></a>
                     <a class="navbar-brand" href="index.html"><img src="images/dashboard.svg"/></a>
-                  </div>
-                  <div class="row">
-                  <a class="navbar-brand" href="index.html"><img width="10" src="images/spacer.png"/></a>
+                </div>
+                <div class="row">
+                    <a class="navbar-brand" href="index.html"><img width="10" src="images/spacer.png"/></a>
                     <a class="navbar-brand" href="index.html">Your Reporting App</a>
-                  </div>
-              </div>
-          </nav>
+                </div>
+            </div>
+        </nav>
         <div id="main">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <H3>Average Weight by City</H3>
-              </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <H3>Average Weight by City</H3>
+                    </div>
+                </div>
+                <!-- SLAMDATA SNIPPET 2 -->
+                <div
+                    style="min-height: 700px;min-width: 800px;"
+                    class="col-lg-12 col-md-12 col-sm-12"
+                    class="row"
+                    id="sd-deck-33a2fbf9-6c1f-487e-b043-f62565572caa">
+                </div>
             </div>
-
-             <!-- SLAMDATA SNIPPET 2 -->
-
-            <div
-                style="min-height: 700px;min-width: 800px;"
-                class="col-lg-12 col-md-12 col-sm-12"
-                class="row"
-                id="sd-deck-5e2ce240-bb3f-4aca-8471-dae06925a429">
-
-            </div>
-          </div>
         </div>
-      </div>
-
-      <!-- SLAMDATA SNIPPET 3 -->
-
-      <script type="text/javascript">
+    </div>
+    <!-- SLAMDATA SNIPPET 3 -->
+    <script type="text/javascript">
         SlamData.embed({
           deckPath: "/devguide/devdb/Average+Weight+by+City.slam/",
-          deckId: "5e2ce240-bb3f-4aca-8471-dae06925a429",
+          deckId: "33a2fbf9-6c1f-487e-b043-f62565572caa",
           // An array of custom stylesheets URLs can be provided here
           stylesheets: []
         });
-      </script>
-
+    </script>
     </body>
 
 
-
-4.2.2.4 Overview of Report 1
+4.2.2.5 Overview of Report 1
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 Now that the **sample1/report1.html** file has been saved, it can be loaded
@@ -1266,7 +1243,7 @@ into the web browser.
   or optionally re-open the file with the browser.
 
 * Click on the **Average Weight by City** link.  It should appear similar
-  to the image below
+  to the image below.
 
 * Observe how the entire contents of that Deck is now being displayed
   in a third party web application.
@@ -1311,7 +1288,7 @@ to move the individual decks around.
               codes[*].desc like "%ulcer%"
             GROUP BY state, gender
 
-    2. Show Table Card (mirror the deck here)
+    2. Preview Table Card (mirror the deck here)
 
 
 **Mirrored Deck Card Order**
@@ -1320,19 +1297,19 @@ to move the individual decks around.
 
     * Bar Chart
     * Category: .state
-    * Series: .gender
+    * Measure: .Count
+    * Stack: .gender
 
-2. Display Chart Card
+2. Show Chart Card
 
 The results should look similar to the following image:
 
 |Report-2-Workspace|
 
-Copy all of the relevant data from the **Embed Deck** option and paste
+Copy all of the relevant data from **Embed Deck** and paste
 it into the **sample1/report2.html** file.  Once it is saved, you
 can click on the **Ulcer-related Illnesses by Gender** report in the
-mock-up app and see something similar to the following image.  Note that
-in this image the user would need to scroll right to see the full chart.
+mock-up application and see something similar to the following image.
 
 |Sample-1-2-Full-Report|
 
@@ -1351,7 +1328,7 @@ from other web applications as well.
 
 This section assumes you understand the basics of SlamData
 Advanced Edition security
-`here <http://docs.slamdata.com/en/v3.0/administration-guide.html#security-overview>`__
+`here <http://docs.slamdata.com/en/v3.0/administration-guide.html#security-overview>`__.
 
 SlamData Advanced Edition utilizes `OpenID Connect <http://openid.net/connect/>`__,
 which is a simple identity layer on top of the OAuth 2.0 protocol.
@@ -1372,7 +1349,7 @@ the SlamData Advanced Edition environment, replacing the email address with
 the user you wish to authenticate with.
 
 ```
-java -jar jars/quasar.jar bootstrap -u you@example.com -g admin
+java -jar quasar.jar bootstrap --admin-group --admin-users you@example.com
 ```
 
 
@@ -1386,14 +1363,14 @@ file for SlamData Advanced Edition.   This OpenID Connector Provider (OP) will b
 trusted by SlamData for authentication information. 
 
 The remainder of this guide will assume that a Google OP will be used and the
-examples are configured based on this assumption; however,
-any OpenID Connect Provider can be used.
+examples are configured based on this assumption. However, any OpenID Connect Provider
+can be used.
 
 5.2.1 Google OIDC Provider
 ''''''''''''''''''''''''''
 
 The best method to create an OP is to follow instructions from the
-Google API Console project `here <https://developers.google.com/identity/sign-in/web/devconsole-project>`__
+Google API Console project `here <https://developers.google.com/identity/sign-in/web/devconsole-project>`__.
 
 Most of the fields should be self explanatory.  Once the project is created, go to the
 Credentials tab in the API Manager.  Under the **Authorized redirect URIs** enter the following
@@ -1401,11 +1378,11 @@ value and save your changes, assuming hostname and port are correct for your env
 
 .. code-block:: shell
 
-http://localhost:8080/files/auth_redirect.html
+    http://localhost:20223/files/auth_redirect.html
 
 
-In SlamData's quasar-config.json file create a new entry similar based off the client_id,
-similar to to the highlighted portion in the image below:
+In SlamData's quasar-config.json file create a new entry based off the client_id,
+similar to the image below:
 
 |Config-Example|
 
@@ -1418,7 +1395,7 @@ You should now be able to click on the application tab bar pull out at the top o
 
 |Header-Grip|
 
-You can then click on the **Sign In** icon to the right.
+You can then click on the **Sign in** icon to the right.
 
 Once clicked it should display all of the OIDC Providers that are configured, similar
 to the image below:
@@ -1443,50 +1420,50 @@ in a separate directory structure for enhanced security.
 
 In this simulated application we will assume we are a national
 healthcare provider.  We also want to create some reports for
-our healthcare professionals; however, those reports must be limited
+our healthcare professionals. However, those reports must be limited
 to the states to which the healthcare professional is licensed.
 
 One option would be to create a report for each state, and specify access
 to that report for each of that state's healthcare professionals.  Now
 consider we would have to do that for **each report type**.  So if one report type was
-**Average Age by City**, we would have to create 50 of those reports, and
+**Average Weight by City**, we would have to create 50 of those reports, and
 then provide access to each professional in each state.
 Then if we wanted another report called **Most Diagnosed Disease**
 we would have to create yet another 50 reports, one for each state, and
 setup the professionals to view it again.
 
-The better answer to this is to create a single report, and change
-the source data set based on who is logged in.  This is accomplished
+A better solution to this is to create a single report, and change
+the source data set based upon who is logged in.  This is accomplished
 through the use of a view.  Let's set one up as an example.
 
 In SlamData, navigate to the root folder.  We have primarily been
 working in the **/devguide/devdb** database which means we'll need
 to go up two levels.
 
-From the main Home page in SlamData, to the ``devguide`` mount,
+From the main Home page in SlamData, go to the ``devguide`` mount,
 then into the ``devdb`` database where the previous Workspaces
 were created, similar to this image:
 
 |Navigate|
 
-* Click on the Create Folder icon |Create-Folder|
+* Click on the Create Folder icon. |Create-Folder|
 
-* Hover over the **Untitled Folder** and click the Move-Rename icon to the right |Move-Rename|
+* Hover over the **Untitled Folder** and click the Move-Rename icon to the right. |Move-Rename|
 
-* Rename the folder to ``state-views``
+* Rename the folder to ``state-views``.
 
 Now we have a folder which is specifically designed to hold views.  This makes
 it easier to manage.
 
 Now let's create our first view.
 
-* Click into the **state-views** folder
+* Click into the **state-views** folder.
 
-* Click on the Mount icon |Icon-Mount|
+* Click on the Mount icon. |Icon-Mount|
 
-* In the mount dialog provide ``colorado`` as the name
+* In the mount dialog provide ``colorado`` as the name.
 
-* Select ``SQL²`` as the mount type
+* Select ``SQL²`` as the mount type.
 
 * Paste or type the following query into the **SQL² query** field:
 
@@ -1494,7 +1471,7 @@ Now let's create our first view.
 
     SELECT * FROM `/devguide/devdb/patients` WHERE state = "CO"
 
-* Click **Mount**
+* Click **Mount**.
 
 Congratulations, you just created a view!  Now this view path can
 be used in queries.  When this view is used as the data source,
@@ -1508,7 +1485,7 @@ through the user interface (even with the API), so let's create
 just one more view to use.
 
 * Create another view named ``texas`` that queries against the
-  ``state`` field for the value of ``TX``
+  ``state`` field for the value of ``TX``.
 
 We'll now use the **colorado** and **texas** views as the data
 sources for some of our reports.
@@ -1521,19 +1498,19 @@ Just like we setup a special folder for the state-views, we
 will now setup a special folder for the reports we wish
 to securely embed into third party web applications.
 
-* Navigate back to the **/devguide/devdb** location within SlamData
+* Navigate back to the **/devguide/devdb** location within SlamData.
 
-* Create a new folder and rename it ``reports``
+* Create a new folder and rename it ``reports``.
 
-* Click into the **reports** folder
+* Click into the **reports** folder.
 
 We are only going to create a single report but this process can
 of course be repeated for as many reports as you like.  This report
 will make use of the views we created previously.
 
-* Click on the Create Workspace icon |Create-Workspace|
+* Click on the Create Workspace icon. |Create-Workspace|
 
-* Create a **Setup Variables Card**
+* Create a **Setup Variables Card**.
 
 * Provide the values from the following table:
 
@@ -1552,16 +1529,18 @@ will make use of the views we created previously.
 .. code-block:: sql
 
     SELECT
-        count(codes[*]),
-        _id as id,
-        first_name,
-        last_name
+      city AS City,
+      AVG(weight) AS AvgWeight
     FROM :viewpath
-    GROUP BY _id
-    ORDER BY count(codes[*]) DESC
+    GROUP BY
+      city
+    ORDER BY AVG(weight) DESC
     LIMIT 20
 
-* Create a **Setup Chard Card** with the following settings:
+
+* Select **Run Query** in the bottom right.
+
+* Create a **Setup Chart Card** with the following settings:
 
 +---------------+-------------------------------------------+
 | Field         | Value                                     |
@@ -1570,24 +1549,22 @@ will make use of the views we created previously.
 +---------------+-------------------------------------------+
 | Category      | **.City**                                 |
 +---------------+-------------------------------------------+
-| Default value | ``/devguide/devdb/state-views/colorado``  |
-+---------------+-------------------------------------------+
 
-* Create a **Show Chart Card**
+* Create a **Show Chart Card**.
 
 We've created an interesting chart.  Let's go back out and rename
 the Workspace now.
 
-* Zoom back out to the navigation screen
+* Zoom back out to the navigation screen.
 
 * Rename the **Untitled Workspace.slam** Workspace to
-  ``Average Age by City``
+  ``Average Weight by City``.
 
-* Click into the **Average Age by City** Workspace again
+* Click into the **Average Weight by City** Workspace again.
 
-* Flip the deck |Icon-Flip|
+* Flip the deck. |Icon-Flip|
 
-* Select the **Embed Deck** icon
+* Select the **Embed deck** icon.
 
 This screen should look familiar!  You'll notice that a few new entries
 are now residing in the code.  Specifically the ``viewpath`` variable is
@@ -1612,12 +1589,12 @@ healthcare web application.
 5.4.3.1 Snippet 1 Code
 @@@@@@@@@@@@@@@@@@@@@@
 
-* Copy the highlighted part of the text (see image below).
+* Copy the highlighted part of the text, as shown below.
 
 |Embed-Code-Secure-1|
 
 * Open the **sample2/report1.html** file in a text editor (note this is **sample2** now,
-  not **sample1**)
+  not **sample1**).
 
 * Paste the **Snippet 1 code** that SlamData provided into the HTML file's ``<HEAD>`` section,
   just after the line that reads ``<!-- SLAMDATA SNIPPET 1 -->``.
@@ -1663,9 +1640,9 @@ your own <div> tag and programmatically insert the id as we did in this example.
 
 * Save your **sample2/report1.html** file to disk.
 
-* Now go to your browser and load **sample1/index.html**
+* Now go to your browser and load **sample2/index.html**.
 
-* Click on the **Average Age by City - Colorado** link
+* Click on the **Average Weight by City - Colorado** link.
 
 Notice how the Deck is embedded securely inside of our simulated web application.
 
@@ -1684,7 +1661,7 @@ following command:
 
 * Open the **sample2/report2.html** file with a text editor.
 
-* Change the title of the page in the ``<H3>`` header to ``Average Age by City - Texas``
+* Change the title of the page in the ``<H3>`` header to ``Average Weight by City - Texas``
 
 * Change the **viewpath** value toward the bottom of this file to
   ``/devguide/devdb/state-views/texas``
@@ -1692,7 +1669,7 @@ following command:
 * Save your changes
 
 * Open the **sample2/index.html** file again, and now click on the
-  **Average Age by City - Texas** report.
+  **Average Weight by City - Texas** report.
 
 Notice that with just the change of the viewpath we are able to provide this
 to our Texas professionals as well.
@@ -1705,87 +1682,87 @@ necessary.
 .. _eCharts: https://ecomfe.github.io/echarts/index-en.html
 
 
-.. |Murray| image:: images/SD3/murray.png
+.. |Murray| image:: images/SD4/murray.png
 
-.. |Murray-Small| image:: images/SD3/murray-small.png
+.. |Murray-Small| image:: images/SD4/murray-small.png
 
-.. |Home-Annotated| image:: images/SD3/screenshots/home-annotated-with-numbers.png
+.. |Home-Annotated| image:: images/SD4/screenshots/home-annotated-with-numbers.png
 
-.. |Icon-Mount| image:: images/SD3/icon-mount.png
+.. |Icon-Mount| image:: images/SD4/icon-mount.png
 
-.. |Mount-Dialog| image:: images/SD3/screenshots/mount-dialog.png
+.. |Mount-Dialog| image:: images/SD4/screenshots/mount-dialog.png
 
-.. |Mount-Dialog-Complete| image:: images/SD3/screenshots/mount-dialog-complete.png
+.. |Mount-Dialog-Complete| image:: images/SD4/screenshots/mount-dialog-complete.png
 
-.. |Create-Folder| image:: images/SD3/icon-create-folder.png
+.. |Create-Folder| image:: images/SD4/icon-create-folder.png
 
-.. |Move-Rename| image:: images/SD3/icon-move-rename.png
+.. |Move-Rename| image:: images/SD4/icon-move-rename.png
 
-.. |Zoom-Out| image:: images/SD3/icon-zoom-out.png
+.. |Zoom-Out| image:: images/SD4/icon-zoom-out.png
 
-.. |Create-Workspace| image:: images/SD3/icon-create-workspace.png
+.. |Create-Workspace| image:: images/SD4/icon-create-workspace.png
 
-.. |Upload| image:: images/SD3/icon-upload.png
+.. |Upload| image:: images/SD4/icon-upload.png
 
-.. |Trash-Can| image:: images/SD3/icon-trash-can.png
+.. |Trash-Can| image:: images/SD4/icon-trash-can.png
 
-.. |Icon-Flip| image:: images/SD3/icon-flip.png
+.. |Icon-Flip| image:: images/SD4/icon-flip.png
 
-.. |Icon-Gray-Bar-Chart| image:: images/SD3/icon-gray-bar.png
+.. |Icon-Gray-Bar-Chart| image:: images/SD4/icon-gray-bar.png
 
-.. |In-Devdb| image:: images/SD3/screenshots/in-devdb-clean.png
+.. |In-Devdb| image:: images/SD4/screenshots/in-devdb-clean.png
 
-.. |After-Upload| image:: images/SD3/screenshots/after-upload.png
+.. |After-Upload| image:: images/SD4/screenshots/after-upload.png
 
-.. |Name-Workspace| image:: images/SD3/screenshots/name-workspace.png
+.. |Name-Workspace| image:: images/SD4/screenshots/name-workspace.png
 
-.. |First-Explore-Annotated| image:: images/SD3/screenshots/first-explore-annotated.png
+.. |First-Explore-Annotated| image:: images/SD4/screenshots/first-explore-annotated.png
 
-.. |Wrapped-Deck| image:: images/SD3/screenshots/wrapped-deck.png
+.. |Wrapped-Deck| image:: images/SD4/screenshots/wrapped-deck.png
 
-.. |Mirrored-Deck| image:: images/SD3/screenshots/mirrored-deck.png
+.. |Mirrored-Deck| image:: images/SD4/screenshots/mirrored-deck.png
 
-.. |Card-Back| image:: images/SD3/screenshots/back-of-card.png
+.. |Card-Back| image:: images/SD4/screenshots/back-of-card.png
 
-.. |Card-Choices-1| image:: images/SD3/screenshots/new-card-choices-1.png
+.. |Card-Choices-1| image:: images/SD4/screenshots/new-card-choices-1.png
 
-.. |MD-and-Show-Decks| image:: images/SD3/screenshots/md-and-show-decks.png
+.. |MD-and-Show-Decks| image:: images/SD4/screenshots/md-and-show-decks.png
 
-.. |All-3-Decks| image:: images/SD3/screenshots/all-3-decks.png
+.. |All-3-Decks| image:: images/SD4/screenshots/all-3-decks.png
 
-.. |Zip-Results| image:: images/SD3/screenshots/zip-results.png
+.. |Zip-Results| image:: images/SD4/screenshots/zip-results.png
 
-.. |All-3-With-Chart| image:: images/SD3/screenshots/all-3-with-chart.png
+.. |All-3-With-Chart| image:: images/SD4/screenshots/all-3-with-chart.png
 
-.. |SD-Nesting| image:: images/SD3/screenshots/sd-nesting.png
+.. |SD-Nesting| image:: images/SD4/screenshots/sd-nesting.png
 
-.. |Embed-Code-1| image:: images/SD3/screenshots/embed-code-1.png
+.. |Embed-Code-1| image:: images/SD4/screenshots/embed-code-1.png
 
-.. |Embed-Code-2| image:: images/SD3/screenshots/embed-code-2.png
+.. |Embed-Code-2| image:: images/SD4/screenshots/embed-code-2.png
 
-.. |Embed-Code-3| image:: images/SD3/screenshots/embed-code-3.png
+.. |Embed-Code-3| image:: images/SD4/screenshots/embed-code-3.png
 
-.. |Sample-1-1-Full-Report| image:: images/SD3/screenshots/sample-1-1-full-report.png
+.. |Sample-1-1-Full-Report| image:: images/SD4/screenshots/sample-1-1-full-report.png
 
-.. |Report-2-Workspace| image:: images/SD3/screenshots/report-2-workspace.png
+.. |Report-2-Workspace| image:: images/SD4/screenshots/report-2-workspace.png
 
-.. |Sample-1-2-Full-Report| image:: images/SD3/screenshots/sample-1-2-full-report.png
+.. |Sample-1-2-Full-Report| image:: images/SD4/screenshots/sample-1-2-full-report.png
 
-.. |Config-Example| image:: images/SD3/screenshots/config-example.png
+.. |Config-Example| image:: images/SD4/screenshots/config-example.png
 
-.. |Header-Grip| image:: images/SD3/screenshots/header-grip.png
+.. |Header-Grip| image:: images/SD4/screenshots/header-grip.png
 
-.. |Sign-In| image:: images/SD3/screenshots/sign-in.png
+.. |Sign-In| image:: images/SD4/screenshots/sign-in.png
 
-.. |Navigate| image:: images/SD3/screenshots/navigate.png
+.. |Navigate| image:: images/SD4/screenshots/navigate.png
 
-.. |Embed-Code-Secure-1| image:: images/SD3/screenshots/embed-code-secure-1.png
+.. |Embed-Code-Secure-1| image:: images/SD4/screenshots/embed-code-secure-1.png
 
-.. |Embed-Code-Secure-2| image:: images/SD3/screenshots/embed-code-secure-2.png
+.. |Embed-Code-Secure-2| image:: images/SD4/screenshots/embed-code-secure-2.png
 
-.. |Embed-Code-Secure-3| image:: images/SD3/screenshots/embed-code-secure-3.png
+.. |Embed-Code-Secure-3| image:: images/SD4/screenshots/embed-code-secure-3.png
 
-.. |Sample-2-1-Full-Report| image:: images/SD3/screenshots/sample-2-1-full-report.png
+.. |Sample-2-1-Full-Report| image:: images/SD4/screenshots/sample-2-1-full-report.png
 
 .. |Repo-Link| raw:: html
 

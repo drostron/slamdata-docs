@@ -2,22 +2,19 @@
    :alt: SlamData Logo
 
 
-.. warning:: Version 4 Documentation Updates
+Administrator's Guide
+=====================
 
-  We are currently updating all of our documentation from Version 3
-  to Version 4.  In the meantime, the document below still represents
-  Version 3.  This notice will be removed when this document has been
-  updated.  Thank you!
+This Administrator's Guide can assist with installing and configuring
+SlamData.
 
+For information on how to use SlamData from a developer's perspective
+see the `SlamData Developer's Guide <developers-guide.html>`__.
 
-Administration Guide
-====================
+For information on how to use SlamData from a user's perspective
+see the `SlamData User's Guide <users-guide.html>`__.
 
-This Administration Guide can assist with installing and configuring
-SlamData. For information on how to use SlamData from a user perspective
-see the `SlamData Users Guide <users-guide.html>`__
-
-.. note:: SlamData Advanced Features
+.. note:: **SlamData Advanced Features**
 
   Throughout this guide there are references to functionality available
   only in SlamData Advanced Edition.  Sections that apply only to SlamData
@@ -32,38 +29,34 @@ Section 1 - Installation
 1.1 Minimum System Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  * Minimum Memory:
+  * Minimum memory
       * 2 GB memory
-      * Add 25 MB for each active user
-  * Disk:
-      * 300 MB for basic installation
-      * Additional space varies based on Workspace size, cached queries, etc.
-  * Java:
-      * Java 1.8
-      * Windows and Mac OS purchased installers include Java 8
-      * Linux requires separate Java 8 installation
-  * Browsers:
-      * Chrome v 51 or newer
-      * Safari v 9 or newer
-      * Internet Exlorer 10 or newer
-  * Target Datasources (for analytics)
+      * An additional 25 MB is required for each active user
+  * Disk
+      * 300 MB for a basic installation
+      * Additional space varies based upon Workspace size, cached queries, and so on
+  * Java
+      * Java 1.8 or newer
+      * Windows and Mac OS versions of SlamData with installers include Java
+      * Linux requires a separate Java installation
+  * Browsers
+      * The most compatible browsers with SlamData are always the most recent versions of Google Chrome and Mozilla Firefox
+  * Target data sources (for analytics)
+      * Apache Spark 2.1 or newer
+      * Couchbase x.x or newer
+      * MarkLogic x.x or newer
       * MongoDB 2.6 or newer
-        
 
-SlamData Standard Edition and SlamData Advanced Edition store configuration
-data in a metastore database.  This should not be confused with Target data
-sources.
+**SlamData Community Edition** uses a file called ``quasar-config.json`` to
+store server configuration data.
 
-By default the metastore is Java H2 but SlamData can be configured to use 
-PostgreSQL.  The Open Source community versions use a file called
-``quasar-config.json`` to store server configuration data.
+**SlamData Analyst Edition** and **SlamData Advanced Edition** store configuration
+data in a metastore database. This should not be confused with target data
+sources. The options for storing server configuration data are as follows:
 
-  * Metastore Datasources (for server configuration data)
-      * H2 Java SQL Database
-          * included with SlamData
-      * PostgreSQL 9.x
-          * must install and configure separately
-
+  * Metastore data sources
+      * Java H2 (included with SlamData)
+      * PostgreSQL 9.x (must be installed and configured separately)
 
 
 1.2 Obtaining SlamData
@@ -73,31 +66,29 @@ PostgreSQL.  The Open Source community versions use a file called
 1.2.1 Downloading the SlamData Installer
 ''''''''''''''''''''''''''''''''''''''''
 
-A fully automated installer package can be purchased directly from the
+A fully automated installer package can be obtained directly from the
 SlamData website `here <http://slamdata.com/get-slamdata/>`__.
-
 
 
 1.2.2 Building SlamData from Source
 '''''''''''''''''''''''''''''''''''
 
-
 1.2.2.1 Build Preparation
 @@@@@@@@@@@@@@@@@@@@@@@@@
 
-Before building SlamData some required software must be installed.
+Before building SlamData, some required software must be installed.
 
 1. Install
    `Node.js <https://docs.npmjs.com/getting-started/installing-node>`__
    version ~4.2, which includes the ``npm`` package manager
 
-2. Install Bower:
+2. Install Bower
 
 .. code-block:: shell
 
     npm install bower -g
 
-3. Install Gulp:
+3. Install Gulp
 
 .. code-block:: shell
 
@@ -105,70 +96,63 @@ Before building SlamData some required software must be installed.
 
    
 
-1.2.2.2 Building Process
-@@@@@@@@@@@@@@@@@@@@@@@@
+1.2.2.2 Build Process
+@@@@@@@@@@@@@@@@@@@@@
 
-Note: If you wish to have the SlamData build process automatically
-download the required Quasar backend engine you will need to have
-a shell environment variable ``GITHUB_AUTH_TOKEN`` populated with
-the appropriate `authorization token <https://github.com/settings/tokens/>`__.
+.. note::
 
-1. Obtain the latest SlamData code:
+  If you wish to have the SlamData build process automatically
+  download the required Quasar backend engine you will need to have
+  a shell environment variable ``GITHUB_AUTH_TOKEN`` populated with
+  the appropriate `authorization token <https://github.com/settings/tokens/>`__.
+
+1. Obtain the latest SlamData code
 
 .. code-block:: shell
 
     git clone https://github.com/slamdata/slamdata.git
     cd slamdata
 
-2. Fetch dependencides.
+2. Fetch the dependencies
 
-From within the slamdata directory:
+Ensure that you are in slamdata directory.
 
 .. code-block:: shell
 
     bower install
     npm install
 
-3. Build
+3. Build the code
 
 .. code-block:: shell
 
     npm i && bower i && gulp make && gulp bundle && gulp less
 
-4. Post-Build Process - **Optional**:
 
-    After building your video camera will turn on
-    and an advanced machine learning algorithm will begin
-    running. In order to proceed to the next step, you must
-    dance around like a chicken. If you do not perform the dance 
-    correctly, SlamData may not run properly.  Either way, congrats,
-    you've just built SlamData!
-
-After this task finishes the ``public`` directory will contain the complete
-SlamData front-end app.
+After this task completes, the ``public`` directory will contain the complete
+SlamData front-end application.
 
 
 1.3 Starting SlamData
 ~~~~~~~~~~~~~~~~~~~~~
 
-SlamData is comprised of a frontend interface and a backend analytics
+SlamData is comprised of a front-end interface and a back-end analytics
 engine. Starting the SlamData application will start both.
 
 
 1.3.1 Starting SlamData from Source
 '''''''''''''''''''''''''''''''''''
 
-If SlamData was installed from source the launch process is the same
+If SlamData is installed from source, the launch process is the same
 on all operating systems.  After successfully building SlamData:
 
-1. Change directory to the directory created by ``git clone``
-2. Start SlamData:  ``java -jar ./jars/quasar.jar --content-path public``
+1. Change directory to the directory created by ``git clone``.
+2. Start SlamData:  ``java -jar ./jars/quasar.jar --content-path public``.
 
 A message similar to the following should be displayed:
 
 ::
 
-    Read config from /Users/user/Library/Application Support/quasar/quasar-config.json
     Server started listening on port 20223
     Press Enter to stop.
 
@@ -178,39 +162,37 @@ A message similar to the following should be displayed:
 
 **Mac OS**
 
-1. Open the Applications folder
-2. Double-click on the SlamData icon
+1. Open the Applications folder.
+2. Double-click on the SlamData icon.
 
 A new browser window or tab will open displaying the SlamData interface.
 The SlamData icon will appear in the Mac OS dock. As with other dock
 applications the SlamData icon may be right-clicked and the application
 terminated.
 
-**Linux**
+**Microsoft Windows**
 
-1. Change directory to the location of the SlamData executable:
-   ``cd SlamData-version``
-2. Execute the SlamData executable: ``./SlamData``
-
-Some Linux systems may not launch a browser automatically. If this is
-the case, open a browser and point it to the following URL:
-http://localhost:20223/slamdata
-
-**Windows**
-
-1. Open the Start menu
-2. Click on the newly installed SlamData icon or use the app search bar
+1. Open the Start menu.
+2. Click on the newly installed SlamData icon or use the search bar
    and type ``slamdata`` and press return to launch it. Select
    appropriate network security settings if prompted.
 
+**Linux**
 
-1.3.3 Starting SlamData Advanced from Command Line
-''''''''''''''''''''''''''''''''''''''''''''''''''
+1. Change directory to the location of the SlamData executable: ``cd SlamData<version>``.
+2. Execute the SlamData executable: ``./SlamData``.
+
+Some Linux systems may not launch a browser automatically. If this is
+the case, open a browser and point it to the following URL: http://localhost:20223/slamdata
+
+
+1.3.3 Starting SlamData Advanced from the Command Line
+''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 SlamData Advanced Edition requires license key information before
 launching.  This information is passed into the JVM at startup.
-An example of how this can be done is below.  Note the use of
-escaping the quote characters with ``\"``
+An example of how this can be done is shown below.  Note the use of
+escaping the quote characters with ``\"``.
 
 .. code-block:: bash
 
@@ -231,22 +213,20 @@ escaping the quote characters with ``\"``
 
     export _JAVA_OPTIONS="$_JAVA_OPTIONS $SD_OPTS"
 
-    java -jar quasar.jar --content-path public -L slamdata
+    java -jar quasar.jar --content-path public
 
 
-Section 2 - Connecting to a Database
-------------------------------------
+Section 2 - Connecting to a Data Source
+---------------------------------------
 
-Connecting to a database is the first step to analyzing data. SlamData
-does not provide a database to connect to. As more databases are
-supported by SlamData they will be listed below.
+Connecting to a data source is the first step to analyzing data.
 
 
-2.1 Databases
-~~~~~~~~~~~~~
+2.1 Data Sources
+~~~~~~~~~~~~~~~~
 
-Supported databases are listed in the following sections.  As new
-target data sources are released they will be listed here.
+Supported data sources are listed in the following sections.  As new
+target data sources are released, they will be listed below.
 
 
 2.1.1 MongoDB
@@ -255,177 +235,150 @@ target data sources are released they will be listed here.
 To connect to MongoDB click on the Mount |Mount-Icon| icon in the upper
 right.
 
-A mount dialog will be presented:
+A mount dialog will be presented, as shown below.
 
-.. figure:: images/SD2/screenshots/mount-dialog-start.png
+.. figure:: images/SD4/screenshots/mount-dialog-start.png
    :alt: SlamData Mount Dialog
 
-   SlamData Mount Dialog
+Enter a name for the data source mount. This name is used in the SlamData
+User Interface (UI) as well as SQL² query paths.
 
-Enter a name for the database mount. This name is used in the SlamData
-UI as well as SQL² query paths. Use a name that makes sense for the
-environment. For instance if this database were hosted on Amazon AWS/EC2
-it might be named ``aws`` or ``aws-1``.
+.. hint:: **Mount Name**
 
-Select **MongoDB** as the mount type. Other mount types will be
-discussed later. Once a Mount type is selected additional fields will
-appear in the dialog based on the mount type selected.
+  Use a name that makes sense for the environment. For example,
+  if a data source were hosted on Amazon AWS/EC2 it might be named
+  ``aws`` or ``aws-1``.
 
-Use the following table to assist in providing example values for the
-remaining fields:
+Select **MongoDB** as the mount type. Once the mount type has been selected,
+additional fields will appear in the dialog. The following form shows
+example values for the remaining fields.
 
-+------------+------------------+
-| Field      | Example          |
-+============+==================+
-| Host       | db.example.com   |
-+------------+------------------+
-| Port       | 27017            |
-+------------+------------------+
-| Username   | joe              |
-+------------+------------------+
-| Password   | \*\*\*\*\*\*\*   |
-+------------+------------------+
-| Database   | joesdb           |
-+------------+------------------+
-| Settings   |                  |
-+------------+------------------+
-
-An example form might look like this:
-
-.. figure:: images/SD2/screenshots/mount-mongodb.png
+.. figure:: images/SD4/screenshots/mount-mongodb.png
    :alt: SlamData MongoDB Dialog
 
-   SlamData MongoDB Dialog
+.. note::
 
-**Note:** When using MongoDB the database field value should be the
-database the username and password will authenticate against. This value
-will depend on which database the user was created in; as such it could
-be ``admin``, the name of the user or something completely different.
+  When using MongoDB, the database field value should be the
+  database the username and password will authenticate against. This value
+  will depend on which database the user was created in. For example,
+  it could be ``admin``, the name of the user or something completely different.
 
-Click **Mount** to mount the database in SlamData.
+Click the **Mount** button to mount the database in SlamData.
 
 
 2.2 Several Mounts
 ~~~~~~~~~~~~~~~~~~
 
-After mounting several databases the SlamData UI might look like the
-following image. In this image there are two separate mounts named
+After mounting several data sources, the SlamData UI might look like the
+following image. In this image, there are two separate mounts named
 ``aws`` and ``macbook``, the latter representing a
-locally mounted database.
+locally mounted data source.
 
-.. figure:: images/SD3/screenshots/mount-all-mounts.png
+.. figure:: images/SD4/screenshots/mount-all-mounts.png
    :alt: SlamData Multiple Mounts
-
-   SlamData Multiple Mounts
 
 
 2.3 Mount Options
 ~~~~~~~~~~~~~~~~~
 
-The mount dialog will display the appropriate fields based on the mount
-type selected. For each database type that SlamData supports a section
-below explains the options available.
+The mount dialog will display the appropriate fields based upon the mount
+type selected. For each data source that SlamData supports, a section
+below describes the options available.
 
-MongoDB
-^^^^^^^
+2.3.1 MongoDB
+'''''''''''''
 
-For MongoDB the values listed in the Connection Options on the MongoDB
-web site are supported. As of MongoDB 2.6 these options are listed
-below.
+The MongoDB values listed in the Connection Options on the MongoDB
+web site are supported. As of MongoDB 2.6 these options are as follows.
 
 +------------------+---------+--------------------------------------------------------------------+
 | Options          | Example | Description                                                        |
 +==================+=========+====================================================================+
-| ssl              | true    | Enable SSL encryption                                              |
+| ssl              | true    | Enable SSL encryption.                                             |
 +------------------+---------+--------------------------------------------------------------------+
-| connectTimeoutMS | 15000   | The time in milliseconds to attempt a connection before timing out |
+| connectTimeoutMS | 15000   | The time in milliseconds to attempt a connection before timing out.|
 +------------------+---------+--------------------------------------------------------------------+
 | socketTimeoutMS  | 10000   | The time in milliseconds to attempt a send or receive on a socket  |
-|                  |         | before the attempt times out                                       |
+|                  |         | before the attempt times out.                                      |
 +------------------+---------+--------------------------------------------------------------------+
 
 
 2.4 SQL² View
 ~~~~~~~~~~~~~
 
-SQL² Views are covered in detail in the SlamData Users Guide.
+SQL² Views are covered in detail in the `SlamData Developer's Guide <developers-guide.html>`__.
 
 
 2.5 Enabling SSL
 ~~~~~~~~~~~~~~~~
 
-If you have trouble following the steps below you may also view our `SSL
+If you have difficulty following the steps below, you may also view the `SSL
 tutorial video <https://www.youtube.com/watch?v=FWdAMyZnOMM>`__.
 
-If a database connection supports SSL encryption, which is to say
+If a data source connection supports SSL encryption, that is to say
 encryption between a client and server such as SlamData and the
-database, additional configuration is necessary.
+data source, additional configuration will be required.
 
 The backend engine of SlamData is written in
 `Scala <http://www.scala-lang.org/>`__ and executes within a Java
-Virtual Machine (JVM). To enable SSL encryption several options must be
+Virtual Machine (JVM). To enable SSL encryption, several options must be
 passed to the JVM when running SlamData. SlamData simplifies this by
 allowing these options to be listed in a text file that the SlamData
 launcher will reference when executed. The file location for each
-operating system is listed below:
+operating system is shown in the following table.
 
-+-------------------------+-------------------------------------------------------------+
-| Operating System        | File Location                                               |
-+=========================+=============================================================+
-| Mac OS                  | /Applications/SlamData-version.app/Contents/vmoptions.txt   |
-+-------------------------+-------------------------------------------------------------+
-| Microsoft Windows       | C:\Programs Files (x86)\slamdata-version\SlamData.vmoptions |
-+-------------------------+-------------------------------------------------------------+
-| Linux (various vendors) | $HOME/slamdata-version/SlamData.vmoptions                   |
-+-------------------------+-------------------------------------------------------------+
++-------------------------+------------------------------------------------------------------+
+| Operating System        | File Location                                                    |
++=========================+==================================================================+
+| Mac OS                  | /Applications/SlamData <version>.app/Contents/vmoptions.txt      |
++-------------------------+------------------------------------------------------------------+
+| Microsoft Windows       | C:\\Programs Files (x86)\\slamdata <version>\\SlamData.vmoptions |
++-------------------------+------------------------------------------------------------------+
+| Linux (various vendors) | $HOME/slamdata<version>/SlamData.vmoptions                       |
++-------------------------+------------------------------------------------------------------+
 
 There are two important options that must be passed to the JVM at
-startup to enable SSL. These options point the JVM to a Java key store
-(JKS).
+startup to enable SSL. These options are shown in the table below
+and point the JVM to a Java Key Store (JKS).
 
 +----------------------------------+---------------------------------------------------------+
-| JVM Options                      | Purpose                                                 |
+| JVM Option                       | Purpose                                                 |
 +==================================+=========================================================+
-| javax.net.ssl.trustStore         | The location of the encrypted trust store file          |
+| javax.net.ssl.trustStore         | The location of the encrypted trust store file.         |
 +----------------------------------+---------------------------------------------------------+
-| javax.net.ssl.trustStorePassword | The password required to decrypt the trust store file   |
+| javax.net.ssl.trustStorePassword | The password required to decrypt the trust store file.  |
 +----------------------------------+---------------------------------------------------------+
 
-The example contents of the file may look something like this:
+Example values for these two options could be as shown in the code below.
 
 ::
 
-    -Djavax.net.ssl.trustStore=/Users/me/ssl/truststore.jks
+    -Djavax.net.ssl.trustStore=/users/me/ssl/truststore.jks
     -Djavax.net.ssl.trustStorePassword=mySecretPassword
 
-This guide does not provide exhaustive steps to create a Java key store
-in every scenario, but we hope the following simple example is helpful.
-Assuming you are hosting MongoDB with a service provider, that provider
-might make a signed (or self-signed) certificate available so that
-MongoDB can connect securely via SSL. Also assuming this is in the form
-a ``your_provider.crt`` text file, you might follow these steps based on
-the JKS configuration above:
+This guide does not provide exhaustive steps to create a Java Key Store
+in every scenario, but the following simple example should be helpful.
 
-**First** - import the certificate into your Java trust store:
+Let's consider a data source hosted with a service provider. That service provider
+makes a signed (or self-signed) certificate available so that the data source
+can connect securely using SSL. Using the JKS configuration described above, the
+``your_provider.crt`` text file could be created as follows.
+
+1. Import the certificate into the Java trust store, as follows.
 
 ::
 
     keytool -import -alias "your_providers_name" -file your_provider.crt \
     -keystore /users/me/ssl/truststore.jks -noprompt -storepass mySecretPassword
 
-**Second** - ensure you've made the appropriate changes to the JVM
-options file referenced above.
+2. Ensure that the appropriate changes have been made to the JVM options file referenced above.
 
-**Third** - restart SlamData so it reloads the JVM options file and
-picks up the new certificate in the JKS.
+3. Restart SlamData so it reloads the JVM options file and picks up the new certificate in the JKS.
 
-**Fourth** - Mount the database with SSL as shown in the attached
-screenshot:
+4. Mount the data source with SSL as shown in the following image. This example uses MongoDB.
 
-.. figure:: images/SD2/screenshots/mount-ssl.png
+.. figure:: images/SD4/screenshots/mount-ssl.png
    :alt: SlamData SSL Mounts
-
-   SlamData SSL Mounts
 
 
 
@@ -437,21 +390,21 @@ Section 3 - Configuring SlamData
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The SlamData configuration file allows an administrator to change
-settings such as the port number SlamData listens on, the mounts
-available and more. The location of the configuration file depends upon
-the operating system being used.
+settings, such as the port number SlamData listens on, the mounts
+available, and so on. The location of the configuration file depends upon
+the operating system being used, as shown in the table below.
 
-+---------------------------+---------------------------------------------------------------+
-| Operating System          | Configuration File Location                                   |
-+===========================+===============================================================+
-| Mac OS                    | $HOME/Library/Application Support/quasar/quasar-config.json   |
-+---------------------------+---------------------------------------------------------------+
-| Microsoft Windows         | %HOMEDIR%\AppData\Local\quasar\quasar-config.json             |
-+---------------------------+---------------------------------------------------------------+
-| Linux (various vendors)   | $HOME/.config/quasar/quasar-config.json                       |
-+---------------------------+---------------------------------------------------------------+
++-------------------------+-------------------------------------------------------------+
+| Operating System        | File Location                                               |
++=========================+=============================================================+
+| Mac OS                  | $HOME/Library/Application Support/quasar/quasar-config.json |
++-------------------------+-------------------------------------------------------------+
+| Microsoft Windows       | %HOMEDIR%\\AppData\\Local\\quasar\\quasar-config.json       |
++-------------------------+-------------------------------------------------------------+
+| Linux (various vendors) | $HOME/.config/quasar/quasar-config.json                     |
++-------------------------+-------------------------------------------------------------+
 
-An example configuration file for SlamData Community Edition might appear like this:
+An example configuration file for **SlamData Community Edition** is shown below.
 
 
 ::
@@ -484,11 +437,11 @@ An example configuration file for SlamData Community Edition might appear like t
 3.2 Advanced Edition Configuration File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to all Community Edition functionality, SlamData Advanced edition
+**SlamData Advanced Edition**
 has additional configuration parameters to setup security, including the
 ``authentication``, ``auditing`` and ``metastore`` directives.
 
-.. attention:: SlamData Advanced Required
+.. attention:: **SlamData Advanced Features**
 
   The configuration file listed below is applicable only
   to SlamData Advanced Edition and contains parameters and
@@ -497,8 +450,8 @@ has additional configuration parameters to setup security, including the
   |Murray-Small|
 
 
-An example configuration file for SlamData Advanced Edition might appear
-like this:
+An example configuration file for **SlamData Advanced Edition** might appear
+as follows.
 
 ::
 
@@ -566,10 +519,10 @@ like this:
 Section 4 - SlamData User Security
 ----------------------------------
 
-SlamData Advanced Edition provides user authorization, authentication,
-and auditing in addition to the features provided by the Community Edition.
+**SlamData Advanced Edition** provides additional features not available in other editions,
+such as user authorization, authentication, and auditing.
 
-.. attention:: SlamData Advanced Required
+.. attention:: **SlamData Advanced Features**
 
   SlamData User Security is available only with SlamData Advanced Edition.
 
@@ -579,22 +532,22 @@ and auditing in addition to the features provided by the Community Edition.
 4.1 Security Overview
 ~~~~~~~~~~~~~~~~~~~~~
 
-SlamData Advanced Edition controls user security through the use of
-tokens, permissions, actions and groups.  Each is defined below.
+**SlamData Advanced Edition** controls user security through the use of
+tokens, permissions, groups, actions and types. Each of these is defined in the table below.
 
 +------------+----------------------------------------------------------------------------------+
 |            | Description                                                                      |
 +============+==================================================================================+
 | Token      | Allows specific actions regardless of implicitly-assigned or explicitly-assigned |
-|            | permissions                                                                      |
+|            | permissions.                                                                     |
 +------------+----------------------------------------------------------------------------------+
-| Permission | Contains actions, users and groups                                               |
+| Permission | Contains actions, users and groups.                                              |
 +------------+----------------------------------------------------------------------------------+
-| Group      | Contains users and other groups                                                  |
+| Group      | Contains users and other groups.                                                 |
 +------------+----------------------------------------------------------------------------------+
-| Action     | Distinct operation(s) that can be performed on a resource based on its type.     |
+| Action     | Distinct operation(s) that can be performed on a resource based upon its type.   |
 +------------+----------------------------------------------------------------------------------+
-| Type       | `Structural`, `Content`, or `Mount`                                              |
+| Type       | `Structural`, `Content`, or `Mount`.                                             |
 +------------+----------------------------------------------------------------------------------+
 
 
@@ -603,12 +556,12 @@ tokens, permissions, actions and groups.  Each is defined below.
 
 Users are technically not objects stored in the SlamData metadata repository.
 Since SlamData relies on OAuth to authenticate users, it trusts the OpenID
-Provider to authenticate a user and state if the user is currently logged in.
+Provider to authenticate a user and state if the user is currently logged-in.
 
-Once logged in a user may perform actions depending on the configuration of groups and
-permissions.  Users themselves are not created in the metadata store, but references
-to them are listed within Groups and Permissions.  So while *technically* a user does
-not have an object in the metadata store, *logically* a user can be thought of as
+Once logged-in, a user may perform actions depending upon the configuration of groups and
+permissions.  Users are not created in the metadata store, but references
+to them are listed within Groups and Permissions.  So while technically a user does
+not have an object in the metadata store, logically a user can be thought of as
 an object with privileges provided by Groups, Permissions, and possibly
 Tokens (when supplied with a request).
 
@@ -651,31 +604,31 @@ or delete anything.
 ''''''''''''
 
 If a token is passed in a request to SlamData, and the token is valid, the request
-will proceed based on the permissions assigned to that token.
+will proceed based upon the permissions assigned to that token.
 
-In other words: if a user is trying to read from the ``/data`` mount, but does not
+In other words, if a user is trying to read from the ``/data`` mount, but does not
 have permissions through direct assignment or through group assignment, if the appropriate
 token with those permissions is passed into the same request, it will succeed.
 
-See the following image
+In the following example, if a request included the token ``A1``, then any operation performed
+within ``/priv`` would succeed, despite the permissions the user actually had.
 
 |SD-Token-Example|
 
-This this example, if a request included the token ``A1`` then any operation performed
-within ``/priv`` would succeed, despite what permissions the user actually has.
 
 
 4.2 Initializing the SlamData Metastore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SlamData Advanced Edition uses a metastore for user security.  Before SlamData
-Advanced Edition can be started the metadata store must be initialized and
-initial administrator users defined.  The administrator users will be added
-to a group having complete, unrestricted access to the system allowing them
+**SlamData Advanced Edition** uses a metastore for user security.  Before **SlamData
+Advanced Edition** can be started, the metadata store must be initialized and
+initial administrator users defined.  The administrator users are added
+to a group having complete and unrestricted access to the system allowing them
 to provision additional groups and roles as needed.
 
 To initialize the metadata store, run the ``bootstrap`` command and provide
-the name of the administrator group and e-mail addresses of initial members:
+the name of the administrator group and e-mail addresses of initial members,
+as shown in the following example.
 
 ::
 
@@ -685,9 +638,9 @@ the name of the administrator group and e-mail addresses of initial members:
 4.3 Authentication
 ~~~~~~~~~~~~~~~~~~
 
-SlamData Advanced Edition adds support for authenticated requests via the
+**SlamData Advanced Edition** adds support for authenticated requests via the
 `OpenID Connect <http://openid.net/connect/>`__ protocol. A request to any
-SlamData or SlamData Advanced Edition API may be authenticated. If no
+SlamData or **SlamData Advanced Edition** API may be authenticated. If no
 credentials are included in a request, it is considered unauthenticated
 (or "anonymous") and may fail if the system is not configured to allow
 anonymous access for the given request.
@@ -697,13 +650,13 @@ anonymous access for the given request.
 '''''''''''''''''''''''''''''''''''''
 
 To make an authenticated request, clients first need to ensure their
-OpenID Provider (OP) has been configured in SlamData Advanced Edition along
+OpenID Provider (OP) has been configured in **SlamData Advanced Edition** along
 with the "Client Identifier" (CID) issued to the client by the OP, this
-allows the SlamData Advanced Edition administrator to specify which clients
-are permitted to access SlamData Advanced Edition. If an ID Token is received
-from a known provider but with an *unknown* CID, it will be rejected outright.
+allows the **SlamData Advanced Edition** administrator to specify which clients
+are permitted to access **SlamData Advanced Edition**. If an ID Token is received
+from a known provider but with an unknown CID, it will be rejected outright.
 
-Next the client should obtain the list of known providers from the
+Next, the client should obtain the list of known providers from the
 ``/security/oidc/providers`` endpoint (see details on this endpoint below)
 and authenticate the user against one of them, obtaining an
 `ID Token <http://openid.net/specs/openid-connect-core-1_0.html#IDToken/>`__
@@ -711,7 +664,7 @@ The ID Token **MUST** be requested using at least the openid and email scopes an
 their claims must be included in the ID Token.
 
 Once in possession of a valid ID Token, the client includes it, verbatim,
-in the request to SlamData Advanced Edition via the ``Authorization`` header
+in the request to **SlamData Advanced Edition** via the ``Authorization`` header
 as a
 `bearer token <http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html>`__
 using the ``Bearer`` scheme.
@@ -728,13 +681,13 @@ succeed.
 4.3.1.1 Authentication and Performance
 ''''''''''''''''''''''''''''''''''''''
 
-SlamData Advanced Edition requests require authentication before performing
+**SlamData Advanced Edition** requests require authentication before performing
 most actions.  When an OIDC Provider (OP) is configured with minimal
 information, and the Discovery process is used, each action will make
-a discovery request as well.  This can result in a noticable degradation
+a discovery request as well.  This can result in a noticeable degradation
 in performance.
 
-To avoid this the OP can be configured with all attributes normally
+To avoid this, the OP can be configured with all attributes normally
 provided by the OIDC Discovery process within the configuration process
 itself.  See the "Our Company OP" example in Section 3.2.
 
@@ -742,14 +695,14 @@ itself.  See the "Our Company OP" example in Section 3.2.
 4.4 Authorization
 ~~~~~~~~~~~~~~~~~
 
-SlamData Advanced adds support for authorization of service requests.
+**SlamData Advanced Edition** adds support for authorization of service requests.
 Permissions for a request are derived from the union of permission tokens
 provided in the `X-Extra-Permissions` header and those configured for the
 authenticated user and anonymous user. Permissions are defined as an
 operation, its type, and a filesystem resource path. A permission token
 grants a set of permissions.
 
-The available operations and types are as follows:
+The available operations and types are as follows.
 
 **Type**: Content, Structural, Mount
 
@@ -764,7 +717,7 @@ The available operations and types are as follows:
 +--------+----------------------+-------------------------+----------------------+
 | Delete | delete file contents | delete resource         | remove mount         |
 +--------+----------------------+-------------------------+----------------------+
-| Modify | modify file contents | rename or move resource | N/A                  |
+| Modify | modify file contents | rename or move resource | Not Available        |
 +--------+----------------------+-------------------------+----------------------+
 
 A permission on a parent resource is sufficient to authorize an action on a
@@ -773,7 +726,7 @@ resource granted the nature and type of the operation are the same.
 A ``403 Forbidden`` is returned by the server when a request does not have
 sufficient permissions to perform the associated actions.
 
-The ``X-Extra-Permissions`` header is formatted as follows:
+The ``X-Extra-Permissions`` header is formatted as follows.
 
 ``X-Extra-Permissions: [token1],[token2]``
 
@@ -781,25 +734,25 @@ The ``X-Extra-Permissions`` header is formatted as follows:
 4.5 Auditing
 ~~~~~~~~~~~~
 
-.. attention:: File system definition
+.. attention:: **File System Definition**
 
   The SlamData product sometimes refers to virtual database paths
   as file systems and tables or collections as file names.  In the
-  Auditing section below the **log file** path should be a
+  Auditing section below, the **log file** path should be a
   path to the collection or table you wish to save to.  This does
   not equate to an operating system file name or directory path.
 
 When a log file is specified in the configuration file, all filesystem
-operations will be logged to that file. SlamData Advanced Edition logs the
+operations will be logged to that file. **SlamData Advanced Edition** logs the
 operations as data in the filesystem where the path is located. This
-means that it is then possible to use SlamData Advanced Edition itself to
+means that it is then possible to use **SlamData Advanced Edition** to
 analyze the log data.
 
 
 Section 5 - Security APIs
 -------------------------
 
-SlamData Advanced Edition provides additional APIs to control user access.
+**SlamData Advanced Edition** provides additional APIs to control user access.
 
 Actions and permissions are central concepts to the security api. An action
 is any operation a subject can perform on a given resource in the system.
@@ -822,9 +775,9 @@ its parents have been revoked. The permission being revoked however, will
 be revoked, no matter how many sources of authority it possess.
 
 Actions and permissions are found throughout the following api endpoints
-and are represented as follows in JSON:
+and are represented as follows in JSON.
 
-**Action**:
+**Action**
 
 .. code:: json
 
@@ -834,7 +787,7 @@ and are represented as follows in JSON:
       "accessType": "Structural|Content|Mount",
     }
 
-**Permission**:
+**Permission**
 
 .. code:: json
 
@@ -866,12 +819,14 @@ and are represented as follows in JSON:
 * **<token_id>** is a string identifier prefixed by the "token" string such
   as ``token:786549382``
 
-.. note:: The Mount value of accessType is only valid if the resource is a
-          filesystem path, it is not a valid value for a group resource.
+.. note::
+
+  The Mount value of accessType is only valid if the resource is a
+  filesystem path. It is not a valid value for a group resource.
 
 In the following API endpoints descriptions, "your permissions" refers to
 the set of permissions associated with the HTTP request. In the case of an
-authenticated user this means all permissions directly associated with that
+authenticated user, this means all permissions directly associated with that
 user as well as all groups that user is a explicitly or implicitly a part
 of. Additionally, any permission associated with tokens present in the request
 headers are added to the permissions associated with the request.
@@ -884,7 +839,7 @@ permissions to satisfy the requirements of the particular endpoint, the server
 will return a ``403 Forbidden`` with an explanation of which permissions were
 missing in order to perform the operation. Certain endpoints will always
 succeed, but the results will be filtered based on what the user is
-permitted to see. In such case the endpoint will document how to determine
+permitted to see. In such a case, the endpoint will document how to determine
 what a user can and cannot see.
 
 
@@ -894,27 +849,27 @@ what a user can and cannot see.
 **GET /security/group/<path>**
 
 * Retrieves information about this group. The result of the query will depend
-  on your permissions according to the following rules:
+  upon your permissions according to the rules described below.
 
 * If you have READ content group permission on this group, then your view is
-  unrestricted. (all fields are present)
+  unrestricted. (all fields are present).
 
 * If you have READ structural group permission on this group, then you can
   know of the existence of this group and all of its sub-groups. (``subGroups``
-  field is present in response)
+  field is present in response).
 
 * If you have ANY OTHER group permission on this group, you can know of the
-  existence of this group, but nothing else. (response is empty)
+  existence of this group, but nothing else. (response is empty).
 
 * If you have READ content group permission on one of this group's sub-groups,
   then you can see that subgroup as well as any of its own subgroups. You can
   see all members of that group and sub-groups. (``allMembers`` and ``subGroups``
-  fields are present in response)
+  fields are present in response).
 
 * If you have READ structural group permission on one of this group's sub-groups,
   then you can see that subgroup as well as any of its own sub-groups. You
   cannot see any of the members of those groups however. (``subGroups`` field is
-  present in response)
+  present in response).
 
 * If you have ANY OTHER group permission on one of this group's sub-groups,
   then you can see that subgroup.
@@ -927,17 +882,19 @@ empty, you just don't have permission to see anything related to that field.
 
 * ``<path>`` is the path of the group in the group hierarchy
 
-.. note:: All users are members of the root group ("/") regardless of whether
-          they are a member of any other group. Permissions associated with the root
-          group represent the capabilities of any agent in the system.
+.. note::
+
+  All users are members of the root group ("/") regardless of whether
+  they are a member of any other group. Permissions associated with the root
+  group represent the capabilities of any agent in the system.
 
 Response:
 
 The response body will vary depending on the rules outlined above. If you
-have some kind of relevant permission as outlined above and the group does
+have some relevant permission as outlined above and the group does
 not exist, the response will be a ``404 Not Found``.
 
-.. code::json
+.. code:: json
 
     {
       "members": ["<user_email>", "..."],
@@ -945,11 +902,11 @@ not exist, the response will be a ``404 Not Found``.
       "subGroups": ["<group_path>", "..."],
     }
 
-* ``members`` All users explicitly a member of this group
+* ``members`` All users are explicitly a member of this group.
 
-* ``allMembers`` All users explicitly and implicitly a member of this group.
-Implicit members of a group refer to the users that are explicit members
-of any of the sub-groups of this group
+* ``allMembers`` All users are explicitly and implicitly a member of this group.
+  Implicit members of a group refer to the users that are explicit members
+  of any of the sub-groups of this group.
 
 * ``subGroups`` All descendants of this group in the group hierarchy.
 
@@ -959,7 +916,7 @@ Given the following groups exist in the system:
 
 /corporate -> "Alice" /corporate/engineering -> "Bob" /corporate/engineering/software -> /corporate/engineering/software/scala -> "Marcy" /corporate/engineering/hardware -> ("Tom", "Beth")
 
-``GET /security/group/corporate/engineering`` will return:
+``GET /security/group/corporate/engineering`` will return the following:
 
 ::
 
@@ -1138,15 +1095,17 @@ Revoke a permission. In order to revoke a permission, you must have a
 permission which is a source of authority for the permission you wish
 to revoke.
 
-Refer to top-level api description for explanation on the process of revoking.
+Refer to the top-level api description for explanation on the process of revoking.
 
-Note: Revoking a permission does not guarantee that the subject associated
-with that permission no longer has the capability to perform that action as
-another subject in the system may have also granted a permission with the
-capability to perform the same action. Unless you possess the root authority
-(e.g. if you are a member of the "admin" group created when the metastore
-was initialized), it is impossible for you to know for sure whether or not
-a subject still has the ability to perform the action.
+.. note::
+
+  Revoking a permission does not guarantee that the subject associated
+  with that permission no longer has the capability to perform that action as
+  another subject in the system may have also granted a permission with the
+  capability to perform the same action. Unless you possess the root authority
+  (e.g. if you are a member of the "admin" group created when the metastore
+  was initialized), it is impossible for you to know for sure whether or not
+  a subject still has the ability to perform the action.
 
 If the permission does not exist or you do not have adequate permission to
 see it, the response will be a ``404 Not Found``. If you attempt to revoke
@@ -1156,7 +1115,7 @@ one of your own permissions, the response will be a ``400 Bad Request``.
 5.4 - Token Endpoint
 ~~~~~~~~~~~~~~~~~~~~
 
-Here is the json representation of a token:
+The following is the json representation of a token.
 
 ::
 
@@ -1173,10 +1132,10 @@ Here is the json representation of a token:
   }
 
 * **secret** is a cryptographically secure string whose possession
-  allows one to perform the action associated with the token.
+  allows you to perform the action associated with the token.
 
 * **name** an optional field that may or may not have been provided
-  upon creation of the token
+  upon creation of the token.
 
 * is a string identifier prefixed by the "token:" string
 
@@ -1184,8 +1143,10 @@ Here is the json representation of a token:
 
 * a group path prefixed with the "group:" string
 
-.. note:: Once again, the ``Mount`` value for ``accessType`` is only valid
-          for a filesystem path.
+.. note::
+
+  Once again, the ``Mount`` value for ``accessType`` is only valid
+  for a filesystem path.
 
 
 **GET /security/token**
@@ -1320,16 +1281,16 @@ Response:
 
 
 
-.. |Mount-Icon| image:: images/SD2/icon-mount.png
+.. |Mount-Icon| image:: images/SD4/icon-mount.png
 
-.. |Murray| image:: images/SD3/murray.png
+.. |Murray| image:: images/SD4/murray.png
 
-.. |Murray-Small| image:: images/SD3/murray-small.png
+.. |Murray-Small| image:: images/SD4/murray-small.png
 
-.. |SD-Group-Example| image:: images/SD3/screenshots/sd-group-example.png
+.. |SD-Group-Example| image:: images/SD4/screenshots/sd-group-example.png
 
-.. |SD-Token-Example| image:: images/SD3/screenshots/sd-token-example.png
+.. |SD-Token-Example| image:: images/SD4/screenshots/sd-token-example.png
 
-.. |SD-Permission-Example-1| image:: images/SD3/screenshots/sd-permission-example-1.png
+.. |SD-Permission-Example-1| image:: images/SD4/screenshots/sd-permission-example-1.png
 
-.. |SD-Permission-Example-2| image:: images/SD3/screenshots/sd-permission-example-2.png
+.. |SD-Permission-Example-2| image:: images/SD4/screenshots/sd-permission-example-2.png

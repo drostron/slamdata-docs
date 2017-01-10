@@ -2,15 +2,18 @@
    :alt: SlamData Logo
 
 
-.. warning:: Version 4 Documentation Updates
 
-  We are currently updating all of our documentation from Version 3
-  to Version 4.  In the meantime, the document below still represents
-  Version 3.  This notice will be removed when this document has been
-  updated.  Thank you!
-  
-Users Guide
-===========
+User's Guide
+============
+
+This User's Guide will assist the user who is unfamiliar with SlamData to
+understand the key product features and interface.
+
+For information on how to use SlamData from an administrator's perspective
+see the `SlamData Administrator's Guide <administration-guide.html>`__.
+
+For information on how to use SlamData from a developer's perspective
+see the `SlamData Developer's Guide <developers-guide.html>`__.
 
 
 Section 1 - Introduction
@@ -20,34 +23,17 @@ Section 1 - Introduction
 1.1 Assumptions
 ~~~~~~~~~~~~~~~
 
-This guide was written with the following assumptions in mind.  The reader:
+This guide was written with the following assumptions in mind.  The user:
 
-- Has a basic to moderate understanding of JSON or semistructured data
-- Has appropriate permissions to install the software
-- If using MongoDB the user should have read **and** write access to MongoDB.
-
-.. warning:: MongoDB Limitations
-
-    MongoDB has several limitations which SlamData must work with and around
-    noted below.
-
-* Users are not allowed to write to secondary nodes in a replica set
-* Queries that return large result sets or use the ``mapreduce`` and ``aggregate``
-  functions must use temporary workspace to store their results.
-
-Because of these limitations users have a few options:
-
-1. Connect to the MongoDB primary in a replica set with a user having
-   read and write privileges.
-2. Create a standalone MongoDB server which
-   `Tails the Oplog <https://docs.mongodb.com/manual/core/tailable-cursors/#tailable-cursors>`__
-   of a member of an existing replica set.
+- Has a basic to moderate understanding of JSON or semi-structured data.
+- Has appropriate permissions to install the software.
+- Has read **and** write access to a data source, such as a database system.
 
 
 1.2 Requirements
 ~~~~~~~~~~~~~~~~
 
-For SlamData to run in an optimal environment see the
+For SlamData to run in an optimal environment please see the
 `Minimum System Requirements <administration-guide.html#minimum-system-requirements>`__
 section.
 
@@ -55,7 +41,7 @@ section.
 1.3 Installation
 ~~~~~~~~~~~~~~~~
 
-See the 
+Please see the 
 `Installation Section <administration-guide.html#section-1-installation>`__
 of the Administrator's Guide for installation instructions.
 
@@ -63,35 +49,35 @@ of the Administrator's Guide for installation instructions.
 Section 2 - Quick Start
 -----------------------
 
-The following two sections will take a new user from zero knowledge of the SlamData
+The following two sections will take a new user from no knowledge of the SlamData
 workflow to creating a basic Workspace with some suggestions.  This section is intended as a
-quick start and not an exhaustive instruction set.  See the remaining
-sections of the User's Guide for detailed information on specific
+quick start and not an exhaustive instruction set.  The remaining
+sections of the User's Guide contain detailed information on specific
 functionality.
 
 
 2.1 - Configuration Suggestions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. JVM Settings
-
-Modify the vmoptions.txt file to adjust Java memory heap space.  JVM memory
-allocation varies by default based on JVM vendor and version.  To ensure
-proper functionality, reserve 1GB or more of JVM heap space, increasing it
-based on requirements.  It is not uncommon to have more than 4GB of heap space
+Modify the **vmoptions** file to adjust the Java memory heap space.  JVM memory
+allocation varies by default based upon the JVM vendor and version.  To ensure
+correct functionality, reserve 1GB or more of JVM heap space, increasing it
+based upon requirements.  It is not uncommon to have more than 4GB of heap space
 reserved for SlamData server environments.
-   
-+-------------------------+-------------------------------------------------------------+
-| Operating System        | File Location                                               |
-+=========================+=============================================================+
-| Mac OS                  | /Applications/SlamData-version.app/Contents/vmoptions.txt   |
-+-------------------------+-------------------------------------------------------------+
-| Microsoft Windows       | C:\Programs Files (x86)\slamdata-version\SlamData.vmoptions |
-+-------------------------+-------------------------------------------------------------+
-| Linux (various vendors) | $HOME/slamdata-version/SlamData.vmoptions                   |
-+-------------------------+-------------------------------------------------------------+
 
-Example of reserving 4GB of JVM heap space for a server-class system:
+Some examples of where the vmoptions file can be found are as follows:
+
++-------------------------+------------------------------------------------------------------+
+| Operating System        | File Location                                                    |
++=========================+==================================================================+
+| Mac OS                  | /Applications/SlamData <version>.app/Contents/vmoptions.txt      |
++-------------------------+------------------------------------------------------------------+
+| Microsoft Windows       | C:\\Programs Files (x86)\\slamdata <version>\\SlamData.vmoptions |
++-------------------------+------------------------------------------------------------------+
+| Linux (various vendors) | $HOME/slamdata<version>/SlamData.vmoptions                       |
++-------------------------+------------------------------------------------------------------+
+
+An example for reserving 4GB of JVM heap space for a server-class system is as follows:
 
 ::
 
@@ -109,32 +95,28 @@ than 4GB of memory.
 2.2 The Log File
 ~~~~~~~~~~~~~~~~
 
-If a user suspects that SlamData is not functioning properly, the first step
-to troubleshooting is looking at the most recent log file, located in the
-table below:
+If a user suspects that SlamData is not functioning correctly, the first step
+to troubleshooting is to look at the most recent log file, located as follows:
 
-+-------------------------+-------------------------------------------------------------------------------+
-| Operating System        | File Location                                                                 |
-+=========================+===============================================================================+
-| Mac OS                  | /Applications/SlamData <version>.app/Contents/java/app/slamdata-<version>.log |
-+-------------------------+-------------------------------------------------------------------------------+
-| Microsoft Windows       | C:\Program Files (x86)\slamdata <version>/slamdata-<version>.log              |
-+-------------------------+-------------------------------------------------------------------------------+
-| Linux (various vendors) | $HOME/slamdata<version>/slamdata-<version>.log                                |
-+-------------------------+-------------------------------------------------------------------------------+
++-------------------------+---------------------------------------------------------------------------------+
+| Operating System        | File Location                                                                   |
++=========================+=================================================================================+
+| Mac OS                  | /Applications/SlamData <version>.app/Contents/java/app/slamdata-<version>.log   |
++-------------------------+---------------------------------------------------------------------------------+
+| Microsoft Windows       | C:\\Program Files (x86)\\slamdata <version>\\slamdata-<version>.log             |
++-------------------------+---------------------------------------------------------------------------------+
+| Linux (various vendors) | $HOME/slamdata<version>/slamdata-<version>.log                                  |
++-------------------------+---------------------------------------------------------------------------------+
 
 Some JVM errors can cause the JVM to stop running completely, resulting in the SlamData
-UI becoming unresponsive.  Reviewing the log file should provide helpful information.
+User Interface (UI) becoming unresponsive. Reviewing the log file should provide helpful information.
 
 
 2.3 Browsers
 ~~~~~~~~~~~~
 
-Most modern browsers are supported by SlamData.  The most compatible browsers are always the
-most recent versions of Google Chrome and Mozilla Firefox.  Microsoft IE, Microsoft Edge and Apple Safari will
-work with SlamData but users are strongly encouraged to use Google Chrome or Firefox when possible
-as other browsers are less flexible and code fixes to support those browsers are not
-as frequent.
+The most compatible browsers with SlamData are always the most recent versions of Google Chrome
+and Mozilla Firefox.
 
 
 Section 3 - The Workspace
@@ -146,26 +128,27 @@ Section 3 - The Workspace
 
 SlamData approaches analytics workflows with the metaphor of a deck or multiple
 decks of cards, sometimes on a Draftboard layout.  A deck is built by stacking
-unique cards on top of one another, each card having a specific purpose such
+unique cards on top of one another, each card having a specific purpose, such
 as opening a table or collection, displaying a result set, displaying a
-chart, etc.
+chart, and so on.
 
 
-3.2 Mount database
-~~~~~~~~~~~~~~~~~~~~
+3.2 Mount Data Source
+~~~~~~~~~~~~~~~~~~~~~
 
-This section assumes you have MongoDB running locally on the system you
-installed SlamData on.  Adjust IP addresses and hostnames as appropriate.
+In this guide the MongoDB database will be used in the examples.
 
-Click the Mount icon |Icon-Mount| to mount a database server.
+Default MongoDB installations run on port **27017** and have no user authentication
+enabled. This guide assumes this configuration in the following instructions.
+
+
+Click the New Mount icon. |Icon-Mount|
 
 A dialog will appear requesting the name and Mount type.
 
 |Mount-Dialog|
 
-Select MongoDB in the Mount Type and enter the appropriate values in the dialog.
-
-Example:
+Enter the values below and the dialog will expand.
 
 +------------+-----------+
 | Parameter  | Value     |
@@ -175,7 +158,9 @@ Example:
 | Mount Type | MongoDB   |
 +------------+-----------+
 
-In the expanded dialog enter the appropriate values and click **Mount**.
+
+In the expanded dialog enter the values below and click **Mount**. If a parameter
+in the table below has no value, leave that field empty in the interface.
 
 +----------------+-----------+
 | Parameter      | Value     |
@@ -196,14 +181,12 @@ In the expanded dialog enter the appropriate values and click **Mount**.
 
 
 
-3.3 Creating Your First Database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3.3 Creating a Database
+~~~~~~~~~~~~~~~~~~~~~~~
 
-* Click on the newly created server.  The interface now
-  shows the databases that reside within that server.
-
-If databases exist on your server, some may be displayed here depending upon
-the credentials supplied in the mount dialog.
+* Click on the newly created server named **myserver**. The interface now shows the
+  databases that reside within the database system. A new database will need to
+  be created to follow along with the guide.
 
 * Click on the Create Folder icon.  |Create-Folder|
 
@@ -213,16 +196,18 @@ the credentials supplied in the mount dialog.
 
 * Click the **Move/Rename** icon that appears to the right.  |Move-Rename|
 
-* Change the name from **Untitled Folder** to ``testdb`` or another name and click **Rename**.
+* Change the name from **Untitled Folder** to ``testdb`` and click **Rename**.
 
-* Click on the newly renamed folder.  Any tables or collections for this database will
-  be displayed here.
+* Click on the newly renamed **testdb** folder.
 
 
-3.4 Importing Sample Data
-~~~~~~~~~~~~~~~~~~~~~~~~~
+3.4 Importing Example Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can download a data set with 10,000 documents by following these
+This guide uses a data set of fictitious patient information that was randomly generated.
+The examples in the remaining sections will assume that the patients data set is being used.
+
+A data set with 10,000 documents can be downloaded by following these
 instructions:
 
 * Right click `this link <https://github.com/damonLL/tutorial_files/raw/master/patients>`__
@@ -232,18 +217,13 @@ instructions:
   **patients** you can either rename it or you can rename it
   inside of SlamData once it has been uploaded.
 
-* Ensure the SlamData UI is in the *testdb* database, and click
-  the Upload icon.  |Upload|
+* Ensure the SlamData UI is in ``testdb``, and click
+  the Upload icon. |Upload|
 
 * In the file dialog find the patients file and submit it.
 
-As you can see it is easy to import JSON and CSV data into
-SlamData quickly.  The underlying database in this case is
-MongoDB.
-
-If the uploaded file appears as `patients.json` or anything other than
-simply `patients` the user should consider renaming it to simplify
-queries and shorten the query path.
+As you can see, it is easy to quickly import JSON data into SlamData.
+Other formats, such as CSV, can also be quickly imported.
 
 The user may wish to index the newly imported patients data set. If
 using MongoDB refer to 
@@ -254,27 +234,29 @@ the Developer's Guide to increase search and query performance.
 3.5 Exploring Sample Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Click on the new patients file in the user interface.
+* Click on **patients** in the user interface.
 
-* A dialog will appear asking the name of the new workspace being created.
+* A dialog will appear asking the name of the new Workspace being created.
 
-* User will be presented with a table showing the contents of the patients file.
+* Give the Workspace a new name and click **Explore**.
 
-Take note that the data in the table is not only top level fields but also
+* You will be presented with a table showing the contents of the patients data.
+
+Note that the data in the table is not only top level fields but also
 contains arrays of various types of data for each record or document.
 
-In this instance SlamData created a new Workspace for the user, created an
-Open Card pointing to the new patients file, then stacked a Show Table card
-on top of the Open Card.
+In this instance SlamData created a new Workspace for you, created an
+**Open Card** pointing to the patients data, then stacked a **Preview Table Card**
+on top of the **Open Card**.
 
-The user can verify this by clicking on the left dots (gripper) on the left side
+You can verify this by clicking on the left dots on the left side
 of the screen and seeing the top most card slide to the right.  The card now
-displayed is the Open Card.  This determines which table or collection is used
+displayed is the **Open Card**.  This determines which table or collection is used
 by the cards following it.
 
-* Click on the right grippers to go back to the Show Table Card
+* Click on the right grippers to go back to the **Preview Table Card**.
 
-The user can now navigate between pages of results.
+Click on the browse arrows at the bottom to scroll through the pages of data.
 
 Click on the Zoom Out |Zoom-Out| icon in the upper left of the interface to return to
 the database view.
@@ -283,9 +265,9 @@ the database view.
 3.6 Querying Sample Data
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Create a new workspace by clicking on the Create Workspace icon
+* Create a new workspace by clicking on the Create Workspace icon. |Create-Workspace|
 
-* Select the *Query Card*
+* Select the **Query Card**.
   
 * Replace the provided query text with the query below:
   
@@ -297,110 +279,105 @@ the database view.
       state as State,
       codes[*].code AS Code,
       codes[*].desc AS Description
-    FROM `/myserver/db_name/patients`
-
-Change the path of the `FROM` clause to match your environment.
+    FROM `/myserver/testdb/patients`
 
 Notice that we are concatenating two fields (``last_name`` and ``first_name``),
 as well as analyzing each document within the ``codes`` array and fetching
 the ``code`` and ``desc`` fields from each of those documents.
 
-* Depending upon the version of SlamData running the user may see a
-  ``Run Query`` button in the Query Card.  If displayed, the user must click
-  this to execute the query.
+* Select **Run Query** in the bottom right.
 
-* Click on the right gripper (dots) on the right side of the interface
-  to stack a new card on top of this card.
+* Click the right grip.
 
-* Select the Show Table Card
-  
-* View the results of your query
+* Select the **Preview Table Card** to see the results.
 
 * Click the Zoom Out |Zoom-Out| icon to return to the database view.
   
-* Optionally rename the Untitled Workspace that was created for this workflow.
+* Optionally rename the **Untitled Workspace** that was created for this workflow.
 
 
 3.7 Searching Data
 ~~~~~~~~~~~~~~~~~~
 
-In this example the user will learn how to create a draftboard card to store
-multiple decks of cards, and mirror one deck of cards to recreate functionality
-in a second deck of cards.
+SlamData has several very powerful ways of finding the data you need. In the following
+example, you will use the **Search Card**.
 
-* Create a new Workspace
+* Select the Create Workspace icon. |Create-Workspace|
 
-* Select the Open Card
+* Select **Open Card**.
   
-* Locate the patients entry in your database and select it
-  
-* Click the right gripper (dots) to stack a new card on top of this card.
-  
-* Select the Search Card
+* Locate the patients entry in your database and select it.
 
-* Click the Flip-Icon |Icon-Flip| in the upper right of the interface.
+* Click and drag the right-hand grip and slide it to the left.
 
-* Select the Wrap option
+The following card types will be presented:
 
-Notice the deck is now within a workspace where you can drag the deck
-by its top gripper, and resize it by using the lower-right gripper of
-that deck.
+|Card-Choices-1|
 
-This deck will now serve as the basis of an additional deck whereby
-the contents and user entry of the first deck will flow into the
-mirrored deck.
-  
-.. warning:: Workspace Nuances
+Notice how the cards are different shades of gray.  The dark gray cards
+are those that can be created directly after the **Open Card**.  Light
+gray cards are those cards that cannot be used following the previous
+card.  A helpful checkmark in the upper right of each selection also
+indicates which cards can be used in the current situation.
 
-  The user is advised to avoid clicking in the open space of the draftboard
-  in the UI as it will create a new deck which is not associated with the
-  original deck.  If this occurs, the user can click on the Flip Icon |Icon-Flip| of
-  the newly created deck and select Delete Deck.  Decks do not need to be
-  created by mirroring other decks; however that option is not covered in
-  that section.
+* Select the **Search Card**.
 
-  Users are also advised to avoid dragging one deck on top of another deck unless
-  the desired effect is to have nested decks.
+A new **Search Card** will appear in the UI.  The search string appears
+simple but has some very powerful search features.
 
-* Activate or highlight the existing deck.
+* Type the word ``Austin`` and either drag the right grip bar
+  to the left, or simply click on the right grip bar.
 
-* Click the Flip Icon |Icon-Flip| for the deck.
-  
-* Select Mirror Deck
+* Select the **Preview Table Card**.
 
-A new deck will appear directly below the original deck.  This deck is synchronized
-with the original deck.  Changes made to either deck at this point will reflect in
-the other deck; however, new cards stacked onto the new deck will not impact the
-original deck.
+Depending on the performance of your system and database it may take
+several seconds before the results are displayed.  Keep in mind that
+SlamData is searching the patients collection that we imported into
+the database system, and that indexes can significantly boost performance
+for searches.
 
-* Consider resizing the original deck to use less screen space, and moving the
-  new deck alongside the original deck and resizing it to take more space.
+Once the results appear, you can browse them just like you did earlier
+in the **Explore Card** with the controls in the bottom left of the
+interface.
 
-* Activate the newly mirrored deck and click the right gripper (dots) to stack a
-  new card.
+Did you notice that in the search string earlier we did not specify
+which field we wanted to search?  That is part of the power of SlamData.
+Relatively non-technical users can use SlamData to search all of
+their data sources with little (or even no) knowledge in advance of the data
+stored within.
 
-* Select the Show Table card
+Of course when searching all available fields for the search string
+it is going to take longer than if we were to explicitly define which field.
+Let's go back to the search card by dragging the current card
+to the right again, or single-click on the left grip.
 
-Now information entered into the search field in the original deck will immediately
-cause the results to be displayed in the new deck.
+Let's search for any patients currently living in the city of Dallas.
 
-* Enter the value ``AUSTIN`` in the search string and see the results shortly after
-  in the new deck.
+* Type the string ``city:Dallas`` and either drag the right grip bar
+  to the left, or simply click on the right grip bar.
 
-Notice no field name was specified.  SlamData, by default, will search all fields
-for the value.  Prefixing a search term with a field name will cause SlamData to
-search a specific field for the value.  
+* View the results in the **Preview Table Card** again.
 
-* Enter the value ``city:AUSTIN`` to restrict the search to just the ``city`` field name.
+The results should have appeared much faster than the previous search
+because we told SlamData to only look at the **city** field.
 
-The next steps shows multiple values which will be ANDed together, and will search
-through nested data as well.
+We can also search on non-string values such as numbers.  Let's find
+all of the patients who are between the ages of 45 and 50:
 
-* Enter the string ``previous_addresses:"[*]":state:CA age:>50 gender:=male``
+* Go back to the **Search Card**.
 
-This searches all documents where the `previous_addresses` array contains multiple entries,
-each with a `state` field for the state of California. It also searches for ages over
-50 and where gender is male.
+* Enter the string ``age:>=45 age:<=50``.
+
+* View the results in the **Preview Table Card** again.
+
+As one last example let's see how we can mix and match different types.
+We want to know how many males over the age of 50 used to live in California.
+
+* Go back to the **Search Card**.
+
+* Enter the string ``previous_addresses:"[*]":state:CA age:>50 gender:=male``.
+
+* View the results.
 
 
 3.8 - Downloading Data
@@ -409,29 +386,20 @@ each with a `state` field for the state of California. It also searches for ages
 This workspace can be adjusted to allow a user to download the results of the
 search after the search is complete.
 
-* In the deck containing the results table click the Flip Icon |Icon-Flip|
+* Click the right gripper to stack a new card on top of the **Preview Table Card**.
 
-* Select Mirror Deck.  A newly created deck will appear below the existing deck.
-
-* In the newly created deck click the right gripper (dots) to stack a new
-  card on top of the Show Table card.
-
-* Select the Setup Download option
+* Select **Setup Download**.
 
 * Select either ``C;S;V`` (CSV) or ``{JS}`` (JSON) format for the download.
 
-* Click the right gripper (dots) to stack a new card on the deck.
+* Click the right gripper to stack a new card on the deck.
 
-* Select the Show Download card
+* Select **Show Download**.
 
-* Resize the deck so that the Download button can be seen but the deck
-  is much smaller.
+* Select the **Download button** to download the data.
 
-* Optionally move the deck to align with the other two decks for better
-  visual appearance.
-
-Now a user may enter search criteria, browse the results and download
-the results in CSV or JSON format.
+You have now entered search criteria, browsed the results and downloaded
+the results in a CSV or JSON format.
 
 
 Section 4 - Cards
@@ -442,7 +410,8 @@ Section 4 - Cards
 
 Cards each have a distinct purpose and typically provide a single, unique action
 that can often be combined with the cards before and after it to create a workflow.
-This section describes the types of cards and the purpose of each.
+This section describes the types of cards and the purpose of each. The cards are
+described in alphabetical order.
 
 
 4.2 - Cache Card
@@ -453,46 +422,24 @@ This section describes the types of cards and the purpose of each.
 Description
 @@@@@@@@@@@
 
-The Cache Card will store results from a Query Card, an Open Card or a Search
-Card for faster retrieval while typically reducing database system load.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| Open Card         | Query Card           |
-+-------------------+----------------------+
-| Query Card        | Search Card          |
-+-------------------+----------------------+
-| Search Card       | Show Table Card      |
-+-------------------+----------------------+
-|                   | Setup Download Card  |
-+-------------------+----------------------+
-|                   | Setup Chart Card     |
-+-------------------+----------------------+
-|                   | Troubleshoot Card    |
-+-------------------+----------------------+
-|                   | Cache Card           |
-+-------------------+----------------------+
+The **Cache Card** will store results, for example from a **Query Card** or a **Search
+Card**, for faster retrieval while typically reducing database system load.
 
 Behavior
 @@@@@@@@
 
-The Cache Card requires a location to store its results.  When a newly selected
-Cache Card becomes active, the user will be presented with a pre-populated text
-field and a **Confirm** button.  The value in this field can be edited directly
+The **Cache Card** requires a location to store its results.  When a newly selected
+**Cache Card** becomes active, the user is presented with a text field and a **Confirm**
+button.  The value of the text field can be edited directly
 to change the location of the cached information. The credentials provided to
-mount the original DB must have read and write privileges to the specified path
-or the cache card will not be created.
+mount the original data source must have read and write privileges to the specified path
+or the **Cache Card** will not be created.
 
-Results stored in a Cache Card are updated when one of the following occurs:
+Results stored in a **Cache Card** are updated when one of the following occurs:
 
-* The table or collection in the Open Card is modified
-* The query in the Query Card is modified
-* The search parameters in the Search Card are modified
+* The table or collection in the **Open Card** is modified.
+* The query in the **Query Card** is modified.
+* The search parameters in the **Search Card** are modified.
 
 
 4.3 - Open Card
@@ -503,44 +450,43 @@ Results stored in a Cache Card are updated when one of the following occurs:
 Description
 @@@@@@@@@@@
 
-The Open Card can be used to specify a collection or table from which
+The **Open Card** can be used, for example, to specify a collection from which
 subsequent cards will operate from.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| N/A               | Query Card           |
-+-------------------+----------------------+
-|                   | Search Card          |
-+-------------------+----------------------+
-|                   | Show Table Card      |
-+-------------------+----------------------+
-|                   | Setup Download Card  |
-+-------------------+----------------------+
-|                   | Setup Chart Card     |
-+-------------------+----------------------+
-|                   | Troubleshoot Card    |
-+-------------------+----------------------+
-|                   | Cache Card           |
-+-------------------+----------------------+
 
 Behavior
 @@@@@@@@
 
-The Open Card is typically the first card in a workflow if a query
-is not used as the source for subsequent cards.  By selecting a table
-or collection with the Open Card, the next card will have access to
-that collection or table as a whole.
+The **Open Card** is typically the first card in a workflow if a query
+is not used as the source for subsequent cards.  By selecting a collection
+with the **Open Card**, the next card will have access to that collection
+as a whole.
 
-Common scenarios leveraging the Open Card include following it with
-a Search Card or Show Table Card.
+Common scenarios for using the **Open Card** include following it with
+a **Search Card** or a **Preview Table Card**.
 
 
-4.4 - Query Card
+4.4 - Preview Table Card
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+|Preview-Table-Card|
+
+Description
+@@@@@@@@@@@
+
+The **Preview Table Card** provides a tabular view of data from a data source. It is
+particularly useful for data exploration and for presenting the results of a
+**Query Card** or a **Search Card**.
+
+Behavior
+@@@@@@@@
+
+When working with a data source, it is very useful to visualize data in a tabular format.
+The **Preview Table Card** provides a very convenient way to present data that is the
+result of a user action, such as a **Query Card**. Controls are available in the lower-left
+that allow the user to scroll through the result set.
+
+
+4.5 - Query Card
 ~~~~~~~~~~~~~~~~
 
 |Query-Card|
@@ -548,49 +494,25 @@ a Search Card or Show Table Card.
 Description
 @@@@@@@@@@@
 
-The Query Card allows a user to execute a SQL² query against one or
-more tables or collections.  If variables were defined from either
-a Setup Variables Card or a Markdown Card in previous cards then
+The **Query Card** is used, for example, to execute an SQL² query against one or
+more collections.  If variables were defined from either
+a **Setup Variables Card** or a **Setup Markdown Card** in previous cards then
 those variables may be used in the query.  For more information
-on SQL² syntax please see the
+on the SQL² syntax please see the
 `SQL² Reference Guide <sql-squared-reference.html>`__.
-
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| N/A               | Cache Card           |
-+-------------------+----------------------+
-|                   | Search Card          |
-+-------------------+----------------------+
-|                   | Query Card           |
-+-------------------+----------------------+
-|                   | Show Table Card      |
-+-------------------+----------------------+
-|                   | Setup Download Card  |
-+-------------------+----------------------+
-|                   | Setup Chart Card     |
-+-------------------+----------------------+
-|                   | Troubleshoot Card    |
-+-------------------+----------------------+
-
 
 Behavior
 @@@@@@@@
 
-If a Query Card follows a Show Table Card then the collection name
+If a **Query Card** follows a **Preview Table Card** then the collection name
 will be automatically populated in the query and cannot be changed.
 
-A Query Card contains a ``Run Query`` button that is used when the user
-is finished entering a query.  If a query is not changed the query will
-execute automatically within a workflow.
+A **Query Card** contains a ``Run Query`` button. This button is used after
+the query has been entered. If a query has not changed, the query will
+automatically execute within a workflow.
 
 
-4.5 - Search Card
+4.6 - Search Card
 ~~~~~~~~~~~~~~~~~
 
 |Search-Card|
@@ -598,95 +520,54 @@ execute automatically within a workflow.
 Description
 @@@@@@@@@@@
 
-The Search Card allows users to search for entries from a data source.
-This data source can either be a specific collection or table designated
-via the Open Card or it can also be the result set from a Query Card.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| Open Card         | Query Card           |
-+-------------------+----------------------+
-| Query Card        | Search Card          |
-+-------------------+----------------------+
-|                   | Show Table Card      |
-+-------------------+----------------------+
-|                   | Setup Download Card  |
-+-------------------+----------------------+
-|                   | Setup Chart Card     |
-+-------------------+----------------------+
-|                   | Troubleshoot Card    |
-+-------------------+----------------------+
-|                   | Cache Card           |
-+-------------------+----------------------+
+The **Search Card** searches for entries from a data source.
+A data source can either be a specific collection or table designated
+by an **Open Card** or it can also be the result set from a **Query Card**.
 
 Behavior
 @@@@@@@@
 
-A Search Card is typically followed by a Show Table Card to display
-the result of the search.
+A **Search Card** is typically followed by a **Preview Table Card** to display
+the results of a search.
 
 Values not preceded by a field name and
-colon, such as ``fieldName:``, will cause the database to search through
+colon, such as ``fieldName:``, will cause the data source to search through
 all fields and may cause a delay in producing results from large tables
 or collections.  Additionally, specifying a field name before a value will
-typically result in a database leveraging an indexed query (if an appropriate
-index exists), resulting in a faster database response.
+typically result in a data source using an indexed query (if an appropriate
+index exists), resulting in a faster response.
 
-Search parameters are "AND"ed together, so the more parameters that a user
-provides, the more selective the result will be.
-
-* Search for everything containing the text "foo":
-
-    ``foo``
-
-    ``+foo``
-
-* Search for everything *not* containing the text "foo":
-
-    ``-foo``
-
-* Search for everything that contains a "foo" field whose value is greater than 2:
-
-    ``foo:>2``
-
-* Search for everything containing a "foo" field whose value falls inside the range of 0..2:
-
-    ``foo:0..2``
-
-* Search for everything that contains a "foo" field which contains a "bar" field which contains the text "baz":
-
-    ``foo:bar:baz``
-
-
-See the table below for some helpful search examples:
+Search parameters are "AND"ed together, so the more parameters that are
+provided, the more selective the result will be. The following table shows
+some common search examples:
 
 +---------------------------+---------------------------------------------------------------+
 | Example                   | Description                                                   |
 +===========================+===============================================================+
-| ``colorado``              | Searches for the **substring** ``colorado`` in **all fields** |
+| ``foo``, ``+foo``         | Searches for the **substring** ``foo`` in **all fields**.     |
 +---------------------------+---------------------------------------------------------------+
-| ``=colorado``             | Searches for the **full word** ``colorado`` in **all fields** |
+| ``-foo``                  | Searches for everything **not** containing the text ``foo``.  |
 +---------------------------+---------------------------------------------------------------+
-| ``age:=50``               | Searches the field **age** for a value of 50                  |
+| ``=foo``                  | Searches for the **full word** ``foo`` in **all fields**.     |
 +---------------------------+---------------------------------------------------------------+
-| ``age:>=50``              | Searches the field **age** for any value greater than or      |
-|                           | equal to 50                                                   |
+| ``foo:=50``               | Searches the field ``foo`` for a value of 50.                 |
 +---------------------------+---------------------------------------------------------------+
-| ``age:50..60``            | Searches the field **age** for values between or equal to     |
-|                           | 50 and 60                                                     |
+| ``foo:>=50``              | Searches the field ``foo`` for any value greater than or      |
+|                           | equal to 50.                                                  |
 +---------------------------+---------------------------------------------------------------+
-| ``codes:"[*]":desc:flu``  | Performs a deep search through the **codes** array and        |
-|                           | examines each subdocument's **desc** field for the            |
-|                           | **substring** ``flu``                                         |
+| ``foo:50..60``            | Searches the field ``foo`` for values inside the range 50 to  |
+|                           | 60, inclusive.                                                |
++---------------------------+---------------------------------------------------------------+
+| ``foo:bar:baz``           | Searches for everything that contains a ``foo`` field which   |
+|                           | contains a ``bar`` field which contains the text ``baz``.     |
++---------------------------+---------------------------------------------------------------+
+| ``foo:"[*]":bar:baz``     | Performs a deep search through the ``foo`` array and          |
+|                           | examines each subdocument's ``bar`` field for the             |
+|                           | **substring** ``baz``.                                        |
 +---------------------------+---------------------------------------------------------------+
 
 
-4.6 - Setup Chart Card
+4.7 - Setup Chart Card
 ~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Chart-Card|
@@ -694,12 +575,9 @@ See the table below for some helpful search examples:
 Description
 @@@@@@@@@@@
 
-The Setup Chart Card is required before using the Show Chart Card.  This
-card allows an author to specify the chart type and chart options of the
-subsequent Show Chart Card.
-
-Major Chart Types
-@@@@@@@@@@@@@@@@@
+The **Setup Chart Card** is required before using the **Show Chart Card**.  This
+card is used to specify the chart type and chart options of the subsequent
+**Show Chart Card**. Major chart types include the following:
 
 * Area Chart
 * Bar Chart
@@ -708,30 +586,37 @@ Major Chart Types
 * Radar Chart
 * Scatter Plot Chart
 
-Card Relationships
-@@@@@@@@@@@@@@@@@@
+Behavior
+@@@@@@@@
 
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| Query Card or     | Show Chart Card      |
-+-------------------+----------------------+
-| Show Table Card   |                      |
-+-------------------+----------------------+
+Each major chart type will have options that allow control over
+the look of the chart.  For example, an **Area Chart** will
+provide the option to stack values.
+
+
+4.8 - Setup Dashboard Card
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|Setup-Dashboard-Card|
+
+Description
+@@@@@@@@@@@
+
+The **Setup Dashboard Card** may only be selected as the first card in the
+first deck inside of a workspace.  Creating a **Setup Dashboard Card** is
+similar to flipping a workspace that contains a single deck and
+choosing **Wrap**, except there is no existing deck and one must now
+be created.
 
 Behavior
 @@@@@@@@
 
-The available chart types in the left column of a Setup Chart Card will
-vary depending on the result set returned from a preceding card.
-
-Each major chart type will have options that allows an author to control
-the look of the chart.  For instance an Area Chart will allow an author
-the choice to stack values or not.
+Because the **Setup Dashboard Card** creates a workspace with no decks or
+cards, it must be the first card in the deck.  Additionally, a user
+must now create a new deck inside of this Dashboard.
 
 
-4.7 - Setup Download Card
+4.9 - Setup Download Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Download-Card|
@@ -739,88 +624,34 @@ the choice to stack values or not.
 Description
 @@@@@@@@@@@
 
-The Setup Download Card precedes the Show Download Card.  An author can
-configure the format of the downloaded file, JSON or CSV, in addition
-to several other parameters.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| Query Card or     | Show Download Card   |
-+-------------------+----------------------+
-| Open Card or      |                      |
-+-------------------+----------------------+
-| Search Card       |                      |
-+-------------------+----------------------+
+The **Setup Download Card** precedes the **Show Download Card**.  The format
+of the download file can be configured to either CSV or JSON. Additionally,
+several other parameters can also be configured.
 
 Behavior
 @@@@@@@@
 
-The Setup Download Card must always precede a Show Download Card.  Each
+The **Setup Download Card** must always precede a **Show Download Card**.  Each
 file format (CSV/JSON) will have different export options available.  Once
-options are configured, they can be change by the workspace author but not
+options are configured, they can be changed by the workspace author, but not
 by a user through a published or embedded workspace.
 
 
-4.8 - Setup Draftboard Card
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-|Setup-Draftboard-Card|
-
-Description
-@@@@@@@@@@@
-
-The Setup Draftboard Card may only be selected as the first card in the
-first deck inside of a workspace.  Creating a Setup Draftboard Card is
-similar to flipping a workspace that contains a single deck and
-choosing **Wrap**, except there is no existing deck and one must now
-be created.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| N/A               | N/A                  |
-+-------------------+----------------------+
-
-Because the Setup Draftboard Card creates a workspace with no decks or
-cards, it must be the first card in the deck.  Additionally an author
-must now create a new deck inside of this Draftboard so the concept
-of an allowable next card is not applicable.
-
-
-4.9 - Setup Markdown Card
-~~~~~~~~~~~~~~~~~~~~~~~~~
+4.10 - Setup Markdown Card
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Markdown-Card|
 
 Description
 @@@@@@@@@@@
 
-The Setup Markdown Card allows an author to write the Markdown code that
-will be rendered within a Show Markdown Card.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+-------------------+----------------------+
-| Required          | Allowable            |
-| Previous Cards    | Next Cards           |
-+===================+======================+
-| N/A               | Show Markdown Card   |
-+-------------------+----------------------+
+The **Setup Markdown Card** allows a user to write the Markdown code that
+will be rendered within a **Show Markdown Card**.
 
 Behavior
 @@@@@@@@
 
-The Setup Markdown Card acts like a text editor to edit Markdown.  Valid
+The **Setup Markdown Card** acts like a text editor to edit Markdown.  Valid
 Markdown code will typically be highlighted blue and line numbers are
 listed in the left column.
 
@@ -828,10 +659,10 @@ For detailed information regarding SlamDown,
 the SlamData-enhanced version of Markdown, please see the
 `SlamDown Reference Guide <slamdown-reference.html>`__.  The reference
 guide describes how to create interactive UI elements such as drop
-downs, radio boxes, check boxes and more.
+downs, radio boxes, check boxes, and more.
 
 
-4.10 - Setup Variables Card
+4.11 - Setup Variables Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Variables-Card|
@@ -839,36 +670,21 @@ downs, radio boxes, check boxes and more.
 Description
 @@@@@@@@@@@
 
-The Setup Variables Card allows an author to create a workspace where the
-results are controlled by parameters being programatically passed into it.
-
-Card Relationships
-@@@@@@@@@@@@@@@@@@
-
-+--------------------------+----------------------+
-| Required                 | Allowable            |
-| Previous Cards           | Next Cards           |
-+==========================+======================+
-| N/A - Must be first card | Query Card           |
-+--------------------------+----------------------+
-|                          | Setup Markdown Card  |
-+--------------------------+----------------------+
-|                          | Troubleshoot Card    |
-+--------------------------+----------------------+
+The **Setup Variables Card** allows a user to create a workspace where the
+results are controlled by parameters that are programatically passed into it.
 
 Behavior
 @@@@@@@@
 
-Each variable in the Setup Variables Card is defined on a separate line.  A
-variable may be any data type listed in the Data Types section below.
+Each variable in the **Setup Variables Card** is defined on a separate line.  A
+variable may be any data type listed in the **Data Types** section below.
 
-Note that following a Variables Card with a Troubleshoot Card is helpful in
+Note that a **Setup Variables Card** followed by a **Troubleshoot Card** is helpful in
 validating values passed into the Workspace.
 
-When embedding a Workspace that contains a Setup Variables Card into a third party
-application, the JavaScript and HTML that SlamData generates for the author
-will be slightly different than workspaces without a Setup Variables Card.
-
+When embedding a Workspace that contains a **Setup Variables Card** into a third party
+application, the JavaScript and HTML that SlamData generates for a user
+will be slightly different than workspaces without a **Setup Variables Card**.
 For example, if two variables called ``state`` and ``city`` with values of
 ``CO`` and ``DENVER``, respectively, are defined in a variables card, the
 resulting JavaScript will contain a ``vars`` section, similar to the following:
@@ -890,7 +706,7 @@ resulting JavaScript will contain a ``vars`` section, similar to the following:
       });
 
 Third party applications may generate this JavaScript programatically, changing
-the values of the ``state`` and ``city`` variables based on custom logic.
+the values of the ``state`` and ``city`` variables based upon custom logic.
 
 
 Data Types
@@ -899,7 +715,7 @@ Data Types
 Text
 !!!!
 
-An input field will appear when the Text data type is chosen.  Alphanumeric
+An input field will appear when **Text** is chosen.  Alphanumeric
 text may be entered.
 
 Example: ``My 123 value here``
@@ -907,36 +723,43 @@ Example: ``My 123 value here``
 DateTime
 !!!!!!!!
 
-A date and time picker will appear when the Date data type is chosen.  Selecting a
+A date and time picker will appear when **DateTime** is chosen.  Selecting a
 date and time will designate the default value.
 
 Date
 !!!!
 
-A date picker will appear when the Date data type is chosen.  Selecting a
-date from the date picker will designate the default value.
+A date picker will appear when **Date** is chosen.  Selecting a
+date will designate the default value.
 
 Time
 !!!!
 
-A time picker will appear when the Time data type is chosen.  Selecting a time
+A time picker will appear when **Time** is chosen.  Selecting a time
 will designate the default value.
 
 Interval
 !!!!!!!!
 
-Pending
+An input field will appear when **Interval** is selected. Selecting
+an interval will designate the default value. Interval is defined
+using the ISO 8601 format.
+
+Example: ``PT12H34M``
+
+In the above example, ``P`` is the duration, ``T`` is the time designator,
+``12H`` is 12 hours and ``34M`` is 34 minutes.
 
 Boolean
 !!!!!!!
 
-A checkbox will appear when the Boolean data type is chosen.  Checking
+A checkbox will appear when **Boolean** is chosen.  Checking
 the box will designate the default value to ``true``.
 
 Numeric
 !!!!!!!
 
-An input field will appear when the Numeric data type is chosen.  Only
+An input field will appear when **Numeric** is chosen.  Only
 numeric values are allowed in this field.
 
 Example:  ``1`` or ``1.5``
@@ -944,89 +767,130 @@ Example:  ``1`` or ``1.5``
 Object ID
 !!!!!!!!!
 
-An input field will appear when the Object ID data type is chosen.  Any
+An input field will appear when **Object ID** is chosen.  Any
 valid Object ID can be entered here.  The subsequent query should not
 be preceded by the ``OID`` function in SQL² as this will be handled
 automatically.  For instance, if the value ``5792b247045175200c4fcd0f``
 is entered for the ``myoidvar`` variable, the resulting query would
-look similar to:
+look similar to the following:
 
 .. code-block:: SQL
 
-    SELECT * FROM `/server/db/collection`
+    SELECT *
+    FROM `/server/db/collection`
     WHERE _id = :myoidvar
 
 Array
 !!!!!
 
-An input field will appear the Array data type is chosen.  A valid array
+An input field will appear when **Array** is chosen.  A valid array
 should be entered as the default.
 
 Example:  ``["S1", "S2", "S3"]``
 
 The subsequent query should reference the values in the array appropriately.
-For example, if the variables ``sensors`` was defined in the Setup
-Variables Card, and we wanted a query to return all records containing
-a ``sensor`` field that matched any entry from the array, the query might
-look like this:
+For example, if the variable ``sensors`` was defined in the **Setup
+Variables Card**, and the user wanted a query to return all records containing
+a ``sensors`` field that matched any entry from the array, the query could
+look similar to the following:
 
 .. code-block:: SQL
 
-    SELECT * FROM `/server/db/collection`
-    WHERE sensor IN :sensors[_]
+    SELECT *
+    FROM `/server/db/collection`
+    WHERE sensor IN :sensors
 
 
 Object
 !!!!!!
 
-Pending
+An input field will appear when **Object** is chosen. Object is a JSON object.
+
+Example: ``{ "a": 1 }``
 
 SQL² Expression
 !!!!!!!!!!!!!!!
 
-Pending
+An input field will appear when **SQL² Expression** is chosen. A valid
+SQL² Expression should be entered as the default.
+
+Example:
+
+.. code-block:: SQL
+
+    SELECT *
+    FROM `/server/db/collection`
+
 
 SQL² Identifier
 !!!!!!!!!!!!!!!
 
-An input field will appear when the SQL² Identifier data type is chosen.
-A valid query path should be entered as the default.  This allows a developer
+An input field will appear when **SQL² Identifier** is chosen.
+A valid query path should be entered as the default.  This allows a user
 to pass in a specific query path while the remainder of the query remains
 unchanged.
 
 Example: mypath = ``/server/db/collection``
 
-The subsequent query would look like:
+The subsequent query would look similar to the following:
 
 .. code-block:: SQL
 
-    SELECT * FROM :mypath
+    SELECT *
+    FROM :mypath
 
 
-
-
-4.11 - Show Chart Card
+4.12 - Show Chart Card
 ~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Chart-Card|
 
+Description
+@@@@@@@@@@@
 
-4.12 - Show Download Card
+The **Show Chart Card** follows the **Setup Chart Card**. Once the options
+have been selected in the **Setup Chart Card** and a chart is ready to be rendered,
+the **Show Chart Card** should be selected.
+
+Behavior
+@@@@@@@@
+
+The **Show Chart Card** renders the chart created using the **Setup Chart Card**.
+
+
+4.13 - Show Download Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Download-Card|
 
+Description
+@@@@@@@@@@@
 
-4.13 - Show Markdown Card
+The **Show Download Card** follows the **Setup Download Card**.
+
+Behavior
+@@@@@@@@
+
+The **Show Download Card** provides a button to download data using the format and options
+selected using the **Setup Download Card**.
+
+
+4.14 - Show Markdown Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Markdown-Card|
 
+Description
+@@@@@@@@@@@
 
-4.14 - Show Table Card
-~~~~~~~~~~~~~~~~~~~~~~
+The **Show Markdown Card** follows the **Setup Markdown Card**. Once the options
+have been selected in the **Setup Markdown Card** and the Markdown is ready to be rendered,
+the **Show Markdown Card** should be selected.
 
-|Show-Table-Card|
+Behavior
+@@@@@@@@
+
+The **Show Markdown Card** renders the Markdown created using the **Setup Markdown Card**.
 
 
 4.15 - Troubleshoot Card
@@ -1034,82 +898,88 @@ The subsequent query would look like:
 
 |Troubleshoot-Card|
 
+Description
+@@@@@@@@@@@
+
+The **Troubleshoot Card** is a useful tool to help find problem or issues in a Workspace.
+
+Behavior
+@@@@@@@@
+
+The **Troubleshoot Card** is helpful in validating values passed into a Workspace. For example,
+a **Setup Variables Card** followed by a **Troubleshoot Card** would enable variable values to be checked.
 
 
-
-Section 5 - Workflow Examples
------------------------------
-
-**COMING SOON**
-
-
-
-
-
-.. |Cache-Card| image:: images/SD3/cards/card-cache.png
+.. |Cache-Card| image:: images/SD4/cards/card-cache.png
    :height: 150px
    :width: 150px
 
-.. |Open-Card| image:: images/SD3/cards/card-open.png
+.. |Open-Card| image:: images/SD4/cards/card-open.png
    :height: 150px
    :width: 150px
 
-.. |Query-Card| image:: images/SD3/cards/card-query.png
+.. |Query-Card| image:: images/SD4/cards/card-query.png
    :height: 150px
    :width: 150px
 
-.. |Search-Card| image:: images/SD3/cards/card-search.png
+.. |Search-Card| image:: images/SD4/cards/card-search.png
    :height: 150px
    :width: 150px
 
-.. |Setup-Chart-Card| image:: images/SD3/cards/card-setup-chart.png
+.. |Setup-Chart-Card| image:: images/SD4/cards/card-setup-chart.png
    :height: 150px
    :width: 150px
 
-.. |Setup-Download-Card| image:: images/SD3/cards/card-setup-download.png
+.. |Setup-Download-Card| image:: images/SD4/cards/card-setup-download.png
    :height: 150px
    :width: 150px
 
-.. |Setup-Draftboard-Card| image:: images/SD3/cards/card-setup-draftboard.png
+.. |Setup-Dashboard-Card| image:: images/SD4/cards/card-setup-dashboard.png
    :height: 150px
    :width: 150px
 
-.. |Setup-Markdown-Card| image:: images/SD3/cards/card-setup-markdown.png
+.. |Setup-Markdown-Card| image:: images/SD4/cards/card-setup-markdown.png
    :height: 150px
    :width: 150px
 
-.. |Setup-Variables-Card| image:: images/SD3/cards/card-setup-variables.png
+.. |Setup-Variables-Card| image:: images/SD4/cards/card-setup-variables.png
    :height: 150px
    :width: 150px
 
-.. |Show-Chart-Card| image:: images/SD3/cards/card-show-chart.png
+.. |Show-Chart-Card| image:: images/SD4/cards/card-show-chart.png
    :height: 150px
    :width: 150px
 
-.. |Show-Download-Card| image:: images/SD3/cards/card-show-download.png
+.. |Show-Download-Card| image:: images/SD4/cards/card-show-download.png
    :height: 150px
    :width: 150px
 
-.. |Show-Markdown-Card| image:: images/SD3/cards/card-show-markdown.png
+.. |Show-Markdown-Card| image:: images/SD4/cards/card-show-markdown.png
    :height: 150px
    :width: 150px
 
-.. |Show-Table-Card| image:: images/SD3/cards/card-show-table.png
+.. |Preview-Table-Card| image:: images/SD4/cards/card-preview-table.png
    :height: 150px
    :width: 150px
 
-.. |Troubleshoot-Card| image:: images/SD3/cards/card-troubleshoot.png
+.. |Troubleshoot-Card| image:: images/SD4/cards/card-troubleshoot.png
    :height: 150px
    :width: 150px
 
-.. |Icon-Mount| image:: images/SD3/icon-mount.png
+.. |Icon-Mount| image:: images/SD4/icon-mount.png
 
-.. |Zoom-Out| image:: images/SD3/icon-zoom-out.png
+.. |Zoom-Out| image:: images/SD4/icon-zoom-out.png
 
-.. |Icon-Flip| image:: images/SD3/icon-flip.png
+.. |Icon-Flip| image:: images/SD4/icon-flip.png
 
-.. |Mount-Dialog| image:: images/SD3/screenshots/mount-dialog.png
+.. |Mount-Dialog| image:: images/SD4/screenshots/mount-dialog.png
 
-.. |Create-Folder| image:: images/SD3/icon-create-folder.png
+.. |Create-Folder| image:: images/SD4/icon-create-folder.png
 
-.. |Move-Rename| image:: images/SD3/icon-move-rename.png
+.. |Move-Rename| image:: images/SD4/icon-move-rename.png
+
+.. |Upload| image:: images/SD4/icon-upload.png
+
+.. |Create-Workspace| image:: images/SD4/icon-create-workspace.png
+
+.. |Card-Choices-1| image:: images/SD4/screenshots/new-card-choices-1.png
