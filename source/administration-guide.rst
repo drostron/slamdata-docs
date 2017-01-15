@@ -43,8 +43,8 @@ Section 1 - Installation
       * The most compatible browsers with SlamData are always the most recent versions of Google Chrome and Mozilla Firefox
   * Target data sources (for analytics)
       * Apache Spark 2.1 or newer
-      * Couchbase x.x or newer
-      * MarkLogic x.x or newer
+      * Couchbase 4.5.1 or newer
+      * MarkLogic 8 or newer
       * MongoDB 2.6 or newer
 
 **SlamData Community Edition** uses a file called ``quasar-config.json`` to
