@@ -9,7 +9,7 @@ Reference - SQL²
 Section 1 - Introduction
 ------------------------
 
-SQL² is a subset of ANSI SQL. SQL² is designed for queries on NoSQL database systems.
+SQL² is a dialect of ANSI SQL that is specialized for queries on NoSQL database systems.
 
 SQL² has support for every major SQL SELECT clause, such as ``AS``,
 ``WHERE``, ``JOIN``, ``GROUP BY``, ``HAVING``, ``LIMIT``, ``OFFSET``,
