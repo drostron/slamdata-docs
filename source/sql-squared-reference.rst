@@ -9,7 +9,7 @@ Reference - SQL²
 Section 1 - Introduction
 ------------------------
 
-SQL² is a dialect of ANSI SQL that is specialized for queries on NoSQL database systems.
+SQL² is a subset of ANSI SQL. SQL² is designed for queries on NoSQL database systems.
 
 SQL² has support for every major SQL SELECT clause, such as ``AS``,
 ``WHERE``, ``JOIN``, ``GROUP BY``, ``HAVING``, ``LIMIT``, ``OFFSET``,
@@ -971,25 +971,3 @@ If ``$lookup`` cannot be used, SlamData will fall back to utilizing the
 mapreduce API.  Utilizing mapreduce is slower but more flexible
 and is also backwards compatible for MongoDB 2.6 and later.
 
-
-13.2 Couchbase
-~~~~~~~~~~~~~~
-
-In the initial configuration of Couchbase, when it is being installed,
-memory optimized indexes should be enabled.
-
-If the Couchbase default bucket is used with SlamData, it is necessary to
-create a primary index as well as an index on the type field. For example:
-
-.. code-block:: sql
-
-    CREATE PRIMARY INDEX ON default;
-    CREATE INDEX default_type_idx ON `default`(type);
-
-
-
-13.3 MarkLogic
-~~~~~~~~~~~~~~
-
-MarkLogic must contain one or more directories in the database before documents will be displayed.
-Additionally, documents must be located within a directory.
