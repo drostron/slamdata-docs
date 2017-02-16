@@ -17,8 +17,8 @@ see the `SlamData User's Guide <users-guide.html>`__.
 .. note:: **SlamData Advanced Features**
 
   Throughout this guide there are references to functionality available
-  only in SlamData Advanced Edition.  Sections that apply only to SlamData
-  Advanced Edition will be called out with the Murray (MRA)
+  only in **SlamData Advanced Edition**.  Sections that apply only to **SlamData
+  Advanced Edition** will be called out with the Murray (MRA)
   icon. |Murray-Small|
 
 
@@ -41,6 +41,7 @@ Section 1 - Installation
       * Linux requires a separate Java installation
   * Browsers
       * The most compatible browsers with SlamData are always the most recent versions of Google Chrome and Mozilla Firefox
+      * Internet Explorer and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all
   * Target data sources (for analytics)
       * Apache Spark 2.1 or newer
       * Couchbase 4.5.1 or newer
@@ -115,7 +116,7 @@ Before building SlamData, some required software must be installed.
 
 2. Fetch the dependencies
 
-Ensure that you are in slamdata directory.
+Ensure that you are in the slamdata directory.
 
 .. code-block:: shell
 
@@ -228,11 +229,7 @@ Connecting to a data source is the first step to analyzing data.
 Supported data sources are listed in the following sections.  As new
 target data sources are released, they will be listed below.
 
-
-2.1.1 MongoDB
-'''''''''''''
-
-To connect to MongoDB click on the Mount |Mount-Icon| icon in the upper
+To connect to data source click on the Mount |Mount-Icon| icon in the upper
 right.
 
 A mount dialog will be presented, as shown below.
@@ -249,44 +246,48 @@ User Interface (UI) as well as SQL² query paths.
   if a data source were hosted on Amazon AWS/EC2 it might be named
   ``aws`` or ``aws-1``.
 
-Select **MongoDB** as the mount type. Once the mount type has been selected,
-additional fields will appear in the dialog. The following form shows
-example values for the remaining fields.
-
-.. figure:: images/SD4/screenshots/mount-mongodb.png
-   :alt: SlamData MongoDB Dialog
-
-.. note::
-
-  When using MongoDB, the database field value should be the
-  database the username and password will authenticate against. This value
-  will depend on which database the user was created in. For example,
-  it could be ``admin``, the name of the user or something completely different.
-
 Click the **Mount** button to mount the database in SlamData.
 
 
-2.2 Several Mounts
-~~~~~~~~~~~~~~~~~~
-
-After mounting several data sources, the SlamData UI might look like the
-following image. In this image, there are two separate mounts named
-``aws`` and ``macbook``, the latter representing a
-locally mounted data source.
-
-.. figure:: images/SD4/screenshots/mount-all-mounts.png
-   :alt: SlamData Multiple Mounts
-
-
-2.3 Mount Options
+2.2 Mount Options
 ~~~~~~~~~~~~~~~~~
 
 The mount dialog will display the appropriate fields based upon the mount
 type selected. For each data source that SlamData supports, a section
 below describes the options available.
 
-2.3.1 MongoDB
+2.2.1 MongoDB
 '''''''''''''
+
+Select **MongoDB** as the mount type. Once the mount type has been selected,
+additional fields will appear in the dialog.
+
+The following table shows an example MongoDB server running on localhost
+with connection available on port 27017. No authetication is required in this
+case.
+
++----------------+-----------+
+| Parameter      | Value     |
++================+===========+
+| Host           | localhost |
++----------------+-----------+
+| Port           |  27017    |
++----------------+-----------+
+| Username       |           |
++----------------+-----------+
+| Password       |           |
++----------------+-----------+
+| Database       |           |
++----------------+-----------+
+| Other Settings |           |
++----------------+-----------+
+
+.. note:: **Using Authetication**
+
+  When using MongoDB, the database field value should be the
+  database the username and password will authenticate against. This value
+  will depend on which database the user was created in. For example,
+  it could be ``admin``, the name of the user or something completely different.
 
 The MongoDB values listed in the Connection Options on the MongoDB
 web site are supported. As of MongoDB 2.6 these options are as follows.
@@ -301,6 +302,111 @@ web site are supported. As of MongoDB 2.6 these options are as follows.
 | socketTimeoutMS  | 10000   | The time in milliseconds to attempt a send or receive on a socket  |
 |                  |         | before the attempt times out.                                      |
 +------------------+---------+--------------------------------------------------------------------+
+
+.. warning:: **MongoDB Limitations**
+
+    MongoDB has several limitations which SlamData must work with and around
+    noted below.
+
+* Users are not allowed to write to secondary nodes in a replica set.
+* Queries that return large result sets or use the ``mapreduce`` and ``aggregate``
+  functions must use temporary workspace to store their results.
+
+Because of these limitations users have a few options:
+
+1. Connect to the MongoDB primary in a replica set with a user having
+   read and write privileges.
+2. Create a standalone MongoDB server which
+   `Tails the Oplog <https://docs.mongodb.com/manual/core/tailable-cursors/#tailable-cursors>`__
+   of a member of an existing replica set.
+
+
+2.2.2 Couchbase
+'''''''''''''''
+
+Select **Couchbase** as the mount type. Once the mount type has been selected,
+additional fields will appear in the dialog.
+
+The following table shows an example Couchbase server running on localhost
+with connection available on port 8091.
+
++----------------+---------------+
+| Parameter      | Value         |
++================+===============+
+| Host           | localhost     |
++----------------+---------------+
+| Port           |  8091         |
++----------------+---------------+
+| Username       | Administrator |
++----------------+---------------+
+| Password       | \*\*\*\*\*\*  |
++----------------+---------------+
+
+.. note::
+
+  To use SlamData with Couchbase, a Username and Password will be required.
+  In the example table above, the Administrator account and password are
+  used. The Administrator account is created when Couchbase is installed.
+
+.. hint:: **Memory Optimized Indexes**
+
+  In the initial configuration of Couchbase, when it is being installed,
+  memory optimized indexes should be enabled.
+
+If the Couchbase default bucket is used with SlamData, it is necessary to
+create a primary index as well as an index on the ``type`` field. For example:
+
+.. code-block:: sql
+
+    CREATE PRIMARY INDEX ON default;
+    CREATE INDEX default_type_idx ON `default`(type);
+
+
+2.2.3 MarkLogic
+'''''''''''''''
+
+Select **MarkLogic** as the mount type. Once the mount type has been selected,
+additional fields will appear in the dialog.
+
+The following table shows an example MarkLogic server running on localhost
+with connection available on port 8000.
+
++----------------+---------------+
+| Parameter      | Value         |
++================+===============+
+| Host           | localhost     |
++----------------+---------------+
+| Port           |  8000         |
++----------------+---------------+
+| Username       | Administrator |
++----------------+---------------+
+| Password       | \*\*\*\*\*\*  |
++----------------+---------------+
+| Database       | /Documents    |
++----------------+---------------+
+
+.. note::
+
+  To use SlamData with MarkLogic, a Username and Password will be required.
+  In the example table above, the Administrator account and password are
+  used. The Administrator account is created when MarkLogic is installed.
+
+.. hint:: **Directories**
+
+  MarkLogic must contain one or more directories in the database before documents will be displayed.
+  Additionally, documents must be located within a directory.
+
+
+2.3 Several Mounts
+~~~~~~~~~~~~~~~~~~
+
+After mounting several data sources, the SlamData UI might look like the
+following image. In this image, there are two separate mounts named
+``aws`` and ``macbook``, the latter representing a
+locally mounted data source.
+
+.. figure:: images/SD4/screenshots/mount-all-mounts.png
+   :alt: SlamData Multiple Mounts
 
 
 2.4 SQL² View
@@ -444,7 +550,7 @@ has additional configuration parameters to setup security, including the
 .. attention:: **SlamData Advanced Features**
 
   The configuration file listed below is applicable only
-  to SlamData Advanced Edition and contains parameters and
+  to **SlamData Advanced Edition** and contains parameters and
   values that are valid only in that version.
   
   |Murray-Small|
@@ -515,6 +621,22 @@ as follows.
       }
     }
 
+The following example ``quasar-config.json`` file allows SlamData users to use Postgres instead of H2 as the metastore:
+
+::
+
+    "metastore": {
+      "database": {
+        "postgresql": {
+          "host": "192.168.99.100",
+          "port": 5432,
+          "database": "slamdata",
+          "userName": "postgres",
+          "password": "postgres"
+        }
+      }
+    }
+
 
 Section 4 - SlamData User Security
 ----------------------------------
@@ -524,7 +646,7 @@ such as user authorization, authentication, and auditing.
 
 .. attention:: **SlamData Advanced Features**
 
-  SlamData User Security is available only with SlamData Advanced Edition.
+  SlamData User Security is available only with **SlamData Advanced Edition**.
 
   |Murray-Small|
 
@@ -1115,7 +1237,7 @@ one of your own permissions, the response will be a ``400 Bad Request``.
 5.4 - Token Endpoint
 ~~~~~~~~~~~~~~~~~~~~
 
-The following is the json representation of a token.
+The following is the JSON representation of a token.
 
 ::
 
@@ -1154,7 +1276,7 @@ The following is the json representation of a token.
 List tokens that you have created. Does not list tokens that were created by
 others based on your authority.
 
-The json representation of the tokens does not contain the ``secret`` field
+The JSON representation of the tokens does not contain the ``secret`` field
 for this endpoint in order to reduce the chance of the secret leaking. The
 secret can be retrieved by using the ``id`` endpoint.
 

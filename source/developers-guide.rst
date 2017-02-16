@@ -8,14 +8,14 @@ This Developer's Guide will assist the developer who is unfamiliar with
 SlamData to install, configure, customize and embed a complete solution
 from start to finish.
 
-For information on how to use SlamData from an administration perspective
-see the `SlamData Administration Guide <administration-guide.html>`__.
+For information on how to use SlamData from an administrator's perspective
+see the `SlamData Administrator's Guide <administration-guide.html>`__.
 
 For information on how to use SlamData from a user's perspective
 see the `SlamData User's Guide <users-guide.html>`__.
 
 
-.. note:: SlamData Advanced Features
+.. note:: **SlamData Advanced Features**
 
   Throughout this guide there are references to functionality available
   only in SlamData Advanced Edition.  Sections that apply only to SlamData
@@ -51,7 +51,7 @@ This is achieved with some of the following features of SlamData:
   but also deeply nested, semi-structured data such as JSON and XML.
 
 - Ability to understand schemas dynamically, resulting in absolutely no
-  need to map field types from one technology to another.  This also allows
+  requirement to map field types from one technology to another.  This also allows
   SlamData to use both field values **and** the schema as data.  This is
   not possible with other NoSQL -> relational solutions.
 
@@ -95,7 +95,7 @@ For SlamData to run in an optimal environment see the
 `Minimum System Requirements <administration-guide.html#minimum-system-requirements>`__
 section.
 
-.. attention:: Windows Developers
+.. attention:: **Windows Developers**
 
   This Developer's Guide includes example code in several sections in addition to
   shell scripts or command line utilities.  While this guide can be followed
@@ -273,7 +273,7 @@ field empty in the interface.
 
 * Hover the mouse over the new **Untitled Folder** folder.
 
-* Click the **Move/Rename** icon that appears to the right.  |Move-Rename|
+* Click the **Move / rename** icon that appears to the right.  |Move-Rename|
 
 * Change the name from **Untitled Folder** to ``devdb`` and click **Rename**.
 
@@ -322,7 +322,7 @@ Other formats, such as CSV, can also be quickly imported.
 2.5.1 Indexing Your Database
 ''''''''''''''''''''''''''''
 
-.. attention:: Indexing Your Database
+.. attention:: **Indexing Your Database**
 
   While this step is not necessary, any database without
   indexes is going to perform slowly.  In SlamData this can be
@@ -401,10 +401,10 @@ In this case you can also see that the **codes** field is not actually a simple 
 an array of other documents!  Each of those documents in turn have a **code** and **desc**
 field.
 
-.. hint:: Workspace Usage
+.. hint:: **Workspace Usage**
 
   You may not know it, but you actually just created a Workspace and a Root Deck,
-  which contains an **Open Card** and an **Explore Card**!  SlamData did this
+  which contains an **Open Card** and a **Preview Table Card**!  SlamData did this
   automatically to save you time.
 
 Any changes made within a Workspace are saved automatically.
@@ -437,11 +437,10 @@ You'll be presented with the following card types to choose from:
 
 |Card-Choices-1|
 
-Notice how the cards are different shades of gray.  The dark gray cards
+Notice how the cards are different colors.  Blue cards
 are those that can be created directly after the **Open Card**.  Light
 gray cards are those cards that cannot be used following the previous
-card.  A helpful checkmark in the upper right of each selection also
-indicates which cards can be used in the current situation.
+card.
 
 * Select the **Search Card**.
 
@@ -459,8 +458,8 @@ SlamData is searching the patients collection that we imported into
 the database system, and that indexes can significantly boost performance
 for searches.
 
-Once the results appear, you can browse them just like you did earlier
-in the **Explore Card** with the controls in the bottom left of the
+Once the results appear, you can browse them
+with the controls in the bottom left of the
 interface.
 
 Did you notice that in the search string earlier we did not specify
@@ -514,7 +513,8 @@ See the table below for some helpful query examples:
 +---------------------------+---------------------------------------------------------------+
 | ``age:=50``               | Searches the field **age** for a value of 50.                 |
 +---------------------------+---------------------------------------------------------------+
-| ``age:>=50``              | Searches the field **age** for any value over 50.             |
+| ``age:>=50``              | Searches the field **age** for any value greater              |
+|                           | than or equal to 50.                                          |
 +---------------------------+---------------------------------------------------------------+
 | ``age:>=50 age:<=60``     | Searches the field **age** for values between or equal to     |
 |                           | 50 and 60.                                                    |
@@ -531,7 +531,7 @@ searches within SlamData!
 2.8 Querying Data with SQL²
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to the **Search Card** SlamData provides a **Query Card** which
+In addition to the **Search Card**, SlamData provides a **Query Card** that
 allows users to execute ANSI-compatible SQL queries on top of any data source,
 including NoSQL databases!  This is accomplished by using SlamData's SQL²
 dialect, which is a superset of SQL that allows dynamic modeling and querying
@@ -571,7 +571,8 @@ two or more collections.
 
 .. code-block:: sql
 
-    SELECT * FROM `/devguide/devdb/patients`
+    SELECT *
+    FROM `/devguide/devdb/patients`
 
 Notice how the path to the dataset is surrounded by
 back-ticks (`````) not apostrophes (``'``)
@@ -733,7 +734,7 @@ with it.
 
 * Hover over the new Workspace labeled **Untitled Workspace.slam**.
 
-* Click the Move/Rename icon to the right. |Move-Rename|
+* Click the **Move / rename** icon to the right. |Move-Rename|
 
 * Replace **Untitled Workspace** with ``Average Weight by City``
   and click **Rename**.
@@ -969,11 +970,11 @@ that decks can build off one another.  We need to now mirror the
 
 * Select the new deck and click on the right grip and then select the **Setup Chart Card**.
 
-* Select the Bar Chart icon. |Icon-Gray-Bar-Chart|
+* Select the **Bar Chart** icon.
 
 The bar chart icon will change from gray to blue to show that it is active.
 
-* In the **Category** drop down select **.City** as the axis source.
+* For the **Category**, select **.City** as the axis source.
 
 * Slide to the right to create a new card and select **Show Chart**.
 
@@ -1012,13 +1013,12 @@ point and publish it so that others can use it as well.
 A URL will be presented to you that you can share with others.
 The URL will only be accessible while SlamData is running.
 
-.. warning:: Published URLs
+.. warning:: **Published URLs**
 
   Anyone with access to the URL may be able to view this deck. They may also be able
   to modify the link to view or edit any deck in this workspace. Please see
-  Securing SlamData Community Edition for more information.
-
-  **NOTE**: SlamData Advanced Edition provides complete security including
+  **Securing SlamData Community Edition** for more information.
+  **SlamData Advanced Edition** provides complete security including
   authorization, authentication and full auditing.  
 
 
@@ -1099,7 +1099,7 @@ Let's refer to this section of code as **Snippet 1**.
 **Snippet 1** should be placed within the HTML file's <HEAD>
 tags as it's a JavaScript snippet.  This section of code can
 easily be inserted into individual HTML files, or you can save it
-to it's own JavaScript (.js) file to include in many documents.
+to its own JavaScript (.js) file to include in many documents.
 
 This snippet is generic and is typically the same regardless of
 what is being embedded - which makes it a great candidate to
@@ -1124,7 +1124,7 @@ even though the code in this snippet is generic.
   with the copied value.  This should be in the section directly below
   ``<!-- SLAMDATA SNIPPET 2 -->``.
 
-One important piece to note here is that the example **report1.html** file
+One important point to note here is that the example **report1.html** file
 is formatted with some CSS and <div> tags already.  In your own application
 you can either paste the entire line of code that SlamData provides, or create
 your own <div> tag and programmatically insert the id as we did in this example.
@@ -1245,7 +1245,7 @@ into the web browser.
 * Click on the **Average Weight by City** link.  It should appear similar
   to the image below.
 
-* Observe how the entire contents of that Deck is now being displayed
+* Observe how the entire contents of that Deck are now being displayed
   in a third party web application.
 
 |Sample-1-1-Full-Report|
@@ -1322,7 +1322,7 @@ with examples.  This not only provides security when users are within
 the SlamData user interface but can also be used to control access
 from other web applications as well.
 
-.. attention:: SlamData Advanced Required
+.. attention:: **SlamData Advanced Required**
 
   |Murray-Small| This section requires SlamData Advanced Edition
 
@@ -1575,7 +1575,7 @@ data set we're looking at.
   of the code window.
 
 Notice how the ``permissionTokens`` value is now populated within the code.
-Now we are ready to securely embed this deck into our simulated web application.
+Now we are ready to securely embed this deck into the simulated web application.
 
 
 5.4.3 - Setting up the Web Application

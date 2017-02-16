@@ -118,6 +118,8 @@ User Interface (UI) becoming unresponsive. Reviewing the log file should provide
 The most compatible browsers with SlamData are always the most recent versions of Google Chrome
 and Mozilla Firefox.
 
+Internet Explorer and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all.
+
 
 Section 3 - The Workspace
 -------------------------
@@ -192,9 +194,9 @@ in the table below has no value, leave that field empty in the interface.
 
   A new folder will appear titled **Untitled Folder**.
 
-* Hover the mouse over the new **Untitled Folder** folder.
+* Hover the mouse over **Untitled Folder**.
 
-* Click the **Move/Rename** icon that appears to the right.  |Move-Rename|
+* Click the **Move / rename** icon that appears to the right.  |Move-Rename|
 
 * Change the name from **Untitled Folder** to ``testdb`` and click **Rename**.
 
@@ -225,7 +227,7 @@ instructions:
 As you can see, it is easy to quickly import JSON data into SlamData.
 Other formats, such as CSV, can also be quickly imported.
 
-The user may wish to index the newly imported patients data set. If
+You may wish to index the newly imported patients data set. If
 using MongoDB refer to 
 `this section <developers-guide.html#indexing-your-database>`__ of
 the Developer's Guide to increase search and query performance.
@@ -249,7 +251,7 @@ In this instance SlamData created a new Workspace for you, created an
 **Open Card** pointing to the patients data, then stacked a **Preview Table Card**
 on top of the **Open Card**.
 
-You can verify this by clicking on the left dots on the left side
+You can verify this by clicking on the left dots (grippers) on the left side
 of the screen and seeing the top most card slide to the right.  The card now
 displayed is the **Open Card**.  This determines which table or collection is used
 by the cards following it.
@@ -314,11 +316,10 @@ The following card types will be presented:
 
 |Card-Choices-1|
 
-Notice how the cards are different shades of gray.  The dark gray cards
-are those that can be created directly after the **Open Card**.  Light
-gray cards are those cards that cannot be used following the previous
-card.  A helpful checkmark in the upper right of each selection also
-indicates which cards can be used in the current situation.
+Notice how the cards are blue and gray.  The blue cards
+are those that can be created directly after the **Open Card**.
+Gray cards are those cards that cannot be used following the previous
+card.
 
 * Select the **Search Card**.
 
@@ -337,7 +338,7 @@ the database system, and that indexes can significantly boost performance
 for searches.
 
 Once the results appear, you can browse them just like you did earlier
-in the **Explore Card** with the controls in the bottom left of the
+in the **Preview Table Card** with the controls in the bottom left of the
 interface.
 
 Did you notice that in the search string earlier we did not specify
@@ -637,7 +638,26 @@ options are configured, they can be changed by the workspace author, but not
 by a user through a published or embedded workspace.
 
 
-4.10 - Setup Markdown Card
+4.10 - Setup Form Card
+~~~~~~~~~~~~~~~~~~~~~~
+
+|Setup-Form-Card|
+
+Description
+@@@@@@@@@@@
+
+The **Setup Form Card** provides a graphical method to select fields to display from a data set.
+
+Behavior
+@@@@@@@@
+
+The **Setup Form Card** provides a wide-range of UI elements to choose from. After a UI element has been chosen, then the field to display is selected.
+An example workflow would be to select an **Open Card** and point it at a database collection, then follow it with a **Setup Form card**.
+The field in the **Setup Form Card** can subsequently be used in other cards, such as a **Query Card**.
+This provides an alternative to using the **Setup Markdown Card**, defining variables, and so on.
+
+
+4.11 - Setup Markdown Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Markdown-Card|
@@ -662,7 +682,7 @@ guide describes how to create interactive UI elements such as drop
 downs, radio boxes, check boxes, and more.
 
 
-4.11 - Setup Variables Card
+4.12 - Setup Variables Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Variables-Card|
@@ -840,7 +860,7 @@ The subsequent query would look similar to the following:
     FROM :mypath
 
 
-4.12 - Show Chart Card
+4.13 - Show Chart Card
 ~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Chart-Card|
@@ -858,7 +878,7 @@ Behavior
 The **Show Chart Card** renders the chart created using the **Setup Chart Card**.
 
 
-4.13 - Show Download Card
+4.14 - Show Download Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Download-Card|
@@ -875,7 +895,19 @@ The **Show Download Card** provides a button to download data using the format a
 selected using the **Setup Download Card**.
 
 
-4.14 - Show Markdown Card
+4.15 Show Form Card
+~~~~~~~~~~~~~~~~~~~
+
+|Show-Form-Card|
+
+Description
+@@@@@@@@@@@
+
+Behavior
+@@@@@@@@
+
+
+4.16 - Show Markdown Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Markdown-Card|
@@ -893,7 +925,7 @@ Behavior
 The **Show Markdown Card** renders the Markdown created using the **Setup Markdown Card**.
 
 
-4.15 - Troubleshoot Card
+4.17 - Troubleshoot Card
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Troubleshoot-Card|
@@ -938,6 +970,10 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
    :height: 150px
    :width: 150px
 
+.. |Setup-Form-Card| image:: images/SD4/cards/card-setup-form.png
+   :height: 150px
+   :width: 150px
+
 .. |Setup-Markdown-Card| image:: images/SD4/cards/card-setup-markdown.png
    :height: 150px
    :width: 150px
@@ -951,6 +987,10 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
    :width: 150px
 
 .. |Show-Download-Card| image:: images/SD4/cards/card-show-download.png
+   :height: 150px
+   :width: 150px
+
+.. |Show-Form-Card| image:: images/SD4/cards/card-show-form.png
    :height: 150px
    :width: 150px
 
