@@ -36,7 +36,7 @@ Section 1 - Installation
       * 300 MB for a basic installation
       * Additional space varies based upon Workspace size, cached queries, and so on
   * Java
-      * Java 1.8 or newer
+      * Java 1.8
       * Windows and Mac OS versions of SlamData with installers include Java
       * Linux requires a separate Java installation
   * Browsers
