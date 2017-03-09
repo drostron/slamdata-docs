@@ -465,9 +465,17 @@ track of our changes and to compartmentalize our changes.
     cp scalegrid_os.pem ssl_config/
     cd ssl_config
 
-The service provider will make several files available to you. Specifically
-in this example you can find the following three files on your MongoDB
-server. Copy the following files to your local system from the ScaleGrid server:
+The service provider will make several files available. These files are
+needed to convert and import, so copy them over from the service
+provider's MongoDB system.  If ``scp`` is installed locally, it can be used
+to simplify the transfer:
+
+::
+
+   scp -i ./scalegrid_os.pem root@your_host.servers.mongodirector.com:/etc/ssl/mongodb* .
+
+Alternatively the files can be copied manually, which are located
+on the remote MongoDB server at these locations:
 
 ::
 
@@ -475,23 +483,17 @@ server. Copy the following files to your local system from the ScaleGrid server:
     /etc/ssl/mongodb-cert.key
     /etc/ssl/mongodb.pem
 
-You can use ``scp`` to quickly copy these over:
-
-::
-
-   scp -i ./scalegrid_os.pem root@your_host.servers.mongodirector.com:/etc/ssl/mongodb* .
+Now that we've copied over the important files, let's test MongoDB connectivity from
+the command line to ensure we can connect. This is a very important step before trying to
+connect with SlamData. This ensures that all network services are running properly
+(DNS, routing, firewalls, etc) and that both the SSL information and MongoDB user
+credentials are correct.
 
 You will be need the MongoDB password for the `admin` user.  On ScaleGrid.io you
 can find that clicking on the Credentials link under Authentication as the following
 screenshot shows:
 
 |SD-ScaleGrid-Credentials|
-
-Now that we've copied over the important files, let's test MongoDB connectivity from
-the command line to ensure we can connect. This is a very important step before trying to
-connect with SlamData. This ensures that all network services are running properly
-(DNS, routing, firewalls, etc) and that both the SSL information and MongoDB user
-credentials are correct.
 
 If you don't already have MongoDB installed on your local system, you'll want to install
 the latest version. Some operating systems such as Linux allow you to install only the
