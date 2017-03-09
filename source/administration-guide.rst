@@ -418,14 +418,143 @@ SQL² Views are covered in detail in the `SlamData Developer's Guide <developers
 2.5 Enabling SSL
 ~~~~~~~~~~~~~~~~
 
-If you have difficulty following the steps below, you may also view the `SSL
-tutorial video <https://www.youtube.com/watch?v=FWdAMyZnOMM>`__.
+If a data source connection supports SSL encryption then
+additional configuration will be required.
 
-If a data source connection supports SSL encryption, that is to say
-encryption between a client and server such as SlamData and the
-data source, additional configuration will be required.
+This section does not provide exhaustive steps to create a Java Key Store
+in every scenario, but the following simple example should be helpful. It
+assumes the user is configuring SlamData to connect to MongoDB over SSL
+with an external service provider.
 
-The backend engine of SlamData is written in
+Let's consider a data source hosted with a service provider such as
+`ScaleGrid.io <http://ScaleGrid.io>`__.
+
+To make the following steps easier, you may want to obtain the available
+PEM file to your server for connecting via ssh.  Specifically for ScaleGrid.io
+follow these steps:
+
+1. Click on the appropriate cluster in the left column menu.
+
+|SD-ScaleGrid-Column|
+
+2. Click on the Machines tab
+
+|SD-ScaleGrid-Machines|
+
+3. Click on the Manage drop-down and select *SSH instructions*
+
+|SD-ScaleGrid-ssh_instructions|
+
+4. Click the PEM File link.  Copy and paste the contents into
+   a text file such as ``scalegrid_os.pem``
+
+|SD-ScaleGrid-PEM_link|
+
+5. Verify connectivity by following steps 2 and 3 from that dialog.
+
+
+Once you have verified connectivity, copying the MongoDB SSL
+files will be easier in the steps below.
+
+Let's create a working directory on our local system so we keep
+track of our changes and to compartmentalize our changes.
+
+::
+
+    mkdir ssl_config
+    cp scalegrid_os.pem ssl_config/
+    cd ssl_config
+
+The service provider will make several files available to you. Specifically
+in this example you can find the following three files on your MongoDB
+server. Copy the following files to your local system from the ScaleGrid server:
+
+::
+
+    /etc/ssl/mongodb-cert.crt
+    /etc/ssl/mongodb-cert.key
+    /etc/ssl/mongodb.pem
+
+You can use ``scp`` to quickly copy these over:
+
+::
+
+   scp -i ./scalegrid_os.pem root@your_host.servers.mongodirector.com:/etc/ssl/mongodb* .
+
+You will be need the MongoDB password for the `admin` user.  On ScaleGrid.io you
+can find that clicking on the Credentials link under Authentication as the following
+screenshot shows:
+
+|SD-ScaleGrid-Credentials|
+
+Now that we've copied over the important files, let's test MongoDB connectivity from
+the command line to ensure we can connect. This is a very important step before trying to
+connect with SlamData. This ensures that all network services are running properly
+(DNS, routing, firewalls, etc) and that both the SSL information and MongoDB user
+credentials are correct.
+
+If you don't already have MongoDB installed on your local system, you'll want to install
+the latest version. Some operating systems such as Linux allow you to install only the
+MongoDB shell utilities which should suffice.
+
+From within the ``ssl_config`` directory, connect to the remote MongoDB server:
+
+::
+
+    mongo your_server.servers.mongodirector.com/admin --ssl --sslAllowInvalidCertificates --sslPEMKeyFile ./mongodb.pem -u admin -p
+
+We must pass the ``--sslAllowInvalidCertificates`` parameter because we are using
+ScaleGrid's self-signed certificate to connect. If we were using a trusted certificate
+signed be a Certificate Authority this wouldn't be necessary.
+
+If you are unable to connect to MongoDB from the command line, you will *not* be
+able to connect through SlamData.  Please be sure you can successfully connect with
+this method before contacting Support for assistance.
+
+Now that we've verified connectivity to MongoDB over SSL, we can continue with
+importing the keys so that SlamData can use them.
+
+
+2.5.1 Setup the Java Key Store
+''''''''''''''''''''''''''''''
+
+We'll need to do some file conversions to get these into the
+Java Key Store (JKS) format that the JVM requires.  If you don't have
+`OpenSSL <https://wiki.openssl.org/index.php/Binaries>`__ installed
+on your system already, you'll need to install it to perform the following
+commands:
+
+
+::
+
+    openssl pkcs12 -export -name ScaleGrid -in ./mongodb-cert.crt -inkey ./mongodb-cert.key -out keystore.p12
+
+    keytool -importkeystore -destkeystore MyKeyStore.jks -srckeystore keystore.p12 -srcstoretype pkcs12 -alias ScaleGrid
+
+This converts the certificate and key file to PKCS12 format and then imports
+it into a Java Key Store that we'll use later.
+
+Now we'll need to perform a similar process for the Java Trust Store.
+
+2.5.2 Setup the Java Trust Store
+''''''''''''''''''''''''''''''''
+
+The Java Trust Store is in a Java Key Store file format but holds the
+information about which certificates to trust.  Since ScaleGrid gave
+us a self-signed certificate, we need to add ScaleGrid to our list of
+trusted providers:
+
+::
+
+    openssl x509 -in mongodb.pem -out cert.der -outform der
+
+    keytool -importcert -alias ScaleGrid -file cert.der -keystore MyTrustStore.jks
+
+
+2.5.3 Setup SSL for the JVM
+'''''''''''''''''''''''''''
+
+The analytics compiler for SlamData is written in
 `Scala <http://www.scala-lang.org/>`__ and executes within a Java
 Virtual Machine (JVM). To enable SSL encryption, several options must be
 passed to the JVM when running SlamData. SlamData simplifies this by
@@ -443,45 +572,49 @@ operating system is shown in the following table.
 | Linux (various vendors) | $HOME/slamdata<version>/SlamData.vmoptions                       |
 +-------------------------+------------------------------------------------------------------+
 
-There are two important options that must be passed to the JVM at
-startup to enable SSL. These options are shown in the table below
+There are several important parameters that must be passed to the JVM at
+startup to enable SSL. These parameters are shown in the table below
 and point the JVM to a Java Key Store (JKS).
 
-+----------------------------------+---------------------------------------------------------+
-| JVM Option                       | Purpose                                                 |
-+==================================+=========================================================+
-| javax.net.ssl.trustStore         | The location of the encrypted trust store file.         |
-+----------------------------------+---------------------------------------------------------+
-| javax.net.ssl.trustStorePassword | The password required to decrypt the trust store file.  |
-+----------------------------------+---------------------------------------------------------+
++----------------------------------+------------------------+--------------------------------+
+| JVM Option                       | Example Value          | Purpose                        |
++==================================+========================+================================+
+| javax.net.ssl.keyStore           | /dir/MyKeyStore.jks    | The location of the encrypted  |
+|                                  |                        | key store file.                |
++----------------------------------+------------------------+--------------------------------+
+| javax.net.ssl.keyStorePassword   | MySecretPassword       | The password required to       |
+|                                  |                        | decrypt the key store file.    |
++----------------------------------+------------------------+--------------------------------+
+| javax.net.ssl.trustStore         | /dir/MyTrustStore.jks  | The location of the encrypted  |
+|                                  |                        | trust store file.              |
++----------------------------------+------------------------+--------------------------------+
+| javax.net.ssl.trustStorePassword | MySecretPassword       | The password required to       |
+|                                  |                        | decrypt the trust store file.  |
++----------------------------------+------------------------+--------------------------------+
+| javax.net.debug                  | ssl                    | Optional for troubleshooting.  |
++----------------------------------+------------------------+--------------------------------+
 
-Example values for these two options could be as shown in the code below.
-
-::
-
-    -Djavax.net.ssl.trustStore=/users/me/ssl/truststore.jks
-    -Djavax.net.ssl.trustStorePassword=mySecretPassword
-
-This guide does not provide exhaustive steps to create a Java Key Store
-in every scenario, but the following simple example should be helpful.
-
-Let's consider a data source hosted with a service provider. That service provider
-makes a signed (or self-signed) certificate available so that the data source
-can connect securely using SSL. Using the JKS configuration described above, the
-``your_provider.crt`` text file could be created as follows.
-
-1. Import the certificate into the Java trust store, as follows.
+Examples for these parameters are shown below.
 
 ::
 
-    keytool -import -alias "your_providers_name" -file your_provider.crt \
-    -keystore /users/me/ssl/truststore.jks -noprompt -storepass mySecretPassword
+    -Djavax.net.ssl.keyStore=/my/dir/ssl_config/MyKeyStore.jks
+    -Djavax.net.ssl.keyStorePassword=mySecretPassword
+    -Djavax.net.ssl.trustStore=/my/dir/ssl_config/MyTrustStore.jks
+    -Djavax.net.ssl.trustStorePassword=MySecretPassword
+    -Djavax.net.debug=ssl
 
-2. Ensure that the appropriate changes have been made to the JVM options file referenced above.
+Adjust the values above accordingly based on the password you provided
+during certificate import and proper directory path.
 
-3. Restart SlamData so it reloads the JVM options file and picks up the new certificate in the JKS.
+Once the changes are saved, restart SlamData so the new parameters
+are loaded.
 
-4. Mount the data source with SSL as shown in the following image. This example uses MongoDB.
+2.5.5 Configuring the SSL Mount
+'''''''''''''''''''''''''''''''
+
+The final step is to add a single parameter to the Mount dialog in
+SlamData.  Add the parameter `ssl` and set the value to `true`.
 
 .. figure:: images/SD4/screenshots/mount-ssl.png
    :alt: SlamData SSL Mounts
@@ -1416,3 +1549,14 @@ Response:
 .. |SD-Permission-Example-1| image:: images/SD4/screenshots/sd-permission-example-1.png
 
 .. |SD-Permission-Example-2| image:: images/SD4/screenshots/sd-permission-example-2.png
+
+.. |SD-ScaleGrid-Column| image:: images/SD4/screenshots/scalegrid/column.png
+
+.. |SD-ScaleGrid-Credentials| image:: images/SD4/screenshots/scalegrid/credentials.png
+
+.. |SD-ScaleGrid-Machines| image:: images/SD4/screenshots/scalegrid/machines.png
+
+.. |SD-ScaleGrid-PEM_link| image:: images/SD4/screenshots/scalegrid/PEM_link.png
+
+.. |SD-ScaleGrid-ssh_instructions| image:: images/SD4/screenshots/scalegrid/ssh_instructions.png
+
