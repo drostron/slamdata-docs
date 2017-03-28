@@ -295,7 +295,7 @@ web site are supported. As of MongoDB 2.6 these options are as follows.
 +------------------+---------+--------------------------------------------------------------------+
 | Options          | Example | Description                                                        |
 +==================+=========+====================================================================+
-| ssl              | true    | Enable SSL encryption.                                             |
+| ssl              | true    | Enable SSL encryption.  Advanced Edition only |Murray-Small|       |
 +------------------+---------+--------------------------------------------------------------------+
 | connectTimeoutMS | 15000   | The time in milliseconds to attempt a connection before timing out.|
 +------------------+---------+--------------------------------------------------------------------+
@@ -652,14 +652,8 @@ An example configuration file for **SlamData Community Edition** is shown below.
 
     {
       "server": {
-        "port": 8080,
-        "ssl": {
-          "enabled": true,
-          "port": 9090,
-          "cert": "<base64 encoded pkcs12 cert file>"
-        }
+        "port": 8080
       },
-
       "mountings": {
         "/aws/": {
           "mongodb": {
@@ -680,15 +674,13 @@ An example configuration file for **SlamData Community Edition** is shown below.
 
 **SlamData Advanced Edition**
 has additional configuration parameters to setup security, including the
-``authentication``, ``auditing`` and ``metastore`` directives.
+``ssl``, ``authentication``, ``auditing`` and ``metastore`` directives.
 
 .. attention:: **SlamData Advanced Features**
 
   The configuration file listed below is applicable only
   to **SlamData Advanced Edition** and contains parameters and
-  values that are valid only in that version.
-  
-  |Murray-Small|
+  values that are valid only in that version. |Murray-Small|
 
 
 An example configuration file for **SlamData Advanced Edition** might appear
@@ -756,7 +748,75 @@ as follows.
       }
     }
 
-The following example ``quasar-config.json`` file allows SlamData users to use Postgres instead of H2 as the metastore:
+
+3.2.1 Configuring HTTP SSL
+''''''''''''''''''''''''''
+
+The subsection of the configuration file below shows an example of
+the SlamData server listening on port 9090 with SSL encryption enabled.
+
+
+::
+
+    "ssl": {
+      "enabled": true,
+      "port": 9090,
+      "cert": "<base64 encoded pkcs12 cert file>"
+    }
+
+.. note::
+
+  The ``cert`` value must be the actual contents of the base64 encoded pkcs12 cert
+  file, not the path to it.  This will be a very long, multi-line string that
+  will be copied and pasted into the configuration file.
+
+
+The example steps below walk through how to create a valid certification
+to include in the configuration file.
+
+Assuming you have been given the following files by your certification
+provider:
+
+* private-key.txt
+* your_server_name_com.ca-bundle
+* your_server_name_com.crt
+
+Follow these steps:
+
+1. Create a ``.pem`` key file from the server certificate and the CA bundle certificate. The
+   order of the files is important.  First the server crt, then the ca-bundle file:
+
+::
+
+  cat your_server_name_com.crt your_server_name_com.ca-bundle > your_server_name_com.pem
+
+
+2. Create a pkcs12 file from the ``.pem`` file and the private key file. (scroll to the
+right if you can't see the entire command)
+
+::
+
+  openssl pkcs12 -export -in your_server_name_com.pem -inkey private-key.txt -passout pass: -out cert-private-key-pair.p12
+
+
+3. Base64 encode the pkcs12 file:
+
+::
+
+  base64 cert-private-key-pair.p12 > cert.base64
+
+
+Now copy the contents of the ``cert.base64`` file into the ``cert`` field of the
+configuration file and restart SlamData.
+
+
+3.2.2 Configuring Postgres as Metastore
+'''''''''''''''''''''''''''''''''''''''
+
+SlamData Advanced Edition defaults to using an H2 java database as its
+metastore database.  Alternatively Postgres may be used instead.
+
+The following example ``quasar-config.json`` shows an example:
 
 ::
 
