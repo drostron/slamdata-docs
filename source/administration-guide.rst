@@ -12,7 +12,6 @@
     </script>
     </embed>
 
-
 Administrator's Guide
 =====================
 

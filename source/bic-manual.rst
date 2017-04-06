@@ -11,7 +11,6 @@
       }}();
     </script>
     </embed>
-    
 
 SlamData BI Connector Manual
 ============================

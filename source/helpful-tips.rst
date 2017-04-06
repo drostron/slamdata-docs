@@ -11,7 +11,6 @@
       }}();
     </script>
     </embed>
-    
   
 Helpful Tips
 ============
