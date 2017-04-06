@@ -11,7 +11,7 @@
       }}();
     </script>
     </embed>
-    
+
 Developer's Guide
 =================
 
@@ -394,7 +394,7 @@ Once you click Explore, the following screen should appear:
 +--------+---------------------------------------------------------------------------------------+
 | Number | Description                                                                           |
 +========+=======================================================================================+
-|     1  |  Zoom icon takes user out of the Workspace and back to the database screen.      |
+|     1  |  Zoom icon takes user out of the Workspace and back to the database screen.           |
 +--------+---------------------------------------------------------------------------------------+
 |     2  |  Flip the card over for more options.                                                 |
 +--------+---------------------------------------------------------------------------------------+

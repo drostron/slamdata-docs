@@ -11,7 +11,7 @@
       }}();
     </script>
     </embed>
-    
+
 Reference - SQL²
 ================
 
@@ -705,7 +705,7 @@ is 8 (and which is lower than the unconstrained \|a ⨯ b\|).
 
 
 Section 10 - Conditionals and Nulls
-----------------------------------
+-----------------------------------
 
 
 10.1 Conditionals
@@ -837,7 +837,7 @@ for examples of converting to date, time, and timestamp types.
 
 
 Section 12 - Variables and SQL²
-------------------------------
+-------------------------------
 
 SQL² has the ability to use variables in queries in addition to statically
 typed content.  Variables can be generated through the use of a **Variables Card**
