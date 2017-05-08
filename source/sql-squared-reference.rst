@@ -386,8 +386,8 @@ Example:
 Use the ``DATE_PART`` function to select part of a date. ``DATE_PART``
 has two arguments: a string that indicates what part of the date or time
 that you want and a timestamp field. Valid values for the first argument
-are century, day, decade, ``dow`` (day of week), ``doy`` (day of year),
-``hour``, ``isodoy``, ``microseconds``, ``millenium``, ``milliseconds``,
+are ``century``, ``day``, ``decade``, ``dow`` (day of week), ``doy`` (day of year),
+``hour``, ``isodow``, ``microseconds``, ``millenium``, ``milliseconds``,
 ``minute``, ``month``, ``quarter``, ``second``, and ``year``.
 
 Example:
