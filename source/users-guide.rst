@@ -64,70 +64,13 @@ quick start and not an exhaustive instruction set.  The remaining
 sections of the User's Guide contain detailed information on specific
 functionality.
 
-
-2.1 - Configuration Suggestions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Modify the **vmoptions** file to adjust the Java memory heap space.  JVM memory
-allocation varies by default based upon the JVM vendor and version.  To ensure
-correct functionality, reserve 1GB or more of JVM heap space, increasing it
-based upon requirements.  It is not uncommon to have more than 4GB of heap space
-reserved for SlamData server environments.
-
-Some examples of where the vmoptions file can be found are as follows:
-
-+-------------------------+------------------------------------------------------------------+
-| Operating System        | File Location                                                    |
-+=========================+==================================================================+
-| Mac OS                  | /Applications/SlamData <version>.app/Contents/vmoptions.txt      |
-+-------------------------+------------------------------------------------------------------+
-| Microsoft Windows       | C:\\Programs Files (x86)\\slamdata <version>\\SlamData.vmoptions |
-+-------------------------+------------------------------------------------------------------+
-| Linux (various vendors) | $HOME/slamdata<version>/SlamData.vmoptions                       |
-+-------------------------+------------------------------------------------------------------+
-
-An example for reserving 4GB of JVM heap space for a server-class system is as follows:
-
-::
-
-    -server
-    -Xms4g
-    -Xmx4g
-
-
-The ``-server`` entry, depending on JVM vendor and version, will typically focus on
-longer initial load times to allow better compilation methods for faster run-time.  ``-Xms4g``
-immediately allocates no less than 4GB of memory and ``-Xmx4g`` allocates no more
-than 4GB of memory.
-
-
-2.2 The Log File
-~~~~~~~~~~~~~~~~
-
-If a user suspects that SlamData is not functioning correctly, the first step
-to troubleshooting is to look at the most recent log file, located as follows:
-
-+-------------------------+---------------------------------------------------------------------------------+
-| Operating System        | File Location                                                                   |
-+=========================+=================================================================================+
-| Mac OS                  | /Applications/SlamData <version>.app/Contents/java/app/slamdata-<version>.log   |
-+-------------------------+---------------------------------------------------------------------------------+
-| Microsoft Windows       | C:\\Program Files (x86)\\slamdata <version>\\slamdata-<version>.log             |
-+-------------------------+---------------------------------------------------------------------------------+
-| Linux (various vendors) | $HOME/slamdata<version>/slamdata-<version>.log                                  |
-+-------------------------+---------------------------------------------------------------------------------+
-
-Some JVM errors can cause the JVM to stop running completely, resulting in the SlamData
-User Interface (UI) becoming unresponsive. Reviewing the log file should provide helpful information.
-
-
-2.3 Browsers
+2.1 Browsers
 ~~~~~~~~~~~~
 
 The most compatible browsers with SlamData are always the most recent versions of Google Chrome
 and Mozilla Firefox.
 
-Internet Explorer and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all.
+Microsoft Edge and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all.
 
 
 Section 3 - The Workspace

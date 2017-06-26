@@ -15,22 +15,14 @@
 Administrator's Guide
 =====================
 
-This Administrator's Guide can assist with installing and configuring
-SlamData.
+This Administrator's Guide describes how to install and configure SlamData.
 
-For information on how to use SlamData from a developer's perspective
-see the `SlamData Developer's Guide <developers-guide.html>`__.
+For basic information on how to use SlamData please refer to the
+`SlamData User's Guide <users-guide.html>`__.
 
-For information on how to use SlamData from a user's perspective
-see the `SlamData User's Guide <users-guide.html>`__.
-
-.. note:: **SlamData Advanced Features**
-
-  Throughout this guide there are references to functionality available
-  only in **SlamData Advanced Edition**.  Sections that apply only to **SlamData
-  Advanced Edition** will be called out with the Murray (MRA)
-  icon. |Murray-Small|
-
+For further information on how to use SlamData and instructions on how to
+integrate SlamData into other applications please refer to the
+`SlamData Developer's Guide <developers-guide.html>`__.
 
 Section 1 - Installation
 ------------------------
@@ -51,180 +43,130 @@ Section 1 - Installation
       * Linux requires a separate Java installation
   * Browsers
       * The most compatible browsers with SlamData are always the most recent versions of Google Chrome and Mozilla Firefox
-      * Internet Explorer and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all
+      * Microsoft Edge and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all
   * Target data sources (for analytics)
-      * Apache Spark 2.1 or newer
-      * Couchbase 4.5.1 or newer
-      * MarkLogic 8 or newer
-      * MongoDB 2.6 or newer
-
-**SlamData Community Edition** uses a file called ``quasar-config.json`` to
-store server configuration data.
-
-**SlamData Analyst Edition** and **SlamData Advanced Edition** store configuration
-data in a metastore database. This should not be confused with target data
-sources. The options for storing server configuration data are as follows:
-
-  * Metastore data sources
-      * Java H2 (included with SlamData)
-      * PostgreSQL 9.x (must be installed and configured separately)
+      * Apache Spark 2.1 and above
+      * Couchbase 4.5.1 and above
+      * MarkLogic 8 and above
+      * MongoDB 2.6 and above
 
 
 1.2 Obtaining SlamData
 ~~~~~~~~~~~~~~~~~~~~~~
 
+1.2.1 Obtaining a license
+'''''''''''''''''''''''''
+You will need a license to use SlamData Advanced. If you do not have a license
+or SlamData.com account please visit <https://slamdata.com/30-day-trial/>
+to obtain a trial license, <https://slamdata.com/slamdata-jump-start/> to
+purchase a trial with additional training and support or
+<https://slamdata.com/contact-us/> to get a quote for your SlamData Advanced
+License.
 
-1.2.1 Downloading the SlamData Installer
-''''''''''''''''''''''''''''''''''''''''
+If you have lost your license key please visit
+<https://slamdata.com/my-account/>.
 
-A fully automated installer package can be obtained directly from the
-SlamData website `here <http://slamdata.com/get-slamdata/>`__.
+1.2.2 Obtaining SlamData Advanced
+'''''''''''''''''''''''''''''''''
+There are two ways of using SlamData Advanced. If you want to try SlamData on
+your PC or Mac we recommend using the SlamData Advanced Launcher. If you want to
+use SlamData on your server(s) we recommend using the SlamData Advanced Jar.
 
+1.2.3 SlamData Advanced Launcher
+''''''''''''''''''''''''''''''''
+The SlamData Advanced Launcher is available for macOS, Windows and Linux.
+On Windows the SlamData Advanced Launcher allows you to launch SlamData Advanced
+from your Start Menu. On macOS the SlamData Advanced Launcher allows you to
+launch SlamData from your Applications folder or Launchpad.
 
-1.2.2 Building SlamData from Source
-'''''''''''''''''''''''''''''''''''
+To get started visit <https://slamdata.com/downloads/> and download the SlamData
+Advanced Installer, launch the installer and follow the instructions.
 
-1.2.2.1 Build Preparation
-@@@@@@@@@@@@@@@@@@@@@@@@@
+You will need to provide a license key or trial license key during installation.
+If you have lost your license key please visit
+<https://slamdata.com/my-account/>.
 
-Before building SlamData, some required software must be installed.
+1.2.3.2 Updating SlamData Advanced Launcher License Information
+```````````````````````````````````````````````````````````````
 
-1. Install
-   `Node.js <https://docs.npmjs.com/getting-started/installing-node>`__
-   version ~4.2, which includes the ``npm`` package manager
+Updating your license information can be achieved by reinstalling. When updating
+your license information please ensure you select "No, install into a different
+directory" in the installation wizard. Although this option must be selected you
+may reinstall into the same directory as before.
 
-2. Install Bower
+|different-directory|
 
-.. code-block:: shell
+1.2.3.1 SlamData Advanced Launcher Default Authentication
+``````````````````````````````````````````````````````````
+By default the SlamData Advanced Launcher is configured to authenticate with
+SlamData.com. You will need a SlamData.com account and access to the internet
+to use the SlamData Advanced Launcher in its default configuration. 
 
-    npm install bower -g
+If you signed up for a trial License at <https://slamdata.com/30-day-trial/>
+your SlamData.com account details are the username and password you provided.
 
-3. Install Gulp
+1.2.4 SlamData Advanced Jar
+'''''''''''''''''''''''''''
+To get started visit <https://slamdata.com/downloads/> and download the SlamData
+Advanced Jar Archive.
 
-.. code-block:: shell
+Next unzip the archive and navigate to the SlamData directory using the
+following commands.
 
-    npm install -g gulp
+.. code-block: bash
 
-   
-
-1.2.2.2 Build Process
-@@@@@@@@@@@@@@@@@@@@@
-
-.. note::
-
-  If you wish to have the SlamData build process automatically
-  download the required Quasar backend engine you will need to have
-  a shell environment variable ``GITHUB_AUTH_TOKEN`` populated with
-  the appropriate `authorization token <https://github.com/settings/tokens/>`__.
-
-1. Obtain the latest SlamData code
-
-.. code-block:: shell
-
-    git clone https://github.com/slamdata/slamdata.git
+    tar jxf slamdata-advanced.tar.bz2
     cd slamdata
 
-2. Fetch the dependencies
+Next save the following configuration file as ``config.json``.
 
-Ensure that you are in the slamdata directory.
+.. code-bock:: json
 
-.. code-block:: shell
+    {
+      "server": {
+        "port": 20223
+      },
+      "authentication": {
+        "openid_providers": [
+          {
+            "client_id": "RFQmEeS0Vw8UWUchQio5tQczsKIqpL",
+            "display_name": "SlamData",
+            "openid_configuration": {
+              "issuer": "https://slamdata.com",
+              "authorization_endpoint": "https://slamdata.com/oauth/authorize",
+              "token_endpoint": "https://slamdata.com/oauth/token",
+              "userinfo_endpoint": "https://slamdata.com/oauth/me",
+              "jwks": [
+                {
+                  "kty": "RSA",
+                  "alg": "RS256",
+                  "use": "sig",
+                  "n": "seduM0gTPqJWT57IFe0_QokLM-fTuhp3lF8zD7AoOyP6yVsNJeEUf91YeuGxOIa3AZRQRX4SaiGfrv57JA8HEHLOIXBx680QjYGAu9urKBFoeNNrWxAVy65CxbnM4pTnzzGBHQhVCaIHhj7nfvcULmE5IV1Xqc3-VKDajVZD0E-_1QQO9XKDix9V1cmc5k6Ejx97tccMLhqYi6vhjg1cgSGeNpM-40K6WL3Y7q1pmEEPLkEkCCNJoEg7D5Xjxfi9a5xaUHRhVo8lpiKi5m9-7ujaN4SzCqoYy1wJT9agPzCaeWNT0tUYuo9ZCH_ev7NxYzzXTS08NXo_BBXypZ40Iw",
+                  "e": "AQAB"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
 
-    bower install
-    npm install
+If you would like SlamData to use a different port, additional or different
+authentication providers, different storage for metadata or enable auditing or
+HTTPS please edit the above configuration file using `Section 3 - Configuring
+SlamData`_ as a reference.
 
-3. Build the code
+Finally start SlamData Advanced using the following command.
 
-.. code-block:: shell
+Please replace the details in the arguments starting with -D with your license
+information.
 
-    npm i && bower i && gulp make && gulp bundle && gulp less
-
-
-After this task completes, the ``public`` directory will contain the complete
-SlamData front-end application.
-
-
-1.3 Starting SlamData
-~~~~~~~~~~~~~~~~~~~~~
-
-SlamData is comprised of a front-end interface and a back-end analytics
-engine. Starting the SlamData application will start both.
-
-
-1.3.1 Starting SlamData from Source
-'''''''''''''''''''''''''''''''''''
-
-If SlamData is installed from source, the launch process is the same
-on all operating systems.  After successfully building SlamData:
-
-1. Change directory to the directory created by ``git clone``.
-2. Start SlamData:  ``java -jar ./jars/quasar.jar --content-path public``.
-
-A message similar to the following should be displayed:
-
-::
-
-    Server started listening on port 20223
-    Press Enter to stop.
-
-
-1.3.2 Starting SlamData from the Installer Package
-''''''''''''''''''''''''''''''''''''''''''''''''''
-
-**Mac OS**
-
-1. Open the Applications folder.
-2. Double-click on the SlamData icon.
-
-A new browser window or tab will open displaying the SlamData interface.
-The SlamData icon will appear in the Mac OS dock. As with other dock
-applications the SlamData icon may be right-clicked and the application
-terminated.
-
-**Microsoft Windows**
-
-1. Open the Start menu.
-2. Click on the newly installed SlamData icon or use the search bar
-   and type ``slamdata`` and press return to launch it. Select
-   appropriate network security settings if prompted.
-
-**Linux**
-
-1. Change directory to the location of the SlamData executable: ``cd SlamData<version>``.
-2. Execute the SlamData executable: ``./SlamData``.
-
-Some Linux systems may not launch a browser automatically. If this is
-the case, open a browser and point it to the following URL: http://localhost:20223/slamdata
-
-
-1.3.3 Starting SlamData Advanced from the Command Line
-''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-SlamData Advanced Edition requires license key information before
-launching.  This information is passed into the JVM at startup.
-An example of how this can be done is shown below.  Note the use of
-escaping the quote characters with ``\"``.
+Please replace the numbers in the arguments starting with -X with the number of
+GB of memory you would like to allocate to SlamData.
 
 .. code-block:: bash
 
-    _JAVA_OPTIONS="-Xms1G -Xmx4G"
-
-    export SD_OPTS="\
-    -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE \
-    -Dlicense_email=myemail@example.com \
-    -Dlicense_full_name=\"My Name\" \
-    -Dlicense_registered_to=\"Name Registered To\" \
-    -Dlicense_company=\"My Company Name\" \
-    -Dlicense_street=\"123 Anywhere Street, Suite A1\" \
-    -Dlicense_tel_number=3035551212 \
-    -Dlicense_fax_number=NA \
-    -Dlicense_city=Boulder \
-    -Dlicense_zip=80302 \
-    -Dlicense_country=US"
-
-    export _JAVA_OPTIONS="$_JAVA_OPTIONS $SD_OPTS"
-
-    java -jar quasar.jar --content-path public
+    java -Xms2G -Xmx2G -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE -Dlicense_email=myemail@example.com -Dlicense_full_name="My Name" -Dlicense_registered_to="Name Registered To" -Dlicense_company="My Company Name" -Dlicense_street="123 Anywhere Street, Suite A1" -Dlicense_tel_number=3035551212 -Dlicense_fax_number=NA -Dlicense_city=Boulder -Dlicense_zip=80302 -Dlicense_country=US -jar quasar.jar --content-path public --config config.json
 
 
 Section 2 - Connecting to a Data Source
@@ -273,7 +215,7 @@ Select **MongoDB** as the mount type. Once the mount type has been selected,
 additional fields will appear in the dialog.
 
 The following table shows an example MongoDB server running on localhost
-with connection available on port 27017. No authetication is required in this
+with connection available on port 27017. No authentication is required in this
 case.
 
 +----------------+-----------+
@@ -292,7 +234,7 @@ case.
 | Other Settings |           |
 +----------------+-----------+
 
-.. note:: **Using Authetication**
+.. note:: **Using Authentication**
 
   When using MongoDB, the database field value should be the
   database the username and password will authenticate against. This value
@@ -305,7 +247,7 @@ web site are supported. As of MongoDB 2.6 these options are as follows.
 +------------------+---------+--------------------------------------------------------------------+
 | Options          | Example | Description                                                        |
 +==================+=========+====================================================================+
-| ssl              | true    | Enable SSL encryption.  Advanced Edition only |Murray-Small|       |
+| ssl              | true    | Enable SSL encryption.                                             |
 +------------------+---------+--------------------------------------------------------------------+
 | connectTimeoutMS | 15000   | The time in milliseconds to attempt a connection before timing out.|
 +------------------+---------+--------------------------------------------------------------------+
@@ -636,65 +578,7 @@ SlamData.  Add the parameter `ssl` and set the value to `true`.
 Section 3 - Configuring SlamData
 --------------------------------
 
-
-3.1 Community Edition Configuration File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The SlamData configuration file allows an administrator to change
-settings, such as the port number SlamData listens on, the mounts
-available, and so on. The location of the configuration file depends upon
-the operating system being used, as shown in the table below.
-
-+-------------------------+-------------------------------------------------------------+
-| Operating System        | File Location                                               |
-+=========================+=============================================================+
-| Mac OS                  | $HOME/Library/Application Support/quasar/quasar-config.json |
-+-------------------------+-------------------------------------------------------------+
-| Microsoft Windows       | %HOMEDIR%\\AppData\\Local\\quasar\\quasar-config.json       |
-+-------------------------+-------------------------------------------------------------+
-| Linux (various vendors) | $HOME/.config/quasar/quasar-config.json                     |
-+-------------------------+-------------------------------------------------------------+
-
-An example configuration file for **SlamData Community Edition** is shown below.
-
-
-::
-
-    {
-      "server": {
-        "port": 8080
-      },
-      "mountings": {
-        "/aws/": {
-          "mongodb": {
-            "connectionUri": "mongodb://myUser:myPass@aws-box.example.com:27017/admin"
-          }
-        },
-        "/macbook/": {
-          "mongodb": {
-            "connectionUri": "mongodb://localhost:27017"
-          }
-        }
-      },
-    }
-
-
-3.2 Advanced Edition Configuration File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**SlamData Advanced Edition**
-has additional configuration parameters to setup security, including the
-``ssl``, ``authentication``, ``auditing`` and ``metastore`` directives.
-
-.. attention:: **SlamData Advanced Features**
-
-  The configuration file listed below is applicable only
-  to **SlamData Advanced Edition** and contains parameters and
-  values that are valid only in that version. |Murray-Small|
-
-
-An example configuration file for **SlamData Advanced Edition** might appear
-as follows.
+An example configuration file for SlamData Advanced might appear as follows.
 
 ::
 
@@ -823,8 +707,10 @@ configuration file and restart SlamData.
 3.2.2 Configuring Postgres as Metastore
 '''''''''''''''''''''''''''''''''''''''
 
-SlamData Advanced Edition defaults to using an H2 java database as its
-metastore database.  Alternatively Postgres may be used instead.
+SlamData Advanced defaults to using an H2 java database as its
+metastore database.  Alternatively PostgreSQL 9.x may be used instead.
+
+A Postgres metastore allows SlamData to be clustered to scale.
 
 The following example ``quasar-config.json`` shows an example:
 
@@ -846,20 +732,13 @@ The following example ``quasar-config.json`` shows an example:
 Section 4 - SlamData User Security
 ----------------------------------
 
-**SlamData Advanced Edition** provides additional features not available in other editions,
+**SlamData Advanced** provides additional features not available in other editions,
 such as user authorization, authentication, and auditing.
-
-.. attention:: **SlamData Advanced Features**
-
-  SlamData User Security is available only with **SlamData Advanced Edition**.
-
-  |Murray-Small|
-
 
 4.1 Security Overview
 ~~~~~~~~~~~~~~~~~~~~~
 
-**SlamData Advanced Edition** controls user security through the use of
+**SlamData Advanced** controls user security through the use of
 tokens, permissions, groups, actions and types. Each of these is defined in the table below.
 
 +------------+----------------------------------------------------------------------------------+
@@ -947,8 +826,8 @@ within ``/priv`` would succeed, despite the permissions the user actually had.
 4.2 Initializing the SlamData Metastore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**SlamData Advanced Edition** uses a metastore for user security.  Before **SlamData
-Advanced Edition** can be started, the metadata store must be initialized and
+**SlamData Advanced** uses a metastore for user security.  Before **SlamData
+Advanced** can be started, the metadata store must be initialized and
 initial administrator users defined.  The administrator users are added
 to a group having complete and unrestricted access to the system allowing them
 to provision additional groups and roles as needed.
@@ -965,9 +844,9 @@ as shown in the following example.
 4.3 Authentication
 ~~~~~~~~~~~~~~~~~~
 
-**SlamData Advanced Edition** adds support for authenticated requests via the
+**SlamData Advanced** adds support for authenticated requests via the
 `OpenID Connect <http://openid.net/connect/>`__ protocol. A request to any
-SlamData or **SlamData Advanced Edition** API may be authenticated. If no
+SlamData or **SlamData Advanced** API may be authenticated. If no
 credentials are included in a request, it is considered unauthenticated
 (or "anonymous") and may fail if the system is not configured to allow
 anonymous access for the given request.
@@ -977,10 +856,10 @@ anonymous access for the given request.
 '''''''''''''''''''''''''''''''''''''
 
 To make an authenticated request, clients first need to ensure their
-OpenID Provider (OP) has been configured in **SlamData Advanced Edition** along
+OpenID Provider (OP) has been configured in **SlamData Advanced** along
 with the "Client Identifier" (CID) issued to the client by the OP, this
-allows the **SlamData Advanced Edition** administrator to specify which clients
-are permitted to access **SlamData Advanced Edition**. If an ID Token is received
+allows the **SlamData Advanced** administrator to specify which clients
+are permitted to access **SlamData Advanced**. If an ID Token is received
 from a known provider but with an unknown CID, it will be rejected outright.
 
 Next, the client should obtain the list of known providers from the
@@ -991,7 +870,7 @@ The ID Token **MUST** be requested using at least the openid and email scopes an
 their claims must be included in the ID Token.
 
 Once in possession of a valid ID Token, the client includes it, verbatim,
-in the request to **SlamData Advanced Edition** via the ``Authorization`` header
+in the request to **SlamData Advanced** via the ``Authorization`` header
 as a
 `bearer token <http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html>`__
 using the ``Bearer`` scheme.
@@ -1008,7 +887,7 @@ succeed.
 4.3.1.1 Authentication and Performance
 ''''''''''''''''''''''''''''''''''''''
 
-**SlamData Advanced Edition** requests require authentication before performing
+**SlamData Advanced** requests require authentication before performing
 most actions.  When an OIDC Provider (OP) is configured with minimal
 information, and the Discovery process is used, each action will make
 a discovery request as well.  This can result in a noticeable degradation
@@ -1022,7 +901,7 @@ itself.  See the "Our Company OP" example in Section 3.2.
 4.4 Authorization
 ~~~~~~~~~~~~~~~~~
 
-**SlamData Advanced Edition** adds support for authorization of service requests.
+**SlamData Advanced** adds support for authorization of service requests.
 Permissions for a request are derived from the union of permission tokens
 provided in the `X-Extra-Permissions` header and those configured for the
 authenticated user and anonymous user. Permissions are defined as an
@@ -1070,16 +949,16 @@ The ``X-Extra-Permissions`` header is formatted as follows.
   not equate to an operating system file name or directory path.
 
 When a log file is specified in the configuration file, all filesystem
-operations will be logged to that file. **SlamData Advanced Edition** logs the
+operations will be logged to that file. **SlamData Advanced** logs the
 operations as data in the filesystem where the path is located. This
-means that it is then possible to use **SlamData Advanced Edition** to
+means that it is then possible to use **SlamData Advanced** to
 analyze the log data.
 
 
 Section 5 - Security APIs
 -------------------------
 
-**SlamData Advanced Edition** provides additional APIs to control user access.
+**SlamData Advanced** provides additional APIs to control user access.
 
 Actions and permissions are central concepts to the security api. An action
 is any operation a subject can perform on a given resource in the system.
@@ -1632,3 +1511,4 @@ Response:
 
 .. |SD-ScaleGrid-ssh_instructions| image:: images/SD4/screenshots/scalegrid/ssh_instructions.png
 
+.. |different-directory| image:: images/SD4/screenshots/different-directory.png
