@@ -49,7 +49,6 @@ Section 1 - Installation
       * Couchbase 4.5.1 and above
       * MarkLogic 8 and above
       * MongoDB 2.6 and above
-  * PostgreSQL 9.x (optional for configuration data)
 
 
 1.2 Obtaining SlamData
@@ -709,7 +708,7 @@ configuration file and restart SlamData.
 '''''''''''''''''''''''''''''''''''''''
 
 SlamData Advanced defaults to using an H2 java database as its
-metastore database.  Alternatively Postgres may be used instead.
+metastore database.  Alternatively PostgreSQL 9.x may be used instead.
 
 A Postgres metastore allows SlamData to be clustered to scale.
 
