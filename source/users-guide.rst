@@ -64,13 +64,13 @@ quick start and not an exhaustive instruction set.  The remaining
 sections of the User's Guide contain detailed information on specific
 functionality.
 
-2.3 Browsers
+2.1 Browsers
 ~~~~~~~~~~~~
 
 The most compatible browsers with SlamData are always the most recent versions of Google Chrome
 and Mozilla Firefox.
 
-Internet Explorer and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all.
+Microsoft Edge and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all.
 
 
 Section 3 - The Workspace
