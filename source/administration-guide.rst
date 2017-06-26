@@ -17,11 +17,12 @@ Administrator's Guide
 
 This Administrator's Guide describes how to install and configure SlamData.
 
-For information on how to use SlamData please refer to the
+For basic information on how to use SlamData please refer to the
 `SlamData User's Guide <users-guide.html>`__.
 
-For information on how to integrate SlamData into your applications
-please refer to the `SlamData Developer's Guide <developers-guide.html>`__.
+For further information on how to use SlamData and instructions on how to
+integrate SlamData into other applications please refer to the
+`SlamData Developer's Guide <developers-guide.html>`__.
 
 Section 1 - Installation
 ------------------------
