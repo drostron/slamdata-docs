@@ -86,6 +86,16 @@ You will need to provide a license key or trial license key during installation.
 If you have lost your license key please visit
 <https://slamdata.com/my-account/>.
 
+1.2.3.2 Updating SlamData Advanced Launcher License Information
+```````````````````````````````````````````````````````````````
+
+Updating your license information can be achieved by reinstalling. When updating
+your license information please ensure you select "No, install into a different
+directory" in the installation wizard. Although this option must be selected you
+may reinstall into the same directory as before.
+
+|different-directory|
+
 1.2.3.1 SlamData Advanced Launcher Default Authentication
 ``````````````````````````````````````````````````````````
 By default the SlamData Advanced Launcher is configured to authenticate with
@@ -1501,3 +1511,4 @@ Response:
 
 .. |SD-ScaleGrid-ssh_instructions| image:: images/SD4/screenshots/scalegrid/ssh_instructions.png
 
+.. |different-directory| image:: images/SD4/screenshots/different-directory.png
