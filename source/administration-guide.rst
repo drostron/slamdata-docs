@@ -57,14 +57,14 @@ Section 1 - Installation
 1.2.1 Obtaining a license
 '''''''''''''''''''''''''
 You will need a license to use SlamData Advanced. If you do not have a license
-or SlamData.com account please visit <https://slamdata.com/30-day-trial/>
-to obtain a trial license, <https://slamdata.com/slamdata-jump-start/> to
+or SlamData.com account please visit https://slamdata.com/30-day-trial/
+to obtain a trial license, https://slamdata.com/slamdata-jump-start/ to
 purchase a trial with additional training and support or
-<https://slamdata.com/contact-us/> to get a quote for your SlamData Advanced
+https://slamdata.com/contact-us/ to get a quote for your SlamData Advanced
 License.
 
 If you have lost your license key please visit
-<https://slamdata.com/my-account/>.
+https://slamdata.com/my-account/.
 
 1.2.2 Obtaining SlamData Advanced
 '''''''''''''''''''''''''''''''''
@@ -79,12 +79,12 @@ On Windows the SlamData Advanced Launcher allows you to launch SlamData Advanced
 from your Start Menu. On macOS the SlamData Advanced Launcher allows you to
 launch SlamData from your Applications folder or Launchpad.
 
-To get started visit <https://slamdata.com/downloads/> and download the SlamData
+To get started visit https://slamdata.com/downloads/ and download the SlamData
 Advanced Installer, launch the installer and follow the instructions.
 
 You will need to provide a license key or trial license key during installation.
 If you have lost your license key please visit
-<https://slamdata.com/my-account/>.
+https://slamdata.com/my-account/.
 
 1.2.3.2 Updating SlamData Advanced Launcher License Information
 ```````````````````````````````````````````````````````````````
@@ -102,12 +102,12 @@ By default the SlamData Advanced Launcher is configured to authenticate with
 SlamData.com. You will need a SlamData.com account and access to the internet
 to use the SlamData Advanced Launcher in its default configuration. 
 
-If you signed up for a trial License at <https://slamdata.com/30-day-trial/>
+If you signed up for a trial License at https://slamdata.com/30-day-trial/
 your SlamData.com account details are the username and password you provided.
 
 1.2.4 SlamData Advanced Jar
 '''''''''''''''''''''''''''
-To get started visit <https://slamdata.com/downloads/> and download the SlamData
+To get started visit https://slamdata.com/downloads/ and download the SlamData
 Advanced Jar Archive.
 
 Next unzip the archive and navigate to the SlamData directory using the
