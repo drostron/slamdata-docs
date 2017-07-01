@@ -66,6 +66,8 @@ License.
 If you have lost your license key please visit
 https://slamdata.com/my-account/.
 
+Updating your license information can be achieved by reinstalling.
+
 1.2.2 Obtaining SlamData Advanced
 '''''''''''''''''''''''''''''''''
 There are two ways of using SlamData Advanced. If you want to try SlamData on
@@ -86,15 +88,7 @@ You will need to provide a license key or trial license key during installation.
 If you have lost your license key please visit
 https://slamdata.com/my-account/.
 
-1.2.3.2 Updating SlamData Advanced Launcher License Information
-```````````````````````````````````````````````````````````````
-
-Updating your license information can be achieved by reinstalling. When updating
-your license information please ensure you select "No, install into a different
-directory" in the installation wizard. Although this option must be selected you
-may reinstall into the same directory as before.
-
-|different-directory|
+Updating your license information can be achieved by reinstalling.
 
 1.2.3.1 SlamData Advanced Launcher Default Authentication
 ``````````````````````````````````````````````````````````
@@ -1510,5 +1504,3 @@ Response:
 .. |SD-ScaleGrid-PEM_link| image:: images/SD4/screenshots/scalegrid/PEM_link.png
 
 .. |SD-ScaleGrid-ssh_instructions| image:: images/SD4/screenshots/scalegrid/ssh_instructions.png
-
-.. |different-directory| image:: images/SD4/screenshots/different-directory.png
