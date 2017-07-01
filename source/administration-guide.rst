@@ -1504,5 +1504,3 @@ Response:
 .. |SD-ScaleGrid-PEM_link| image:: images/SD4/screenshots/scalegrid/PEM_link.png
 
 .. |SD-ScaleGrid-ssh_instructions| image:: images/SD4/screenshots/scalegrid/ssh_instructions.png
-
-.. |different-directory| image:: images/SD4/screenshots/different-directory.png
