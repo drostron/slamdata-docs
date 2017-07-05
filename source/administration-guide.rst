@@ -361,8 +361,8 @@ locally mounted data source.
 SQL² Views are covered in detail in the `SlamData Developer's Guide <developers-guide.html>`__.
 
 
-2.5 Enabling SSL
-~~~~~~~~~~~~~~~~
+2.5 Enabling SSL for MongoDB
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If a data source connection supports SSL encryption then
 additional configuration will be required.
@@ -558,7 +558,7 @@ during certificate import and proper directory path.
 Once the changes are saved, restart SlamData so the new parameters
 are loaded.
 
-2.5.5 Configuring the SSL Mount
+2.5.4 Configuring the SSL Mount
 '''''''''''''''''''''''''''''''
 
 The final step is to add a single parameter to the Mount dialog in
@@ -637,8 +637,8 @@ An example configuration file for SlamData Advanced might appear as follows.
     }
 
 
-3.2.1 Configuring HTTP SSL
-''''''''''''''''''''''''''
+3.1 Configuring HTTP SSL
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The subsection of the configuration file below shows an example of
 the SlamData server listening on port 9090 with SSL encryption enabled.
@@ -698,8 +698,8 @@ Now copy the contents of the ``cert.base64`` file into the ``cert`` field of the
 configuration file and restart SlamData.
 
 
-3.2.2 Configuring Postgres as Metastore
-'''''''''''''''''''''''''''''''''''''''
+3.2 Configuring Postgres as Metastore
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 SlamData Advanced defaults to using an H2 java database as its
 metastore database.  Alternatively PostgreSQL 9.x may be used instead.
