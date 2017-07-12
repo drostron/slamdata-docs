@@ -975,3 +975,10 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
 .. |Create-Workspace| image:: images/SD4/icon-create-workspace.png
 
 .. |Card-Choices-1| image:: images/SD4/screenshots/new-card-choices-1.png
+
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

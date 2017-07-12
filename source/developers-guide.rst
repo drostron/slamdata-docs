@@ -1105,3 +1105,10 @@ The URL will only be accessible while SlamData is running.
 .. |Repo-Link| raw:: html
 
    <a href="https://github.com/slamdata/slamdata-dev-examples" target="_blank">repository link</a>
+
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

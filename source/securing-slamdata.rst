@@ -16,3 +16,10 @@ Securing SlamData
 =================
 
 Pending
+
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

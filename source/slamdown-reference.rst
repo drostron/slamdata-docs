@@ -683,3 +683,9 @@ the SQL² Reference Guide.
 
 .. |Date-And-Time| image:: images/SD4/screenshots/date-and-time.png
 
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

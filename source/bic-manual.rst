@@ -641,3 +641,9 @@ join is used when one join condition is only going to return a very
 small number of rows. This parameterized join is the best pushdown
 that can be achieved with PostgreSQL 9.4's FDW interface.
 
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

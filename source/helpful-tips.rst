@@ -595,3 +595,10 @@ Notice the inclusion now of the MongoDB **$unwind** operator in the code below.
 .. |Quarter-Year-Group-By| image:: images/SD4/screenshots/quarter-year-group-by.png
 
 .. |Quarter-Year-Group-By-Chart| image:: images/SD4/screenshots/quarter-year-group-by-chart.png
+
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

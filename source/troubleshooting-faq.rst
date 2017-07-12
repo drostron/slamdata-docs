@@ -143,3 +143,10 @@ Use the following checklist to ensure network problems are minimized.
 
 -  Verify that you can connect with a standard database client from any system.
 -  Connect with a standard database client from the same system SlamData is running on.
+
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
+

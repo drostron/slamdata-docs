@@ -308,7 +308,7 @@ Section 5 - Dates and Times
 ---------------------------
 
 Filter by dates and times using the ``TIMESTAMP``, ``TIME``, and
-``DATE`` operators. The ``DATEPART`` operator can also be used
+``DATE`` operators. The ``DATE_PART`` operator can also be used
 to select part of a date, such as the day.
 
 .. note::
@@ -980,4 +980,10 @@ conditions that are imposed by MongoDB:
 If ``$lookup`` cannot be used, SlamData will fall back to utilizing the
 mapreduce API.  Utilizing mapreduce is slower but more flexible
 and is also backwards compatible for MongoDB 2.6 and later.
+
+.. raw:: html
+
+    <embed>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
+    </embed>
 
