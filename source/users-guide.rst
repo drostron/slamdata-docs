@@ -390,9 +390,11 @@ or the **Cache Card** will not be created.
 
 Results stored in a **Cache Card** are updated when one of the following occurs:
 
-* The table or collection in the **Open Card** is modified.
-* The query in the **Query Card** is modified.
-* The search parameters in the **Search Card** are modified.
+* Each time the workspace that writes to the cache location is opened
+* The table or collection in the **Open Card** prior to the Cache Card is modified.
+* The query in the **Query Card** prior to the Cache Card is modified.
+* The search parameters in the **Search Card** prior to the Cache Card are modified.
+
 
 
 4.3 - Open Card
