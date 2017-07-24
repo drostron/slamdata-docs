@@ -387,8 +387,9 @@ Use the ``DATE_PART`` function to select part of a date. ``DATE_PART``
 has two arguments: a string that indicates what part of the date or time
 that you want and a timestamp field. Valid values for the first argument
 are ``century``, ``day``, ``decade``, ``dow`` (day of week), ``doy`` (day of year),
-``hour``, ``isodow``, ``microseconds``, ``millenium``, ``milliseconds``,
-``minute``, ``month``, ``quarter``, ``second``, and ``year``.
+``epoch``, ``hour``, ``isodow``, ``isoyear``,  ``microseconds``, ``millennium``,
+``milliseconds``, ``minute``, ``month``, ``quarter``, ``second``, ``week`` and
+``year``, although some values are not supported by all connectors.
 
 Example:
 
@@ -936,8 +937,14 @@ you can specify it by selecting the ``_id`` field. For example:
 
 .. code-block:: sql
 
-    SELECT _id AS cust_id
+    SELECT `_id` AS cust_id
     FROM `/users`
+
+.. note::
+
+  When using the ``_id`` field, it must be escaped in backtick characters or
+  you will get an error. You must also give the ``_id`` an alias or it will
+  not show up, even if you have it in your ``SELECT`` statement.
 
 MongoDB has special rules about fields called ``_id``. For example, they
 must remain unique, which means that some queries (such as
@@ -956,7 +963,7 @@ special field.
 
     SELECT *
     FROM `/foo`
-    WHERE _id = OID("abc123")
+    WHERE `_id` = OID("abc123")
 
 
 13.1.2 JOINs on MongoDB
