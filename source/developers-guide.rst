@@ -1026,25 +1026,25 @@ The URL will only be accessible while SlamData is running.
 
 .. |Home-Annotated| image:: images/SD4/screenshots/home-annotated-with-numbers.png
 
-.. |Icon-Mount| image:: images/SD4/icon-mount.png
+.. |Icon-Mount| image:: images/icons/icon-mount.png
 
 .. |Mount-Dialog| image:: images/SD4/screenshots/mount-dialog.png
 
 .. |Mount-Dialog-Complete| image:: images/SD4/screenshots/mount-dialog-complete.png
 
-.. |Create-Folder| image:: images/SD4/icon-create-folder.png
+.. |Create-Folder| image:: images/icons/icon-create-folder.png
 
-.. |Move-Rename| image:: images/SD4/icon-move-rename.png
+.. |Move-Rename| image:: images/icons/icon-move-rename.png
 
-.. |Zoom-Out| image:: images/SD4/icon-zoom-out.png
+.. |Zoom-Out| image:: images/icons/icon-zoom-out.png
 
-.. |Create-Workspace| image:: images/SD4/icon-create-workspace.png
+.. |Create-Workspace| image:: images/icons/icon-create-workspace.png
 
-.. |Upload| image:: images/SD4/icon-upload.png
+.. |Upload| image:: images/icons/icon-upload.png
 
-.. |Trash-Can| image:: images/SD4/icon-trash-can.png
+.. |Trash-Can| image:: images/icons/icon-remove.png
 
-.. |Icon-Flip| image:: images/SD4/icon-flip.png
+.. |Icon-Flip| image:: images/icons/icon-flip-deck.png
 
 .. |Icon-Gray-Bar-Chart| image:: images/SD4/icon-gray-bar.png
 

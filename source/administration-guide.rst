@@ -1481,7 +1481,7 @@ Response:
 
 
 
-.. |Mount-Icon| image:: images/SD4/icon-mount.png
+.. |Mount-Icon| image:: images/icons/icon-mount.png
 
 .. |Murray| image:: images/SD4/murray.png
 

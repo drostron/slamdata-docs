@@ -960,21 +960,21 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
    :height: 150px
    :width: 150px
 
-.. |Icon-Mount| image:: images/SD4/icon-mount.png
+.. |Icon-Mount| image:: images/icons/icon-mount.png
 
-.. |Zoom-Out| image:: images/SD4/icon-zoom-out.png
+.. |Zoom-Out| image:: images/icons/icon-zoom-out.png
 
-.. |Icon-Flip| image:: images/SD4/icon-flip.png
+.. |Icon-Flip| image:: images/icons/icon-flip-deck.png
 
 .. |Mount-Dialog| image:: images/SD4/screenshots/mount-dialog.png
 
-.. |Create-Folder| image:: images/SD4/icon-create-folder.png
+.. |Create-Folder| image:: images/icons/icon-create-folder.png
 
-.. |Move-Rename| image:: images/SD4/icon-move-rename.png
+.. |Move-Rename| image:: images/icons/icon-move-rename.png
 
-.. |Upload| image:: images/SD4/icon-upload.png
+.. |Upload| image:: images/icons/icon-upload.png
 
-.. |Create-Workspace| image:: images/SD4/icon-create-workspace.png
+.. |Create-Workspace| image:: images/icons/icon-create-workspace.png
 
 .. |Card-Choices-1| image:: images/SD4/screenshots/new-card-choices-1.png
 
