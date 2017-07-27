@@ -114,7 +114,7 @@ following commands.
 
 Next save the following configuration file as ``config.json``.
 
-.. code-bock:: json
+.. code-block:: json
 
     {
       "server": {
