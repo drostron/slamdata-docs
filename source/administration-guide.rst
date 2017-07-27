@@ -107,7 +107,7 @@ Advanced Jar Archive.
 Next unzip the archive and navigate to the SlamData directory using the
 following commands.
 
-.. code-block: bash
+.. code-block:: bash
 
     tar jxf slamdata-advanced.tar.bz2
     cd slamdata
