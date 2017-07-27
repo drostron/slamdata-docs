@@ -752,7 +752,7 @@ look similar to the following:
 
     SELECT *
     FROM `/server/db/collection`
-    WHERE _id = :myoidvar
+    WHERE `_id` = :myoidvar
 
 Array
 !!!!!
