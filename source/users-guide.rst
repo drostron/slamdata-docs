@@ -896,69 +896,37 @@ The **Troubleshoot Card** is helpful in validating values passed into a Workspac
 a **Setup Variables Card** followed by a **Troubleshoot Card** would enable variable values to be checked.
 
 
-.. |Cache-Card| image:: images/SD4/cards/card-cache.png
-   :height: 150px
-   :width: 150px
+.. |Cache-Card| image:: images/cards/card-cache.png
 
-.. |Open-Card| image:: images/SD4/cards/card-open.png
-   :height: 150px
-   :width: 150px
+.. |Open-Card| image:: images/cards/card-open.png
 
-.. |Query-Card| image:: images/SD4/cards/card-query.png
-   :height: 150px
-   :width: 150px
+.. |Query-Card| image:: images/cards/card-query.png
 
-.. |Search-Card| image:: images/SD4/cards/card-search.png
-   :height: 150px
-   :width: 150px
+.. |Search-Card| image:: images/cards/card-search.png
 
-.. |Setup-Chart-Card| image:: images/SD4/cards/card-setup-chart.png
-   :height: 150px
-   :width: 150px
+.. |Setup-Chart-Card| image:: images/cards/card-setup-chart.png
 
-.. |Setup-Download-Card| image:: images/SD4/cards/card-setup-download.png
-   :height: 150px
-   :width: 150px
+.. |Setup-Download-Card| image:: images/cards/card-setup-download.png
 
-.. |Setup-Dashboard-Card| image:: images/SD4/cards/card-setup-dashboard.png
-   :height: 150px
-   :width: 150px
+.. |Setup-Dashboard-Card| image:: images/cards/card-setup-dashboard.png
 
-.. |Setup-Form-Card| image:: images/SD4/cards/card-setup-form.png
-   :height: 150px
-   :width: 150px
+.. |Setup-Form-Card| image:: images/cards/card-setup-form.png
 
-.. |Setup-Markdown-Card| image:: images/SD4/cards/card-setup-markdown.png
-   :height: 150px
-   :width: 150px
+.. |Setup-Markdown-Card| image:: images/cards/card-setup-markdown.png
 
-.. |Setup-Variables-Card| image:: images/SD4/cards/card-setup-variables.png
-   :height: 150px
-   :width: 150px
+.. |Setup-Variables-Card| image:: images/cards/card-setup-variables.png
 
-.. |Show-Chart-Card| image:: images/SD4/cards/card-show-chart.png
-   :height: 150px
-   :width: 150px
+.. |Show-Chart-Card| image:: images/cards/card-show-chart.png
 
-.. |Show-Download-Card| image:: images/SD4/cards/card-show-download.png
-   :height: 150px
-   :width: 150px
+.. |Show-Download-Card| image:: images/cards/card-show-download.png
 
-.. |Show-Form-Card| image:: images/SD4/cards/card-show-form.png
-   :height: 150px
-   :width: 150px
+.. |Show-Form-Card| image:: images/cards/card-show-form.png
 
-.. |Show-Markdown-Card| image:: images/SD4/cards/card-show-markdown.png
-   :height: 150px
-   :width: 150px
+.. |Show-Markdown-Card| image:: images/cards/card-show-markdown.png
 
-.. |Preview-Table-Card| image:: images/SD4/cards/card-preview-table.png
-   :height: 150px
-   :width: 150px
+.. |Preview-Table-Card| image:: images/cards/card-preview-table.png
 
-.. |Troubleshoot-Card| image:: images/SD4/cards/card-troubleshoot.png
-   :height: 150px
-   :width: 150px
+.. |Troubleshoot-Card| image:: images/cards/card-troubleshoot.png
 
 .. |Icon-Mount| image:: images/icons/icon-mount.png
 
@@ -966,7 +934,7 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
 
 .. |Icon-Flip| image:: images/icons/icon-flip-deck.png
 
-.. |Mount-Dialog| image:: images/SD4/screenshots/mount-dialog.png
+.. |Mount-Dialog| image:: images/screenshots/mount-dialog.png
 
 .. |Create-Folder| image:: images/icons/icon-create-folder.png
 
@@ -976,7 +944,7 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
 
 .. |Create-Workspace| image:: images/icons/icon-create-workspace.png
 
-.. |Card-Choices-1| image:: images/SD4/screenshots/new-card-choices-1.png
+.. |Card-Choices-1| image:: images/screenshots/new-card-choices-1.png
 
 .. raw:: html
 
