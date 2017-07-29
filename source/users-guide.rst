@@ -611,7 +611,19 @@ The field in the **Setup Form Card** can subsequently be used in other cards, su
 This provides an alternative to using the **Setup Markdown Card**, defining variables, and so on.
 
 
-4.11 - Setup Markdown Card
+4.11 - Setup Geo Chart Card
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|Setup-Geo-Chart-Card|
+
+Description
+@@@@@@@@@@@
+
+Behavior
+@@@@@@@@
+
+
+4.12 - Setup Markdown Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Markdown-Card|
@@ -636,7 +648,26 @@ guide describes how to create interactive UI elements such as drop
 downs, radio boxes, check boxes, and more.
 
 
-4.12 - Setup Variables Card
+4.13 - Setup Tabs Card
+~~~~~~~~~~~~~~~~~~~~~~
+
+|Setup-Tabs-Card|
+
+Description
+@@@@@@@@@@@
+The **Setup Tabs Card** may only be selected as the first card in the first deck
+inside of a workspace. Creating a **Setup Tabs Card** is similar to creating a
+**Setup Dashboard** card, but instead of having multiple decks being shown on the
+same display, the decks are shown in seperate tabs.
+
+Behavior
+@@@@@@@@
+Because the **Setup Tabs Card** creates a new workspace in each of the tabs
+created with no decks or cards in it. Additionally, the user must now create
+a new deck inside of the tab.
+
+
+4.14 - Setup Variables Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Setup-Variables-Card|
@@ -814,7 +845,7 @@ The subsequent query would look similar to the following:
     FROM :mypath
 
 
-4.13 - Show Chart Card
+4.15 - Show Chart Card
 ~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Chart-Card|
@@ -832,7 +863,7 @@ Behavior
 The **Show Chart Card** renders the chart created using the **Setup Chart Card**.
 
 
-4.14 - Show Download Card
+4.16 - Show Download Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Download-Card|
@@ -849,19 +880,39 @@ The **Show Download Card** provides a button to download data using the format a
 selected using the **Setup Download Card**.
 
 
-4.15 Show Form Card
+4.17 Show Form Card
 ~~~~~~~~~~~~~~~~~~~
 
 |Show-Form-Card|
 
 Description
 @@@@@@@@@@@
+The **Show Form Card** follows the **Setup Form Card**.
 
 Behavior
 @@@@@@@@
+The **Show Form Card** displays the given form element that was chosen
+in the **Setup Form Card**.
 
 
-4.16 - Show Markdown Card
+4.18 Show Geo Chart Card
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+|Show-Geo-Chart-Card|
+
+Description
+@@@@@@@@@@@
+The **Show Geo Chart Card** follows the **Setup Geo Chart Card**. Once the
+options have been selected in the **Setup Geo Chart Card** and a chart is
+ready to be rendered, you can select the **Show Geo Chart Card**.
+
+Behavior
+@@@@@@@@
+The **Show Geo Chart Card** renders the chart created using the **Setup
+Geo Chart Card**.
+
+
+4.19 - Show Markdown Card
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Show-Markdown-Card|
@@ -878,8 +929,25 @@ Behavior
 
 The **Show Markdown Card** renders the Markdown created using the **Setup Markdown Card**.
 
+4.20 - Structure Viewer Card
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4.17 - Troubleshoot Card
+|Structure-Viewer-Card|
+
+Description
+@@@@@@@@@@@
+The **Structure Viewer Card** will give you a quick overview of your data structure.
+
+Behavior
+@@@@@@@@
+The **Structure Viewer Card** can be put after any card that returns a data set. You can
+view the structure of the data that was passed in such as columns and their contents.
+The **Structure Viewer Card** will also show a grey bar in the column representing the
+percentage of documents that contain a value for that field. The larger the bar, the
+more documents that have a value.
+
+
+4.21 - Troubleshoot Card
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 |Troubleshoot-Card|
@@ -912,7 +980,11 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
 
 .. |Setup-Form-Card| image:: images/cards/card-setup-form.png
 
+.. |Setup-Geo-Chart-Card| image:: images/cards/card-setup-geo-chart.png
+
 .. |Setup-Markdown-Card| image:: images/cards/card-setup-markdown.png
+
+.. |Setup-Tabs-Card| image:: images/cards/card-setup-tabs.png
 
 .. |Setup-Variables-Card| image:: images/cards/card-setup-variables.png
 
@@ -922,9 +994,13 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
 
 .. |Show-Form-Card| image:: images/cards/card-show-form.png
 
+.. |Show-Geo-Chart-Card| image:: images/cards/card-show-geo-chart.png
+
 .. |Show-Markdown-Card| image:: images/cards/card-show-markdown.png
 
 .. |Preview-Table-Card| image:: images/cards/card-preview-table.png
+
+.. |Structure-Viewer-Card| image:: images/cards/card-structure-viewer.png
 
 .. |Troubleshoot-Card| image:: images/cards/card-troubleshoot.png
 
