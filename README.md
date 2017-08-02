@@ -13,7 +13,7 @@ This document assumes:
 
 First we’ll need to clone the documentation repository so we can make changes.
 
-```bash
+```
 [/Users/damon]$ mkdir git
 [/Users/damon]$ cd git
 [/Users/damon/git]$ git clone https://github.com/slamdata/slamdata-docs.git
@@ -35,7 +35,7 @@ Whenever a specific change is needed we should create a branch to hold this chan
 Let’s say we want to make a change Section 3 in the Administrator’s Guide. To prep for that, we could use the following commands:
 
 
-```bash
+```
 [../damon/git/slamdata-docs]$ git checkout -b damon-admin-section3
 Switched to branch 'damon-admin-section3'
 ```
@@ -52,7 +52,7 @@ Once the necessary changes have been made to the administrators guide, we need t
 We currently use ReadTheDocs.org to host our documentation. It is a free service and has integration with GitHub’s branch management. This also means when you build the local docs it should look almost identical to how it looks live on the doc web site. After the prerequisites have been installed (not covered here, yet) you can make changes to the docs, build them, then test them. See the example below and know that you may see some warnings but these are typically benign.
 
 
-```bash
+```
 [../damon/git/slamdata-docs]$ make html
 sphinx-build -b html -d build/doctrees   source build/html
 Making output directory...
@@ -81,7 +81,7 @@ Build finished. The HTML pages are in build/html.
 The process above has now created a new directory called `build` under the current directory. You can open the `build/html/index.html` file to see your local documentation now. On macOS you can simply type the following command rather than opening a browser and pointing it to the file:
 
 
-```bash
+```
 [../damon/git/slamdata-docs]$ open build/html/index.html
 ```
 
@@ -94,7 +94,7 @@ Once you have made your changes and are satisfied with how they look in your loc
 It may help to first see what changes have been made:
 
 
-```bash
+```
 [../damon/git/slamdata-docs]$ git status
 On branch damon-admin-section3
 Changes not staged for commit:
@@ -110,7 +110,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 This output is telling us that we are working with the `damon-admin-section3` branch and the `administration-guide.rst` file has been changed but has not been staged for a commit. Files must be staged before committed. Now we can stage the file:
 
 
-```bash
+```
 [../git/slamdata-docs/source]$ git commit -a
 ```
 
@@ -132,7 +132,7 @@ Changed a few lines here and there.
 You should see output on the command line similar to this after you save:
 
 
-```bash
+```
 [damon-admin-section3 8a9ac39] Changed a few lines here and there.
  1 file changed, 1 insertion(+), 1 deletion(-)
  ```
@@ -141,7 +141,7 @@ You should see output on the command line similar to this after you save:
 Finally, push your local committed changes up to the working branch in GitHub:
 
 
-```bash
+```
 [../damon/git/slamdata-docs]$ git push -u origin damon-admin-section3
 Counting objects: 4, done.
 Delta compression using up to 8 threads.
@@ -160,7 +160,7 @@ Now that the remote tracking branch is setup (the `-u` feature) we can simply ca
 You may continue to make changes using the steps from above:
 
 
-```bash
+```
 git status
 git commit -a
 git push
@@ -196,6 +196,7 @@ The doc website has a versioning system that allows users to select which versio
 1. Go to https://readthedocs.org/
 2. Login
 3. Click “SlamData Documentation” in the list of Projects:
+![List of Projects](/git_images/docs1.png?raw=true)
 4. Click the “Builds” button:
 5. Ensure “latest” is selected from the drop down, then click “Build Version”:
 
