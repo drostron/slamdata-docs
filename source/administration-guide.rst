@@ -20,7 +20,7 @@ This Administrator's Guide describes how to install and configure SlamData.
 For basic information on how to use SlamData please refer to the
 `SlamData User's Guide <users-guide.html>`__.
 
-For further information on how to use SlamData and instructions on how to
+For more information on how to use SlamData and instructions on how to
 integrate SlamData into other applications please refer to the
 `SlamData Developer's Guide <developers-guide.html>`__.
 
