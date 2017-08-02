@@ -184,9 +184,7 @@ Changes have been committed. Now the changes must be approved by a team member. 
 
 ![Click Create Pull Request](/git_images/pull3.png?raw=true)
 
-Update the title of the pull request if necessary and any comments in the body section.
-
-4. Finally click **Create pull request** again:
+Update the title of the pull request if necessary and any comments in the body section and click **Create pull request** again:
 
 ![Click Create Pull Request](/git_images/pull4.png?raw=true)
 
