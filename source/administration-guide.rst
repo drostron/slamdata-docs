@@ -180,7 +180,7 @@ right.
 
 A mount dialog will be presented, as shown below.
 
-.. figure:: images/SD4/screenshots/mount-dialog-start.png
+.. figure:: images/screenshots/mount-dialog-start.png
    :alt: SlamData Mount Dialog
 
 Enter a name for the data source mount. This name is used in the SlamData
@@ -347,11 +347,10 @@ with connection available on port 8000.
 ~~~~~~~~~~~~~~~~~~
 
 After mounting several data sources, the SlamData UI might look like the
-following image. In this image, there are two separate mounts named
-``aws`` and ``macbook``, the latter representing a
-locally mounted data source.
+following image. In this image, there are several MongoDB mounts, a MarkLogic
+mount and a Spark mount using the local file system.
 
-.. figure:: images/SD4/screenshots/mount-all-mounts.png
+.. figure:: images/screenshots/mount-all-mounts.png
    :alt: SlamData Multiple Mounts
 
 
@@ -564,7 +563,7 @@ are loaded.
 The final step is to add a single parameter to the Mount dialog in
 SlamData.  Add the parameter `ssl` and set the value to `true`.
 
-.. figure:: images/SD4/screenshots/mount-ssl.png
+.. figure:: images/screenshots/mount-ssl.png
    :alt: SlamData SSL Mounts
 
 
@@ -1479,10 +1478,6 @@ Response:
 
 
 .. |Mount-Icon| image:: images/icons/icon-mount.png
-
-.. |Murray| image:: images/SD4/murray.png
-
-.. |Murray-Small| image:: images/SD4/murray-small.png
 
 .. |SD-Group-Example| image:: images/SD4/screenshots/sd-group-example.png
 
