@@ -172,15 +172,23 @@ git push
 
 Changes have been committed. Now the changes must be approved by a team member. Go to the repository URL again https://github.com/slamdata/slamdata-docs
 
-Create a new Pull Request by clicking on the **New pull request** button:
+1. Create a new Pull Request by clicking on the **New pull request** button:
 
-Select the branch you want to submit the Pull Request for:
+![Create New Pull Request](/git_images/pull1.png?raw=true)
 
+2. Select the branch you want to submit the Pull Request for:
 
-Click on the **Create pull request** button:
+![Select Branch](/git_images/pull2.png?raw=true)
 
+3. Click on the **Create pull request** button:
 
-Update the title of the pull request if necessary and any comments in the body section, then finally click **Create pull request** again:
+![Click Create Pull Request](/git_images/pull3.png?raw=true)
+
+Update the title of the pull request if necessary and any comments in the body section.
+
+4. Finally click **Create pull request** again:
+
+![Click Create Pull Request](/git_images/pull4.png?raw=true)
 
 
 This starts the approval workflow. Someone from the team must now go in and approve the changes before they are merged with master.
