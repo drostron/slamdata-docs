@@ -576,7 +576,7 @@ An example configuration file for SlamData Advanced might appear as follows.
 
 ::
 
-    {
+{
       "server": {
         "port": 8080,
         "ssl": {
@@ -585,52 +585,49 @@ An example configuration file for SlamData Advanced might appear as follows.
           "cert": "<base64 encoded pkcs12 cert file>"
         }
       },
-
       "authentication": {
         "openid_providers": [
           {
             "issuer": "https://accounts.google.com",
             "client_id": "123...googleusercontent.com",
-            "display_name": "Google",
+            "display_name": "Google"
           },
           {
             "issuer": "https://accounts.google.com",
             "client_id": "456...789.apps.googleusercontent.com",
             "display_name": "OAuth 2.0 Playground"
+          },
+          {
+            "display_name": "Our Company OP",
+            "client_id": "123455976",
+            "openid_configuration": {
+              "issuer": "https://op.ourcompany.com",
+              "authorization_endpoint": "https://op.ourcompany.com/authorize",
+              "token_endpoint": "https://op.ourcompany.com/token",
+              "userinfo_endpoint": "https://op.ourcompany.com/userinfo",
+              "jwks": [
+                {
+                  "kty": "RSA",
+                  "kid": "1234",
+                  "alg": "RS256",
+                  "use": "sig",
+                  "n": "2354098udw...2957835lkj"
+                },
+                {
+                  "kty": "RSA",
+                  "kid": "5678",
+                  "alg": "RS256",
+                  "use": "sig",
+                  "n": "skljhdfiugy...39587dlkjsd"
+                }
+              ]
+            }
           }
         ]
       },
-      {
-        "display_name": "Our Company OP",
-        "client_id": "123455976",
-        "openid_configuration": {
-          "issuer": "https://op.ourcompany.com",
-          "authorization_endpoint": "https://op.ourcompany.com/authorize",
-          "token_endpoint": "https://op.ourcompany.com/token",
-          "userinfo_endpoint": "https://op.ourcompany.com/userinfo",
-          "jwks": [
-            {
-              "kty": "RSA",
-              "kid": "1234",
-              "alg": "RS256",
-              "use": "sig",
-              "n": "2354098udw...2957835lkj"
-            },
-            {
-              "kty": "RSA",
-              "kid": "5678",
-              "alg": "RS256",
-              "use": "sig",
-              "n": "skljhdfiugy...39587dlkjsd"
-            }
-          ]
-        }
-      },
-
       "auditing": {
         "log_file": "/aws/logdb/slamdata-logs"
       },
-
       "metastore": {
         "database": "<h2 config | postgresql config>"
       }
