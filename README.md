@@ -198,7 +198,10 @@ The doc website has a versioning system that allows users to select which versio
 3. Click “SlamData Documentation” in the list of Projects:
 ![List of Projects](/git_images/docs1.png?raw=true)
 4. Click the “Builds” button:
+![List of Projects](/git_images/docs2.png?raw=true)
 5. Ensure “latest” is selected from the drop down, then click “Build Version”:
+![List of Projects](/git_images/docs3.png?raw=true)
+
 
 The build process will begin. You can click on the top most entry in the table that says **Triggered** if you’d like to watch the build progress. Once complete, you can visit the doc site at http://docs.slamdata.com to verify the latest branch has been updated.
 
