@@ -194,12 +194,19 @@ After the Pull Request has been approved and the changes have been merged into t
 The doc website has a versioning system that allows users to select which version of the documentation is displayed. The default version is `latest` which corresponds to the GitHub `master` branch. The steps below explain pushing out the latest changes to the doc web site.
 
 1. Go to https://readthedocs.org/
+
 2. Login
+
 3. Click “SlamData Documentation” in the list of Projects:
+
 ![List of Projects](/git_images/docs1.png?raw=true)
+
 4. Click the “Builds” button:
+
 ![List of Projects](/git_images/docs2.png?raw=true)
+
 5. Ensure “latest” is selected from the drop down, then click “Build Version”:
+
 ![List of Projects](/git_images/docs3.png?raw=true)
 
 
