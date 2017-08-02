@@ -155,7 +155,7 @@ Branch damon-admin-section3 set up to track remote branch damon-admin-section3 f
 ```
 
 
-Now that the remote tracking branch is setup (the `-u` feature) we can simply call git push without any parameters to push the changes.
+Now that the remote tracking branch is setup (the `-u` feature) we can simply call `git push` without any parameters to push the changes.
 
 You may continue to make changes using the steps from above:
 
