@@ -576,7 +576,7 @@ An example configuration file for SlamData Advanced might appear as follows.
 
 ::
 
-{
+    {
       "server": {
         "port": 8080,
         "ssl": {
