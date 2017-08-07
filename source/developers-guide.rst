@@ -150,19 +150,25 @@ and their descriptions following the image.
 +--------+------------------------------------------------------------------------------+
 |     2  |  The current path you are viewing. In this example it is the Home path (/).  |
 +--------+------------------------------------------------------------------------------+
-|     3  |  The wrench icon configures a mount.                                         |
+|     3  |  Create a new mount (data source).                                           |
 +--------+------------------------------------------------------------------------------+
-|     4  |  The eye icon toggles visibility of the trash can icon.                      |
+|     4  |  Create a new workspace.                                                     |
 +--------+------------------------------------------------------------------------------+
-|     5  |  Download all data starting from this path.                                  |
+|     5  |  Create a new folder in the datasource virtual file system.                  |
 +--------+------------------------------------------------------------------------------+
-|     6  |  Mount a new data source.                                                    |
+|     6  |  Toggles visibility of hidden items (i.e `.trash` folder).                   |
 +--------+------------------------------------------------------------------------------+
-|     7  |  Create a new folder in the datasource virtual file system.                  |
+|     7  |  Download all data starting from this path.                                  |
 +--------+------------------------------------------------------------------------------+
-|     8  |  Upload a data file.                                                         |
+|     8  |  Upload a data file to the collection (must be CSV or JSON format).          |
 +--------+------------------------------------------------------------------------------+
-|     9  |  Create a new workspace.                                                     |
+|     9  |  Edit the mount.                                                             |
++--------+------------------------------------------------------------------------------+
+|    10  |  Rename the mount.                                                           |
++--------+------------------------------------------------------------------------------+
+|    11  |  Download all data for the mount.                                            |
++--------+------------------------------------------------------------------------------+
+|    12  |  Delete the mount.                                                           |
 +--------+------------------------------------------------------------------------------+
 
 
@@ -372,21 +378,12 @@ To simply look around and explore data, you can click on any file
 (collection) that you see.  Start by clicking on the **patients**
 file.
 
-You'll be prompted to provide a name for a new Workspace.  A
-Workspace is how users interact with the actual data within the
-database.  Let's start by calling this ``My First Test`` and
-clicking **Explore**.
-
-|Name-Workspace|
-
-Once you click Explore, the following screen should appear:
-
 |First-Explore-Annotated|
 
 +--------+---------------------------------------------------------------------------------------+
 | Number | Description                                                                           |
 +========+=======================================================================================+
-|     1  |  Zoom icon takes user out of the Workspace and back to the database screen.           |
+|     1  |  `<` icon takes user out of the Workspace and back to the database screen.            |
 +--------+---------------------------------------------------------------------------------------+
 |     2  |  Flip the card over for more options.                                                 |
 +--------+---------------------------------------------------------------------------------------+
@@ -394,7 +391,7 @@ Once you click Explore, the following screen should appear:
 +--------+---------------------------------------------------------------------------------------+
 |     4  |  Browse controls for the current card.                                                |
 +--------+---------------------------------------------------------------------------------------+
-|     5  |  Your position within the deck. Gray circle indicates your place, white circles are   |
+|     5  |  Your position within the deck. Purple circle indicates your place, gray circles are  |
 |        |  available to view.                                                                   |
 +--------+---------------------------------------------------------------------------------------+
 
@@ -712,8 +709,8 @@ the existing Workspace alone or you can delete it if you wish.
 
 To (optionally) delete the existing Workspace:
 
-* If you are still in the Workspace, click on the zoom-out
-  icon. |Zoom-Out|
+* If you are still in the Workspace, click on the back to filesystem
+  icon. |Back-to-FileSystem|
 
 * Locate the **My First Test** Workspace and hover your mouse over it.
 
@@ -742,7 +739,7 @@ with it.
 * Replace **Untitled Workspace** with ``Average Weight by City``
   and click **Rename**.
 
-* Click on the **Average Weight by City.slam** Workspace again.
+* Hover over the **Average Weight by City.slam** Workspace and click on the edit icon. |Icon-Edit|
 
 Ensure that you are in the **Setup Markdown Card**.
 
@@ -880,6 +877,8 @@ cities within that state.
 
 * Select **Wrap**.
 
+* Select **Setup Dashboard**
+
 Note that your interface should now look similar to the following:
 
 |Wrapped-Deck|
@@ -975,9 +974,11 @@ that decks can build off one another.  We need to now mirror the
 
 * Select the **Bar Chart** icon.
 
-The bar chart icon will change from gray to blue to show that it is active.
+* For the **Category**, select **City**. This will be the y-axis source. Click on the **Confirm** button.
 
-* For the **Category**, select **.City** as the axis source.
+* For the **Measure**, select **AvgWeight**. This will be the x-access source. Click on the **Confirm** button.
+
+* Change the **Label angle** value to 45.0 so the city names do not overlap each other.
 
 * Slide to the right to create a new card and select **Show Chart**.
 
@@ -990,6 +991,8 @@ Your interface should now look like the following image:
 
 * Try hovering your mouse over the individual bars in the chart and you can
   view the actual value.
+
+|Bar-Chart-Hover-With-Value|
 
 Setting up interactive forms and charts is as simple as that!  In the next
 section we'll go over how to share these charts with others.
@@ -1020,23 +1023,23 @@ The URL will only be accessible while SlamData is running.
 .. _eCharts: https://ecomfe.github.io/echarts/index-en.html
 
 
-.. |Murray| image:: images/SD4/murray.png
-
-.. |Murray-Small| image:: images/SD4/murray-small.png
-
-.. |Home-Annotated| image:: images/SD4/screenshots/home-annotated-with-numbers.png
+.. |Home-Annotated| image:: images/screenshots/home-annotated-with-numbers.png
 
 .. |Icon-Mount| image:: images/icons/icon-mount.png
 
-.. |Mount-Dialog| image:: images/SD4/screenshots/mount-dialog.png
+.. |Icon-Edit| image:: images/icons/icon-edit.png
 
-.. |Mount-Dialog-Complete| image:: images/SD4/screenshots/mount-dialog-complete.png
+.. |Mount-Dialog| image:: images/screenshots/mount-dialog.png
+
+.. |Mount-Dialog-Complete| image:: images/screenshots/mount-dialog-complete.png
 
 .. |Create-Folder| image:: images/icons/icon-create-folder.png
 
 .. |Move-Rename| image:: images/icons/icon-move-rename.png
 
 .. |Zoom-Out| image:: images/icons/icon-zoom-out.png
+
+.. |Back-to-FileSystem| image:: images/icons/icon-back-to-filesystem.png
 
 .. |Create-Workspace| image:: images/icons/icon-create-workspace.png
 
@@ -1046,61 +1049,31 @@ The URL will only be accessible while SlamData is running.
 
 .. |Icon-Flip| image:: images/icons/icon-flip-deck.png
 
-.. |Icon-Gray-Bar-Chart| image:: images/SD4/icon-gray-bar.png
+.. |In-Devdb| image:: images/screenshots/in-devdb-clean.png
 
-.. |In-Devdb| image:: images/SD4/screenshots/in-devdb-clean.png
+.. |After-Upload| image:: images/screenshots/after-upload.png
 
-.. |After-Upload| image:: images/SD4/screenshots/after-upload.png
+.. |First-Explore-Annotated| image:: images/screenshots/first-explore-annotated.png
 
-.. |Name-Workspace| image:: images/SD4/screenshots/name-workspace.png
+.. |Wrapped-Deck| image:: images/screenshots/wrapped-deck.png
 
-.. |First-Explore-Annotated| image:: images/SD4/screenshots/first-explore-annotated.png
+.. |Mirrored-Deck| image:: images/screenshots/mirrored-deck.png
 
-.. |Wrapped-Deck| image:: images/SD4/screenshots/wrapped-deck.png
+.. |Card-Back| image:: images/screenshots/back-of-card.png
 
-.. |Mirrored-Deck| image:: images/SD4/screenshots/mirrored-deck.png
+.. |Card-Choices-1| image:: images/screenshots/new-card-choices-1.png
 
-.. |Card-Back| image:: images/SD4/screenshots/back-of-card.png
+.. |MD-and-Show-Decks| image:: images/screenshots/md-and-show-decks.png
 
-.. |Card-Choices-1| image:: images/SD4/screenshots/new-card-choices-1.png
+.. |All-3-Decks| image:: images/screenshots/all-3-decks.png
 
-.. |MD-and-Show-Decks| image:: images/SD4/screenshots/md-and-show-decks.png
+.. |Zip-Results| image:: images/screenshots/zip-results.png
 
-.. |All-3-Decks| image:: images/SD4/screenshots/all-3-decks.png
+.. |All-3-With-Chart| image:: images/screenshots/all-3-with-chart.png
 
-.. |Zip-Results| image:: images/SD4/screenshots/zip-results.png
-
-.. |All-3-With-Chart| image:: images/SD4/screenshots/all-3-with-chart.png
+.. |Bar-Chart-Hover-With-Value| image:: images/screenshots/bar-chart-hover-with-value.png
 
 .. |SD-Nesting| image:: images/SD4/screenshots/sd-nesting.png
-
-.. |Embed-Code-1| image:: images/SD4/screenshots/embed-code-1.png
-
-.. |Embed-Code-2| image:: images/SD4/screenshots/embed-code-2.png
-
-.. |Embed-Code-3| image:: images/SD4/screenshots/embed-code-3.png
-
-.. |Sample-1-1-Full-Report| image:: images/SD4/screenshots/sample-1-1-full-report.png
-
-.. |Report-2-Workspace| image:: images/SD4/screenshots/report-2-workspace.png
-
-.. |Sample-1-2-Full-Report| image:: images/SD4/screenshots/sample-1-2-full-report.png
-
-.. |Config-Example| image:: images/SD4/screenshots/config-example.png
-
-.. |Header-Grip| image:: images/SD4/screenshots/header-grip.png
-
-.. |Sign-In| image:: images/SD4/screenshots/sign-in.png
-
-.. |Navigate| image:: images/SD4/screenshots/navigate.png
-
-.. |Embed-Code-Secure-1| image:: images/SD4/screenshots/embed-code-secure-1.png
-
-.. |Embed-Code-Secure-2| image:: images/SD4/screenshots/embed-code-secure-2.png
-
-.. |Embed-Code-Secure-3| image:: images/SD4/screenshots/embed-code-secure-3.png
-
-.. |Sample-2-1-Full-Report| image:: images/SD4/screenshots/sample-2-1-full-report.png
 
 .. |Repo-Link| raw:: html
 
