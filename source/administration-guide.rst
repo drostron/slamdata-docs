@@ -43,7 +43,6 @@ Section 1 - Installation
       * Linux requires a separate Java installation
   * Browsers
       * The most compatible browsers with SlamData are always the most recent versions of Google Chrome and Mozilla Firefox
-      * Microsoft Edge and Safari are both limited in functionality and some UI elements, such as Date picker, do not render properly, or at all
   * Target data sources (for analytics)
       * Apache Spark 2.1 and above
       * Couchbase 4.5.1 and above
@@ -71,18 +70,27 @@ Updating your license information can be achieved by reinstalling.
 1.2.2 Obtaining SlamData Advanced
 '''''''''''''''''''''''''''''''''
 There are two ways of using SlamData Advanced. If you want to try SlamData on
-your PC or Mac we recommend using the SlamData Advanced Launcher. If you want to
-use SlamData on your server(s) we recommend using the SlamData Advanced Jar.
+your Windows, Linux or Mac workstation we recommend using the SlamData Advanced
+Installer. If you want to use SlamData on your server(s) we recommend using the
+SlamData Advanced Jar.
 
 1.2.3 SlamData Advanced Launcher
 ''''''''''''''''''''''''''''''''
-The SlamData Advanced Launcher is available for macOS, Windows and Linux.
-On Windows the SlamData Advanced Launcher allows you to launch SlamData Advanced
-from your Start Menu. On macOS the SlamData Advanced Launcher allows you to
+The SlamData Advanced Installer is available for macOS, Windows and Linux.
+The Windows SlamData Advanced Installer allows you to launch SlamData Advanced
+from your Start Menu. The macOS SlamData Advanced Installer allows you to
 launch SlamData from your Applications folder or Launchpad.
 
-To get started visit https://slamdata.com/downloads/ and download the SlamData
-Advanced Installer, launch the installer and follow the instructions.
+If you have never installed SlamData before, get started by visiting
+https://slamdata.com/get-slamdata/30-day-trial/. You will register your
+email address with the SlamData authorization server and will receive an
+email with your license key and additional instructions.
+
+`bearer token <http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html>`__
+
+
+The latest version of SlamData Advanced can always be found
+`here <https://slamdata.com/downloads>`__.
 
 You will need to provide a license key or trial license key during installation.
 If you have lost your license key please visit
@@ -94,10 +102,13 @@ Updating your license information can be achieved by reinstalling.
 ``````````````````````````````````````````````````````````
 By default the SlamData Advanced Launcher is configured to authenticate with
 SlamData.com. You will need a SlamData.com account and access to the internet
-to use the SlamData Advanced Launcher in its default configuration. 
+to use the SlamData Advanced Launcher in its default configuration.
 
-If you signed up for a trial License at https://slamdata.com/30-day-trial/
-your SlamData.com account details are the username and password you provided.
+To use the SlamData.com authentication server you sign up for a trial License at
+https://slamdata.com/30-day-trial/. You will use the email address and password
+you supply here to authenticate against the SlamData.com authentication server,
+which allows you to use SlamData in your environment.
+
 
 1.2.4 SlamData Advanced Jar
 '''''''''''''''''''''''''''
@@ -238,16 +249,16 @@ case.
 The MongoDB values listed in the Connection Options on the MongoDB
 web site are supported. As of MongoDB 2.6 these options are as follows.
 
-+------------------+---------+--------------------------------------------------------------------+
-| Options          | Example | Description                                                        |
-+==================+=========+====================================================================+
-| ssl              | true    | Enable SSL encryption.                                             |
-+------------------+---------+--------------------------------------------------------------------+
-| connectTimeoutMS | 15000   | The time in milliseconds to attempt a connection before timing out.|
-+------------------+---------+--------------------------------------------------------------------+
-| socketTimeoutMS  | 10000   | The time in milliseconds to attempt a send or receive on a socket  |
-|                  |         | before the attempt times out.                                      |
-+------------------+---------+--------------------------------------------------------------------+
++------------------+---------+---------------------------------------------------------------------+
+| Options          | Example | Description                                                         |
++==================+=========+=====================================================================+
+| ssl              | true    | Enable SSL encryption.                                              |
++------------------+---------+---------------------------------------------------------------------+
+| connectTimeoutMS | 15000   | The time in milliseconds to attempt a connection before timing out. |
++------------------+---------+---------------------------------------------------------------------+
+| socketTimeoutMS  | 10000   | The time in milliseconds to attempt a send or receive on a socket   |
+|                  |         | before the attempt times out.                                       |
++------------------+---------+---------------------------------------------------------------------+
 
 .. warning:: **MongoDB Limitations**
 
@@ -256,7 +267,8 @@ web site are supported. As of MongoDB 2.6 these options are as follows.
 
 * Users are not allowed to write to secondary nodes in a replica set.
 * Queries that return large result sets or use the ``mapreduce`` and ``aggregate``
-  functions must use temporary workspace to store their results.
+  functions must use temporary workspace to temporarily store query results, which
+  results in the need to write to the database.
 
 Because of these limitations users have a few options:
 
@@ -265,6 +277,16 @@ Because of these limitations users have a few options:
 2. Create a standalone MongoDB server which
    `Tails the Oplog <https://docs.mongodb.com/manual/core/tailable-cursors/#tailable-cursors>`__
    of a member of an existing replica set.
+
+Operations that do not require write access can still be performed with a read-only account.
+Example operations may include clicking on a collection name to view its contents with
+a Preview Table, using a simple query with a Query Card, downloading results of the previous
+two steps, etc.
+
+Because SlamData expands its feature set at a rapid pace, and because MongoDB relies so heavily
+on temporary result sets being written to disk, there is no authoritative source
+for stating which operations will or will not require write ability at this time as it could
+change with each version of MongoDB.
 
 
 2.2.2 Couchbase
@@ -276,36 +298,48 @@ additional fields will appear in the dialog.
 The following table shows an example Couchbase server running on localhost
 with connection available on port 8091.
 
-+----------------+---------------+
-| Parameter      | Value         |
-+================+===============+
-| Host           | localhost     |
-+----------------+---------------+
-| Port           |  8091         |
-+----------------+---------------+
-| Username       | Administrator |
-+----------------+---------------+
-| Password       | \*\*\*\*\*\*  |
-+----------------+---------------+
++------------------+---------------+
+| Parameter        | Value         |
++==================+===============+
+| Host             | localhost     |
++------------------+---------------+
+| Port             | 8091          |
++------------------+---------------+
+| Bucket Name      | myBucket      |
++------------------+---------------+
+| Password         | \*\*\*\*      |
++------------------+---------------+
+| Document Type    | ``type``      |
++------------------+---------------+
+| Query timeout    | 30            |
++------------------+---------------+
+| Override default | True          |
++------------------+---------------+
 
-.. note::
+The **Bucket Name** should contain the value of the Couchbase bucket you
+wish to connect to.
 
-  To use SlamData with Couchbase, a Username and Password will be required.
-  In the example table above, the Administrator account and password are
-  used. The Administrator account is created when Couchbase is installed.
+**Password** is the bucket-specific password that is set in Couchbase.
+
+**Document Type** allows the SlamData user to dictate which field in the
+documents stored in this Bucket will logically separate them. For instance,
+if there are three general document schemas in a bucket, and they all have
+a field labeled ``myObjType``, and the values are ``post``, ``response`` and
+``link``, then setting the Document Type to `myObjType` will result in 3
+separate SlamData virtual files being presented to the user, logically grouping
+the documents types together.  Three files named ``post``, ``response`` and
+``link`` will appear and can be queried, visualized, etc.
+
+**Query timeout** allows the SlamData to override the default query timeout.
+
+**Override default** must be enabled to allow **Query timeout** to take effect.
+
 
 .. hint:: **Memory Optimized Indexes**
 
   In the initial configuration of Couchbase, when it is being installed,
-  memory optimized indexes should be enabled.
-
-If the Couchbase default bucket is used with SlamData, it is necessary to
-create a primary index as well as an index on the ``type`` field. For example:
-
-.. code-block:: sql
-
-    CREATE PRIMARY INDEX ON default;
-    CREATE INDEX default_type_idx ON `default`(type);
+  memory optimized indexes should be enabled. This allows queries from
+  SlamData to run faster.
 
 
 2.2.3 MarkLogic
@@ -315,14 +349,14 @@ Select **MarkLogic** as the mount type. Once the mount type has been selected,
 additional fields will appear in the dialog.
 
 The following table shows an example MarkLogic server running on localhost
-with connection available on port 8000.
+with connection available on port 8000 and using XML as the data format.
 
 +----------------+---------------+
 | Parameter      | Value         |
 +================+===============+
 | Host           | localhost     |
 +----------------+---------------+
-| Port           |  8000         |
+| Port           | 8000          |
 +----------------+---------------+
 | Username       | Administrator |
 +----------------+---------------+
@@ -330,17 +364,14 @@ with connection available on port 8000.
 +----------------+---------------+
 | Database       | /Documents    |
 +----------------+---------------+
+| Format         | XML (checked) |
++----------------+---------------+
 
 .. note::
 
   To use SlamData with MarkLogic, a Username and Password will be required.
   In the example table above, the Administrator account and password are
   used. The Administrator account is created when MarkLogic is installed.
-
-.. hint:: **Directories**
-
-  MarkLogic must contain one or more directories in the database before documents will be displayed.
-  Additionally, documents must be located within a directory.
 
 
 2.3 Several Mounts
@@ -1502,4 +1533,3 @@ Response:
     <embed>
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
     </embed>
-
