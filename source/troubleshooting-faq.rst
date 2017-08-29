@@ -46,20 +46,17 @@ configuration file in the following locations by default:
   be overwritten.
 
 
-1.1.1 Configuration File Differences
-''''''''''''''''''''''''''''''''''''
+1.1.1 The Metastore
+'''''''''''''''''''
 
-SlamData Community Edition relies on the **quasar-config.json**
-configuration file to store all metadata for the product, including
-server configurations, mount points, views, and so on.
+Within the configuration file is a section to specify the location and type
+of Metastore to use for SlamData.
 
-SlamData Analyst and Advanced Editions rely upon a PostgreSQL or
-Java H2 database to store metadata. Depending upon the edition,
-additional information will be stored such as security information for users,
-groups, permissions, actions and tokens.
+SlamData relies upon a PostgreSQL or Java H2 database to store metadata. The
+metastore saves information such as mount points, views and everything
+related to security.
 
-If there is no metadata source when SlamData Analyst or Advanced Edition
-start, the **quasar-config.json** file will be used.
+See the Administration Guide for more information.
 
 
 1.2 Log File Locations
