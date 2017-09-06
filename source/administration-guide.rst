@@ -373,6 +373,84 @@ with connection available on port 8000 and using XML as the data format.
   In the example table above, the Administrator account and password are
   used. The Administrator account is created when MarkLogic is installed.
 
+2.2.4 Apache Spark - HDFS
+'''''''''''''''''''''''''
+
+Select **HDFS on Spark** as the mount type. Once the mount type has been selected,
+additional fields will appear in the dialog.
+
+The following table shows an example Spark server running on host ``spark1``,
+HDFS server running on ``spark1`` as well. Data directory is located at
+``/spark/data``.
+
+Refer to Apache Spark documentation for more information about how to
+administrate Spark and manage its directories and files structure.
+
++-------------------+---------------+
+| Parameter         | Value         |
++===================+===============+
+| Spark Server Host | spark1        |
++-------------------+---------------+
+| Spark Server Port | 7077          |
++-------------------+---------------+
+| HDFS Server Host  | spark1        |
++-------------------+---------------+
+| HDFS Server Port  | 9000          |
++-------------------+---------------+
+| Root Path         | /spark/data   |
++-------------------+---------------+
+| Advanced Settings |               |
++-------------------+---------------+
+
+Additional options can be supplied, one row per option, in the ``Advanced Settings``. The following
+can be selected as Additional Options and the user can supply a value. For example one can set
+the ``spark.executor.memory`` option to a value of ``4g``. The following list displays the drop-down
+options available in the Mount dialog:
+
++---------------------------------+---------------+
+| Option                          | Example Value |
++=================================+===============+
+| spark.eventLog.enabled          | true          |
++---------------------------------+---------------+
+| spark.executor.memory           | 4g            |
++---------------------------------+---------------+
+| spark.executor.cores            |               |
++---------------------------------+---------------+
+| spark.executor.extraJavaOptions |               |
++---------------------------------+---------------+
+| spark.default.parallelism       |               |
++---------------------------------+---------------+
+| spark.files.maxPartitionBytes   |               |
++---------------------------------+---------------+
+| spark.driver.cores              |               |
++---------------------------------+---------------+
+| spark.driver.maxResultSize      |               |
++---------------------------------+---------------+
+| spark.driver.memory             |               |
++---------------------------------+---------------+
+| spark.local.dir                 |               |
++---------------------------------+---------------+
+| spark.reducere.maxSizeInFlight  |               |
++---------------------------------+---------------+
+| spark.reducer.maxReqsInFlight   |               |
++---------------------------------+---------------+
+| spark.shuffle.file.buffer       |               |
++---------------------------------+---------------+
+| spark.shuffle.io.retryWait      |               |
++---------------------------------+---------------+
+| spark.memory.fraction           |               |
++---------------------------------+---------------+
+| spark.memory.storageFraction    |               |
++---------------------------------+---------------+
+| spark.cores.maxResultSize       |               |
++---------------------------------+---------------+
+| spark.speculation               |               |
++---------------------------------+---------------+
+| spark.tasks.cpus                |               |
++---------------------------------+---------------+
+| spark.eventLog.enabled          |               |
++---------------------------------+---------------+
+
 
 2.3 Several Mounts
 ~~~~~~~~~~~~~~~~~~
