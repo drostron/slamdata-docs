@@ -29,15 +29,15 @@ will be created and used to store mount points.
 Unless specified on the command line, SlamData will look for its
 configuration file in the following locations by default:
 
-+-------------------------+-------------------------------------------------------------+
-| Operating System        | File Location                                               |
-+=========================+=============================================================+
-| Mac OS                  | $HOME/Library/Application Support/quasar/quasar-config.json |
-+-------------------------+-------------------------------------------------------------+
-| Microsoft Windows       | %HOMEDIR%\\AppData\\Local\\quasar\\quasar-config.json       |
-+-------------------------+-------------------------------------------------------------+
-| Linux (various vendors) | $HOME/.config/quasar/quasar-config.json                     |
-+-------------------------+-------------------------------------------------------------+
++-------------------------+-------------------------------------------------------------------------------+
+| Operating System        | File Location                                                                 |
++=========================+===============================================================================+
+| Apple macOS             | /Applications/SlamData Advanced <ver>.app/Contents/java/app/empty-config.json |
++-------------------------+-------------------------------------------------------------------------------+
+| Microsoft Windows       | C:\\Program Files (x86)\\slamdata-advanced \<ver\>\\empty-config.json         |
++-------------------------+-------------------------------------------------------------------------------+
+| Linux                   | $HOME/slamdata-advanced-<ver>/empty-config.json                               |
++-------------------------+-------------------------------------------------------------------------------+
 
 .. warning:: **Modifying the configuration file**
 
@@ -71,7 +71,7 @@ running.
 +=========================+=================================================================================+
 | Mac OS                  | /Applications/SlamData <version>.app/Contents/java/app/slamdata-<version>.log   |
 +-------------------------+---------------------------------------------------------------------------------+
-| Microsoft Windows       | C:\\Program Files (x86)\\slamdata <version>\\slamdata-<version>.log             |
+| Microsoft Windows       | C:\Program Files (x86)\slamdata <version>\slamdata-<version>.log                |
 +-------------------------+---------------------------------------------------------------------------------+
 | Linux (various vendors) | $HOME/slamdata<version>/slamdata-<version>.log                                  |
 +-------------------------+---------------------------------------------------------------------------------+
@@ -259,7 +259,7 @@ Example: ``http://localhost:20223``
 SlamData's version will be displayed in the browser title bar or
 tab title.
 
-The version of the Quasar analytics backend engine can be obtained
+The version of the SlamData analytics compiler can be obtained
 by browsing to ``http://<servername>:20223/server/info``
 
 Example: ``http://localhost:20223/server/info``

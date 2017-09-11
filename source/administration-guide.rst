@@ -171,7 +171,7 @@ GB of memory you would like to allocate to SlamData.
 
 .. code-block:: bash
 
-    java -Xms2G -Xmx2G -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE -Dlicense_email=myemail@example.com -Dlicense_full_name="My Name" -Dlicense_registered_to="Name Registered To" -Dlicense_company="My Company Name" -Dlicense_street="123 Anywhere Street, Suite A1" -Dlicense_tel_number=3035551212 -Dlicense_fax_number=NA -Dlicense_city=Boulder -Dlicense_zip=80302 -Dlicense_country=US -jar quasar.jar --content-path public --config config.json
+    java -Xms2G -Xmx2G -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE -Dlicense_email=myemail@example.com -Dlicense_full_name="My Name" -Dlicense_registered_to="Name Registered To" -Dlicense_company="My Company Name" -Dlicense_street="123 Anywhere Street, Suite A1" -Dlicense_tel_number=3035551212 -Dlicense_fax_number=NA -Dlicense_city=Boulder -Dlicense_zip=80302 -Dlicense_country=US -jar slamdata-backend.jar --content-path public --config config.json
 
 
 Section 2 - Connecting to a Data Source
@@ -811,7 +811,7 @@ metastore database.  Alternatively PostgreSQL 9.x may be used instead.
 
 A Postgres metastore allows SlamData to be clustered to scale.
 
-The following example ``quasar-config.json`` shows an example:
+The following example ``slamdata-config.json`` shows an example:
 
 ::
 
@@ -937,7 +937,7 @@ as shown in the following example.
 
 ::
 
-    java -jar quasar.jar bootstrap --admin-group <name> --admin-users user1@example.com[,user2@example.com,...]
+    java -jar slamdata-backend.jar bootstrap --admin-group <name> --admin-users user1@example.com[,user2@example.com,...]
 
 
 4.3 Authentication
@@ -1107,7 +1107,7 @@ and are represented as follows in JSON.
       "grantedBy": ["<user_id>", "<group_path>", "<token_id>", "..."]
     }
 
-* **<filesystem_path>** is a path in the quasar virtual filesystem such as
+* **<filesystem_path>** is a path in the SlamData virtual filesystem such as
   ``data:/foo/bar`` for a file and ``data:/foo/bar/`` for a directory
 
 * **<group_path>** is a path uniquely identifying a group and its location
