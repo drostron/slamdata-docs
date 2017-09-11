@@ -466,7 +466,7 @@ mount and a Spark mount using the local file system.
 2.4 SQL² View
 ~~~~~~~~~~~~~
 
-SQL² Views are covered in detail in the `SlamData Developer's Guide <developers-guide.html>`__.
+SQL² Views are covered in detail in the `SlamData User's Guide <users-guide.html#section-4-views>`__.
 
 
 2.5 Enabling SSL for MongoDB

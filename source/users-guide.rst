@@ -964,6 +964,169 @@ The **Troubleshoot Card** is helpful in validating values passed into a Workspac
 a **Setup Variables Card** followed by a **Troubleshoot Card** would enable variable values to be checked.
 
 
+Section 4 - Views
+-----------------
+
+4.1 View Introduction
+~~~~~~~~~~~~~~~~~~~~~
+
+Views allow a user to execute a custom query whenever the View's
+virtual file system (VFS) path is referenced.
+
+Since a View is a SlamData mount type, and not a Card type, it is not
+placed within a Workspace; rather, it is available to all users and
+Workspaces as long as the User has access to the View's path.
+
+A View can be used within a Query Card, it can precede a Search Card as
+its data source, can populate a visualization, and can generally be
+used as a valid data source. Views may reference other views as well.
+
+For example if the user has a datasource mounted under ``/medical``, and
+navigates to the ``production`` folder, a View can be created named
+``AltitudeSickness``. The View's full path would then be referenced as
+``/medical/production/AltitudeSickness``.
+
+4.1.1 View Example
+~~~~~~~~~~~~~~~~~~
+
+Let us assume that a frequent query among staff is the population
+of patients who reside in Boulder, Colorado who have also been
+diagnosed with Altitude Sickness by their care provider. We can
+create a SQL² View that provides the results of this query while
+simultaneously making it less error prone by entering the query
+only once.
+
+The View's query can be constructed to constrain the results to
+specific fields within the datasource. If we're concerned about
+private patient data being returned, we can simply specify the
+fields that should be returned, omitting those fields that could
+be considered sensitive.
+
+The query for such a View might be similar to the following,
+assuming the medical diagnosis information resides within an array
+called ``codes``, which contains zero or more diagnoses for the patient.
+
+.. code-block:: sql
+
+    SELECT
+      age,
+      gender,
+      first_name,
+      last_name,
+      height,
+      weight
+    FROM `/medical/production/all-patients`
+    WHERE
+      age >= 21 AND
+      codes[*].desc LIKE "%altitude sickness%"
+
+4.1.2 View Mount
+~~~~~~~~~~~~~~~~
+
+To create a View, navigate within the SlamData VFS to the desired folder
+where the View should be placed. Click the ``Mount`` icon in the upper right.
+
+|Mount-Dialog|
+
+Using the example given above, we can configure our View with the
+following table:
+
++------------+------------------+
+| Parameter  | Value            |
++============+==================+
+| Name       | AltitudeSickness |
++------------+------------------+
+| Mount Type | SQL² View        |
++------------+------------------+
+
+In the ``SQL² Query`` field, enter the query from Section 4.1.1 above. Once
+complete, click **Mount**. Example screenshot:
+
+|Mount-SQL2|
+
+
+4.1.3 View Results
+~~~~~~~~~~~~~~~~~~
+
+Now that the View is created it can be used anywhere a valid data
+source can be used. Valid places to use a View:
+
+Within these Card types:
+
+* Open Card
+* Query Card
+
+Preceding these Card Types:
+
+* Search Card
+* Preview Table Card
+* Setup Chard Card
+* Setup Form Card
+* Setup Geo Card
+* Setup Download Card
+* Cache Card
+* Structure Viewer Card
+
+4.1.4 Limitations of Views
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While Views provide considerable flexibility within a user's
+Workspace they do have some limitations.
+
+A View will be executed **every time** it is referenced. Since a view
+is a query against a datasource, the datasource should have appropriate
+indexes to allow for optimal performance.
+
+A View's results are typically stored in a temporary area within the datasource
+so they can be used by the next stage of a workflow. Because this is a
+temporary area, and is created and removed as needed, it is not indexed
+by the database storing it. This results in **subsequent** queries performing
+slower than a query against an indexed datastore. 
+
+Additionally, using the generated temporary results of a View within another
+query or function may cause the datastore to perform different functions than
+what might be expected. For example, if a user attempts to ``JOIN`` the results
+of a normal table or collection with the results of a View, the underlying
+database engine may perform a MapReduce operation instead of a faster
+aggregation operation due to the missing indexes. Behavior is based
+solely on the underlying database engine.
+
+4.1.5 Example Usage
+~~~~~~~~~~~~~~~~~~~
+
+The example below shows a query where the variable ``:selectedAge`` is being used
+in the ``WHERE`` clause against the ``AltitudeSickness`` View, which we already
+know results in a list of patients who live in Boulder, CO, etc.
+
+.. code-block:: sql
+
+    SELECT
+      weight,
+      height,
+      age,
+      SUBSTRING(first_name, 0, 1) || SUBSTRING(last_name, 0, 1) AS initials
+    FROM `/medical/production/AltitudeSickness`
+    WHERE
+      age >= :selectedAge
+
+The results of this query are actually the results of two separate queries.
+The first query (the query stored in the View object itself) is executed
+when the View is referenced in the ``FROM`` clause which provides an initial
+result set containing the following fields:
+
+``age``, ``gender``, ``first_name``, ``last_name``, ``height`` and ``weight``
+
+The second query (the query above) executes against the results of the first query
+(the View) and constrains the fields even further. This query also happens
+to mask the full names of the patients with just their initials. The combination
+of queries results in the following fields:
+
+``weight``, ``height``, ``age`` and ``initials`` where age is greater than or
+equal to 21 (from the View query) **AND** age is greater than or equal to whatever
+value the user selected.
+
+
+
 .. |Cache-Card| image:: images/cards/card-cache.png
 
 .. |Open-Card| image:: images/cards/card-open.png
@@ -1011,6 +1174,8 @@ a **Setup Variables Card** followed by a **Troubleshoot Card** would enable vari
 .. |Icon-Flip| image:: images/icons/icon-flip-deck.png
 
 .. |Mount-Dialog| image:: images/screenshots/mount-dialog.png
+
+.. |Mount-SQL2| image:: images/screenshots/mount-sql2.png
 
 .. |Create-Folder| image:: images/icons/icon-create-folder.png
 
