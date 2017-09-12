@@ -56,7 +56,7 @@ The advantages of using the SlamData BI Connector over alternatives are:
 
 -  PostgreSQL version 9.4.x (does not run on 9.3 or 9.5)
 
--  MongoDB version 2.6, 2.8, 3.0 or 3.2
+-  MongoDB version 3.0 or newer
 
 -  Python 2.7 (for use with the gen\_schema.py script)
 

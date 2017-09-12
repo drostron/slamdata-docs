@@ -47,7 +47,7 @@ Section 1 - Installation
       * Apache Spark 2.1 and above
       * Couchbase 4.5.1 and above
       * MarkLogic 8 and above
-      * MongoDB 2.6 and above
+      * MongoDB 3.0 and above
 
 
 1.2 Obtaining SlamData
@@ -247,7 +247,7 @@ case.
   it could be ``admin``, the name of the user or something completely different.
 
 The MongoDB values listed in the Connection Options on the MongoDB
-web site are supported. As of MongoDB 2.6 these options are as follows.
+web site are supported. As of MongoDB 3.0 these options are as follows.
 
 +------------------+---------+---------------------------------------------------------------------+
 | Options          | Example | Description                                                         |

@@ -986,7 +986,7 @@ conditions that are imposed by MongoDB:
 
 If ``$lookup`` cannot be used, SlamData will fall back to utilizing the
 mapreduce API.  Utilizing mapreduce is slower but more flexible
-and is also backwards compatible for MongoDB 2.6 and later.
+and is also backwards compatible for MongoDB 3.0 and newer.
 
 .. raw:: html
 
