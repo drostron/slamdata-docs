@@ -44,10 +44,10 @@ Section 1 - Installation
   * Browsers
       * The most compatible browsers with SlamData are always the most recent versions of Google Chrome and Mozilla Firefox
   * Target data sources (for analytics)
-      * Apache Spark 2.1 and above
-      * Couchbase 4.5.1 and above
-      * MarkLogic 8 and above
-      * MongoDB 3.0 and above
+      * Apache Spark 2.1 and newer
+      * Couchbase 4.5.1 and newer
+      * MarkLogic 8 and newer
+      * MongoDB 3.2 and newer
 
 
 1.2 Obtaining SlamData
@@ -247,7 +247,7 @@ case.
   it could be ``admin``, the name of the user or something completely different.
 
 The MongoDB values listed in the Connection Options on the MongoDB
-web site are supported. As of MongoDB 3.0 these options are as follows.
+web site are supported. As of MongoDB 3.2 these options are as follows.
 
 +------------------+---------+---------------------------------------------------------------------+
 | Options          | Example | Description                                                         |

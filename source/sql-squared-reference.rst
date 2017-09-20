@@ -985,8 +985,8 @@ conditions that are imposed by MongoDB:
 * Match must be an equijoin, based on equality only (``a.field = b.field`` is ok, ``a.field < b.field`` is not).
 
 If ``$lookup`` cannot be used, SlamData will fall back to utilizing the
-mapreduce API.  Utilizing mapreduce is slower but more flexible
-and is also backwards compatible for MongoDB 3.0 and newer.
+mapreduce API.  Utilizing mapreduce is usually slower but has a wider
+range of use cases that it supports.
 
 .. raw:: html
 
