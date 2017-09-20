@@ -960,7 +960,7 @@ here is an example:
 
 ::
 
-    java -jar $lic slamdata-backend.jar bootstrap -c slamdata-config.json --admin-group admin --admin-users user1@example.com,user2@example.com --additive
+    java -jar $lic slamdata-backend.jar bootstrap -c empty-config.json --admin-group admin --admin-users user1@example.com,user2@example.com --additive
 
 
 4.3 Authentication
