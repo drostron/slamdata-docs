@@ -940,6 +940,29 @@ as shown in the following example.
     java -jar slamdata-backend.jar bootstrap --admin-group <name> --admin-users user1@example.com[,user2@example.com,...]
 
 
+4.2.1 Adding More Users
+'''''''''''''''''''''''
+
+To add users to the SlamData Metastore the ``slamdata-backend.jar`` file must
+be executed with additional parameters; specifically the ``--additive`` argument
+at the end.
+
+Parameters must also include the user email addresses to add and the initial
+group the users will belong. All relevant license details must also be included
+on the command line as normal. Assuming the following:
+
+* license parameters are contained within the environment variable ``$lic``
+* the user emails are ``user1@example.com`` and ``user2@example.com``
+* the users will be in the ``admin`` group
+* the SlamData configuration file is ``empty-config.json``
+
+here is an example:
+
+::
+
+    java -jar $lic slamdata-backend.jar bootstrap -c slamdata-config.json --admin-group admin --admin-users user1@example.com,user2@example.com --additive
+
+
 4.3 Authentication
 ~~~~~~~~~~~~~~~~~~
 
