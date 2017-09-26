@@ -143,7 +143,7 @@ The following functions are supported:
 +---------------+---------------------------------------------------------------------------+
 | Arrays        | ``ARRAY_LENGTH``, ``FLATTEN_ARRAY``                                       |
 +---------------+---------------------------------------------------------------------------+
-| Objects       | ``FLATTEN_OBJECT``                                                        |
+| Objects       | ``FLATTEN_MAP``                                                           |
 +---------------+---------------------------------------------------------------------------+
 | Set-Level     | ``DISTINCT``, ``DISTINCT_BY``                                             |
 +---------------+---------------------------------------------------------------------------+
@@ -865,7 +865,7 @@ Single values are generated in Markdown through the following elements:
 * Calendar / Time Picker
 * Radio Boxes
 * Drop Downs
-  
+
 For more information on Markdown / Slamdown and how to generate form
 elements see the
 `Form Elements Section <slamdown-reference.html#section-5-form-elements>`__
@@ -993,4 +993,3 @@ range of use cases that it supports.
     <embed>
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2389041.js"></script>
     </embed>
-
