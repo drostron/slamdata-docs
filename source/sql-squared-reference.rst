@@ -266,7 +266,7 @@ Some common numeric functions include:
 +------------------------+-----------------------------------------+
 | Operator or Function   | Description                             |
 +========================+=========================================+
-| ``ABS``                | Absolulte value (distance from zero)    |
+| ``ABS``                | Absolute value (distance from zero)     |
 +------------------------+-----------------------------------------+
 | ``CEIL``               | Return the next greater integer         |
 +------------------------+-----------------------------------------+
