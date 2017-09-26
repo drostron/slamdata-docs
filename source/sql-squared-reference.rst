@@ -111,7 +111,7 @@ The following operators are supported:
 | Projection   | ``foo.bar``, ``foo[2]``, ``foo{*}``, ``foo[*]``                  |
 +--------------+------------------------------------------------------------------+
 | Date/Time    | ``TIMESTAMP``, ``DATE``, ``INTERVAL``, ``TIME``,                 |
-|              | ``START_OF_DAY``                                                 |
+|              | ``START_OF_DAY``, ``TIME_OF_DAY``                                |
 +--------------+------------------------------------------------------------------+
 | Identity     | ``OID``                                                          |
 +--------------+------------------------------------------------------------------+
@@ -451,13 +451,26 @@ Example:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the ``START_OF_DAY`` function to return a Date/Time value for midnight
-of the given day
+of the given day.
 
 Example:
 
 .. code-block:: sql
 
-    SELECT START_OF_DAY(event)
+    SELECT START_OF_DAY(eventDate)
+    FROM `/log/events`
+
+
+5.7 Get the time of day
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the ``TIME_OF_DAY`` function to return the time portion of a Date/Time value.
+
+Example:
+
+.. code-block:: sql
+
+    SELECT TIME_OF_DAY(eventDate)
     FROM `/log/events`
 
 
