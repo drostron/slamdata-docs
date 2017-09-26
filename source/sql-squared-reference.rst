@@ -135,13 +135,15 @@ The following functions are supported:
 +---------------+---------------------------------------------------------------------------+
 | Type          | Functions                                                                 |
 +===============+===========================================================================+
+| Numeric       | ``ABS``, ``CEIL``, ``FLOOR``, ``TRUNC``                                   |
++---------------+---------------------------------------------------------------------------+
 | String        | ``CONCAT``, ``LOWER``, ``UPPER``, ``SUBSTRING``, ``LENGTH``, ``SEARCH``   |
 +---------------+---------------------------------------------------------------------------+
-| DateTime      | ``DATE_PART``, ``TO_TIMESTAMP``                                           |
+| Arrays        | ``ARRAY_LENGTH``, ``FLATTEN_ARRAY``                                       |
++---------------+---------------------------------------------------------------------------+
+| Date/Time     | ``DATE_PART``, ``TO_TIMESTAMP``                                           |
 +---------------+---------------------------------------------------------------------------+
 | Nulls         | ``COALESCE``                                                              |
-+---------------+---------------------------------------------------------------------------+
-| Arrays        | ``ARRAY_LENGTH``, ``FLATTEN_ARRAY``                                       |
 +---------------+---------------------------------------------------------------------------+
 | Objects       | ``FLATTEN_MAP``                                                           |
 +---------------+---------------------------------------------------------------------------+
@@ -256,21 +258,37 @@ Section 4 - Numeric and String Operations
 
 You can use any of the operators or functions listed in the `Clauses,
 Operators, and Functions <#clauses-operators-and-functions>`__ section on
-numbers and strings. Some common string operators and functions include:
+numbers and strings.
 
-+------------------------+----------------------------+
-| Operator or Function   | Description                |
-+========================+============================+
-| ``||``                 | Concatenates               |
-+------------------------+----------------------------+
-| ``LOWER``              | Converts to lowercase      |
-+------------------------+----------------------------+
-| ``UPPER``              | Converts to uppercase      |
-+------------------------+----------------------------+
-| ``SUBSTRING``          | Returns a substring        |
-+------------------------+----------------------------+
-| ``LENGTH``             | Returns length of string   |
-+------------------------+----------------------------+
+Some common numeric functions include:
+
++------------------------+-----------------------------------------+
+| Operator or Function   | Description                             |
++========================+=========================================+
+| ``ABS``                | Absolulte value (distance from zero)    |
++------------------------+-----------------------------------------+
+| ``CEIL``               | Return the next greater integer         |
++------------------------+-----------------------------------------+
+| ``FLOOR``              | Return the next lower integer           |
++------------------------+-----------------------------------------+
+| ``TRUNCATE``           | Removes the decimal portion of a number |
++------------------------+-----------------------------------------+
+
+Some common string operators and functions include:
+
++------------------------+-----------------------------+
+| Operator or Function   | Description                 |
++========================+=============================+
+| ``||``                 | Concatenates                |
++------------------------+-----------------------------+
+| ``LOWER``              | Converts to lowercase       |
++------------------------+-----------------------------+
+| ``UPPER``              | Converts to uppercase       |
++------------------------+-----------------------------+
+| ``SUBSTRING``          | Returns a substring         |
++------------------------+-----------------------------+
+| ``LENGTH``             | Returns length of string    |
++------------------------+-----------------------------+
 
 4.1 - Examples
 ~~~~~~~~~~~~~~
@@ -281,6 +299,20 @@ Using mathematical operations:
 
     SELECT c.age + 2 * 1 / 4 % 2
     FROM `/users` AS c
+
+Mathematical functions:
+
+.. code-block:: sql
+
+    SELECT
+            ABS(1234.56)        // Returns 1234.56
+        ,   ABS(-1234.56)       // Returns 1234.56
+        ,   CEIL(1234.56)       // Returns 1235
+        ,   CEIL(-1234.56)      // Returns -1234
+        ,   FLOOR(1234.56)      // Returns 1234
+        ,   FLOOR(-1234.56)     // Returns -1235
+        ,   TRUNCATE(1234.56)   // Returns 1234
+        ,   TRUNCATE(-1234.56)  // Returns -1234
 
 Concatenating strings:
 
@@ -301,7 +333,7 @@ Filtering by regular expression:
 .. code-block:: sql
 
     SELECT * FROM `/users` AS c
-    WHERE c.firstName ~ "[sS]h+""
+    WHERE c.firstName ~ "[sS]h+"
 
 
 Section 5 - Dates and Times
