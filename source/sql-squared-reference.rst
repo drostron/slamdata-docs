@@ -52,7 +52,7 @@ The following data types are used by SQL².
 +----------+-----------------------------------+---------------------------------------+
 | String   | Text                              | ``"221B Baker Street"``               |
 +----------+-----------------------------------+---------------------------------------+
-| DateTime | Date and time, in ISO8601 format  | ``TIMESTAMP("2004-10-19T10:23:54Z")`` |
+| Date/Time| Date and time, in ISO8601 format  | ``TIMESTAMP("2004-10-19T10:23:54Z")`` |
 +----------+-----------------------------------+---------------------------------------+
 | Time     | Time in the format HH:MM:SS.      | ``TIME("10:23:54")``                  |
 +----------+-----------------------------------+---------------------------------------+
@@ -110,7 +110,8 @@ The following operators are supported:
 +--------------+------------------------------------------------------------------+
 | Projection   | ``foo.bar``, ``foo[2]``, ``foo{*}``, ``foo[*]``                  |
 +--------------+------------------------------------------------------------------+
-| Date/Time    | ``TIMESTAMP``, ``DATE``, ``INTERVAL``, ``TIME``                  |
+| Date/Time    | ``TIMESTAMP``, ``DATE``, ``INTERVAL``, ``TIME``,                 |
+|              | ``START_OF_DAY``                                                 |
 +--------------+------------------------------------------------------------------+
 | Identity     | ``OID``                                                          |
 +--------------+------------------------------------------------------------------+
@@ -444,6 +445,20 @@ Example:
     SELECT *
     FROM `/log/events` AS c
     WHERE c.ts > TO_TIMESTAMP(1446335999)
+
+
+5.6 Get the start of the day
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the ``START_OF_DAY`` function to return a Date/Time value for midnight
+of the given day
+
+Example:
+
+.. code-block:: sql
+
+    SELECT START_OF_DAY(event)
+    FROM `/log/events`
 
 
 Section 6 - Grouping
