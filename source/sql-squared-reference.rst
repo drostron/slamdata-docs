@@ -272,7 +272,7 @@ Some common numeric functions include:
 +------------------------+-----------------------------------------+
 | ``FLOOR``              | Return the next lower integer           |
 +------------------------+-----------------------------------------+
-| ``TRUNCATE``           | Removes the decimal portion of a number |
+| ``TRUNC``              | Removes the decimal portion of a number |
 +------------------------+-----------------------------------------+
 
 Some common string operators and functions include:
@@ -312,8 +312,8 @@ Mathematical functions:
         ,   CEIL(-1234.56)      // Returns -1234
         ,   FLOOR(1234.56)      // Returns 1234
         ,   FLOOR(-1234.56)     // Returns -1235
-        ,   TRUNCATE(1234.56)   // Returns 1234
-        ,   TRUNCATE(-1234.56)  // Returns -1234
+        ,   TRUNC(1234.56)      // Returns 1234
+        ,   TRUNC(-1234.56)     // Returns -1234
 
 Concatenating strings:
 
