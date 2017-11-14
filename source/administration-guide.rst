@@ -56,9 +56,7 @@ Section 1 - Installation
 1.2.1 Obtaining a license
 '''''''''''''''''''''''''
 You will need a license to use SlamData Advanced. If you do not have a license
-or SlamData.com account please visit https://slamdata.com/30-day-trial/
-to obtain a trial license, https://slamdata.com/slamdata-jump-start/ to
-purchase a trial with additional training and support or
+or SlamData.com account please go to 
 https://slamdata.com/contact-us/ to get a quote for your SlamData Advanced
 License.
 
@@ -81,10 +79,10 @@ The Windows SlamData Advanced Installer allows you to launch SlamData Advanced
 from your Start Menu. The macOS SlamData Advanced Installer allows you to
 launch SlamData from your Applications folder or Launchpad.
 
-If you have never installed SlamData before, get started by visiting
-https://slamdata.com/get-slamdata/30-day-trial/. You will register your
-email address with the SlamData authorization server and will receive an
-email with your license key and additional instructions.
+As part of the process of setting up SlamData, you will be asked to register your
+email address with the SlamData authorization server that will be provided
+by your sales representative. Once you've completed this process you will
+receive an email with your license key and additional instructions.
 
 `bearer token <http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html>`__
 
@@ -92,7 +90,7 @@ email with your license key and additional instructions.
 The latest version of SlamData Advanced can always be found
 `here <https://slamdata.com/downloads>`__.
 
-You will need to provide a license key or trial license key during installation.
+You will need to provide a license key during installation.
 If you have lost your license key please visit
 https://slamdata.com/my-account/.
 
@@ -104,10 +102,10 @@ By default the SlamData Advanced Launcher is configured to authenticate with
 SlamData.com. You will need a SlamData.com account and access to the internet
 to use the SlamData Advanced Launcher in its default configuration.
 
-To use the SlamData.com authentication server you sign up for a trial License at
-https://slamdata.com/30-day-trial/. You will use the email address and password
-you supply here to authenticate against the SlamData.com authentication server,
-which allows you to use SlamData in your environment.
+To use the SlamData.com authentication server you will use the email address and
+password you supplied earlier when setting up your account. This will authenticate
+you against the SlamData.com authentication server, and will allow you to start using
+SlamData in your environment.
 
 
 1.2.4 SlamData Advanced Jar
