@@ -32,7 +32,7 @@ Section 1 - Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   * Minimum memory
-      * 2 GB memory
+      * 8 GB memory
       * An additional 25 MB is required for each active user
   * Disk
       * 300 MB for a basic installation
@@ -169,7 +169,7 @@ GB of memory you would like to allocate to SlamData.
 
 .. code-block:: bash
 
-    java -Xms2G -Xmx2G -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE -Dlicense_email=myemail@example.com -Dlicense_full_name="My Name" -Dlicense_registered_to="Name Registered To" -Dlicense_company="My Company Name" -Dlicense_street="123 Anywhere Street, Suite A1" -Dlicense_tel_number=3035551212 -Dlicense_fax_number=NA -Dlicense_city=Boulder -Dlicense_zip=80302 -Dlicense_country=US -jar slamdata-backend.jar --content-path public --config config.json
+    java -Xms8G -Xmx8G -Dlicense_key=ABCDE-12345-ABCDE-12345-ABCDE -Dlicense_email=myemail@example.com -Dlicense_full_name="My Name" -Dlicense_registered_to="Name Registered To" -Dlicense_company="My Company Name" -Dlicense_street="123 Anywhere Street, Suite A1" -Dlicense_tel_number=3035551212 -Dlicense_fax_number=NA -Dlicense_city=Boulder -Dlicense_zip=80302 -Dlicense_country=US -jar slamdata-backend.jar --content-path public --config config.json
 
 
 Section 2 - Connecting to a Data Source
